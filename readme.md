@@ -1,8 +1,8 @@
 # Attribution Generator API
 
-<!-- TODO: Add CI badge here -->
-
 An API for generating attribution hints for images from Wikipedia and Wikimedia Commons.
+
+[![Build Status](https://travis-ci.org/wmde/attribution-generator-api.svg?branch=master)](https://travis-ci.org/wmde/attribution-generator-api)
 
 ## Prerequisites
 
