@@ -3,5 +3,10 @@ cache:
   yarn: true
 install: yarn install
 script:
+  # Run linting and execute tests
   - yarn lint
   - yarn test
+  # Set up environment
+  - cp .env.test .env
+  # Ensure generated API specification is up-to-date
+  - scripts/gen-apidoc > openapi.yaml && git diff --quiet --exit-code HEAD openapi.yaml
