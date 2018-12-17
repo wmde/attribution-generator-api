@@ -15,7 +15,8 @@
         "devDependencies": [
           "**/*.test.{js,jsx}",
           "**/jest.config.js",
-          "**/jest.setup.js"
+          "**/jest.setup.js",
+          "scripts/*"
         ]
       }
     ],
