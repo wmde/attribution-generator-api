@@ -16,7 +16,7 @@
     "watch": "nodemon start.js",
     "debug": "ndb start.js",
     "console": "node --experimental-repl-await console.js",
-    "lint": "eslint .",
+    "lint": "eslint --ignore-path .gitignore . scripts/*",
     "test": "jest --runInBand"
   },
   "engines": {
