@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+const yaml = require('js-yaml')
+
+require('../config/boot')
+
+const environment = require('../config/environment')
+const init = require('../server')
+
+async function main() {
+  const server = await init({ ...environment, logging: false })
+  const response = await server.inject('/swagger')
+
+  const spec = JSON.parse(response.payload)
+
+  const options = { sortKeys: true }
+  const output = yaml.safeDump(spec, options).trim()
+
+  console.log(output)
+
+  await server.stop()
+}
+
+main()

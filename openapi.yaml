@@ -1,0 +1,81 @@
+definitions:
+  AttributionShowResponse:
+    properties: {}
+  BadRequestErrorResponse:
+    description: Bad Request
+    properties: {}
+  InfoShowResponse:
+    properties:
+      version:
+        example:
+          value: 1.0.0
+        type: string
+    required:
+      - version
+  UnauthorizedErrorResponse:
+    description: Unauthorized
+    properties: {}
+host: TODO
+info:
+  description: Create attribution hints for images from Wikipedia and Wikimedia Commons.
+  title: attribution-generator-api
+  version: 0.1.0
+paths:
+  '/attribution/{file}/and-so-on':
+    get:
+      description: Generate attribution hints for the given file.
+      operationId: attribution.show
+      produces:
+        - application/json
+      responses:
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BadRequestErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedErrorResponse'
+        default:
+          description: ''
+          schema:
+            $ref: '#/definitions/AttributionShowResponse'
+      security:
+        - default: []
+      summary: Generate attribution
+      tags:
+        - attribution
+  /info:
+    get:
+      description: Get information on the API.
+      operationId: info.show
+      produces:
+        - application/json
+      responses:
+        default:
+          description: ''
+          schema:
+            $ref: '#/definitions/InfoShowResponse'
+      summary: Get information
+      tags:
+        - info
+  /swagger:
+    get:
+      parameters:
+        - in: query
+          name: tags
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        default:
+          description: ''
+      tags:
+        - swagger
+schemes:
+  - https
+  - http
+securityDefinitions: []
+swagger: '2.0'
+tags: []

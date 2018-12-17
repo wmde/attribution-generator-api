@@ -1,0 +1,51 @@
+{
+  "private": true,
+  "version": "0.1.0",
+  "name": "attribution-generator-api",
+  "description": "Create attribution hints for images from Wikipedia and Wikimedia Commons.",
+  "homepage": "https://github.com/wmde/attribution-generator-api",
+  "author": "bitcrowd <info@bitcrowd.net>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:wmde/attribution-generator-api.git"
+  },
+  "license": "GPL-2.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node start.js",
+    "watch": "nodemon start.js",
+    "debug": "ndb start.js",
+    "console": "node --experimental-repl-await console.js",
+    "lint": "eslint .",
+    "test": "jest --runInBand"
+  },
+  "engines": {
+    "node": "^10.14.2"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "boom": "^7.2.0",
+    "bunyan": "^1.8.12",
+    "dotenv": "^6.0.0",
+    "good": "^8.1.1",
+    "good-bunyan": "^2.0.1",
+    "hapi": "^17.5.4",
+    "hapi-router": "^4.0.0",
+    "hapi-swaggered": "^3.0.3",
+    "joi": "^14.3.0",
+    "repl.history": "^0.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
+    "jest": "^23.5.0",
+    "js-yaml": "^3.12.0",
+    "ndb": "^1.0.25",
+    "nodemon": "^1.18.4",
+    "prettier": "^1.15.3"
+  }
+}
