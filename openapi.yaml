@@ -68,6 +68,11 @@ paths:
   '/license/{file}':
     get:
       description: Returns the most liberal license for the given image
+      parameters:
+        - in: path
+          name: file
+          required: true
+          type: string
       produces:
         - application/json
       responses:
