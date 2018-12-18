@@ -4,6 +4,12 @@ definitions:
   BadRequestErrorResponse:
     description: Bad Request
     properties: {}
+  CodeUrlModel:
+    properties:
+      code:
+        type: string
+      url:
+        type: string
   InfoShowResponse:
     properties:
       version:
@@ -67,6 +73,8 @@ paths:
       responses:
         default:
           description: ''
+          schema:
+            $ref: '#/definitions/CodeUrlModel'
       summary: Image License
       tags:
         - license
@@ -78,6 +86,10 @@ paths:
       responses:
         default:
           description: ''
+          schema:
+            items:
+              $ref: '#/definitions/CodeUrlModel'
+            type: array
       summary: Licenses Index
       tags:
         - licenses
