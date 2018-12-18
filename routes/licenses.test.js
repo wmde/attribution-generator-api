@@ -28,4 +28,22 @@ describe('license routes', () => {
       expect(response.payload).toMatchSnapshot();
     });
   });
+
+  describe('GET /license', () => {
+    function options() {
+      return { url: `/license/File:Pommes-1.jpg`, method: 'GET' };
+    }
+
+    async function subject() {
+      return context.inject(options());
+    }
+
+    it('returns a list of licenses', async () => {
+      const response = await subject({});
+
+      expect(response.status).toBe(200);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+  });
 });
