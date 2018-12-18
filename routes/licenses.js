@@ -20,7 +20,7 @@ routes.push({
       schema: Joi.array().items(
         Joi.object().keys({
           code: Joi.string(),
-          url: Joi.string()
+          url: Joi.string(),
         })
       ),
     },
@@ -36,13 +36,13 @@ routes.push({
     notes: 'Returns the most liberal license for the given image',
     validate: {
       params: {
-        file: Joi.string()
-      }
+        file: Joi.string(),
+      },
     },
     response: {
       schema: Joi.object().keys({
         code: Joi.string(),
-        url: Joi.string()
+        url: Joi.string(),
       }),
     },
   },

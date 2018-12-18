@@ -33,7 +33,7 @@ describe('license routes', () => {
     const file = 'File:Pommes-1.jpg';
 
     function options() {
-      return { url: `/license/{file}`, method: 'GET' };
+      return { url: `/license/${file}`, method: 'GET' };
     }
 
     async function subject() {
