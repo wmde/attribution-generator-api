@@ -34,7 +34,11 @@ routes.push({
   options: {
     description: 'Image License',
     notes: 'Returns the most liberal license for the given image',
-    validate: {},
+    validate: {
+      params: {
+        file: Joi.string()
+      }
+    },
     response: {
       schema: Joi.object().keys({
         code: Joi.string(),
