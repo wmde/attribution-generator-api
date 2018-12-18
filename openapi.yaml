@@ -59,6 +59,15 @@ paths:
       summary: Get information
       tags:
         - info
+  /licenses:
+    get:
+      produces:
+        - application/json
+      responses:
+        default:
+          description: ''
+      tags:
+        - licenses
   /swagger:
     get:
       parameters:
