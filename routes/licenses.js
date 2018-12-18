@@ -1,3 +1,5 @@
+const Joi = require('joi');
+
 const routes = [];
 
 const mockResponse = [
@@ -10,8 +12,41 @@ const mockResponse = [
 routes.push({
   path: '/licenses',
   method: 'GET',
-  options: {},
+  options: {
+    description: 'Licenses Index',
+    notes: 'Returns a List of all Licenses',
+    validate: {},
+    response: {
+      schema: Joi.array().items(
+        Joi.object().keys({
+          code: Joi.string(),
+          url: Joi.string(),
+        })
+      ),
+    },
+  },
   handler: async (request, h) => h.response(mockResponse),
+});
+
+routes.push({
+  path: '/license/{file}',
+  method: 'GET',
+  options: {
+    description: 'Image License',
+    notes: 'Returns the most liberal license for the given image',
+    validate: {
+      params: {
+        file: Joi.string(),
+      },
+    },
+    response: {
+      schema: Joi.object().keys({
+        code: Joi.string(),
+        url: Joi.string(),
+      }),
+    },
+  },
+  handler: async (request, h) => h.response(mockResponse[0]),
 });
 
 module.exports = routes;

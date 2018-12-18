@@ -28,4 +28,24 @@ describe('license routes', () => {
       expect(response.payload).toMatchSnapshot();
     });
   });
+
+  describe('GET /license', () => {
+    const file = 'File:Pommes-1.jpg';
+
+    function options() {
+      return { url: `/license/${file}`, method: 'GET' };
+    }
+
+    async function subject() {
+      return context.inject(options());
+    }
+
+    it('returns the license of a file', async () => {
+      const response = await subject({});
+
+      expect(response.status).toBe(200);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+  });
 });

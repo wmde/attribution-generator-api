@@ -4,6 +4,12 @@ definitions:
   BadRequestErrorResponse:
     description: Bad Request
     properties: {}
+  CodeUrlModel:
+    properties:
+      code:
+        type: string
+      url:
+        type: string
   InfoShowResponse:
     properties:
       version:
@@ -59,13 +65,37 @@ paths:
       summary: Get information
       tags:
         - info
-  /licenses:
+  '/license/{file}':
     get:
+      description: Returns the most liberal license for the given image
+      parameters:
+        - in: path
+          name: file
+          required: true
+          type: string
       produces:
         - application/json
       responses:
         default:
           description: ''
+          schema:
+            $ref: '#/definitions/CodeUrlModel'
+      summary: Image License
+      tags:
+        - license
+  /licenses:
+    get:
+      description: Returns a List of all Licenses
+      produces:
+        - application/json
+      responses:
+        default:
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/CodeUrlModel'
+            type: array
+      summary: Licenses Index
       tags:
         - licenses
   /swagger:
