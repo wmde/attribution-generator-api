@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`files routes GET /files returns a list of files with their name and url 1`] = `
+Array [
+  Object {
+    "file": "Datei:Sunday 3 Besetzung (retouched).jpg",
+    "url": "https://de.wikipedia.org/wiki/Datei:Sunday_3_Besetzung_(retouched).jpg",
+  },
+]
+`;
