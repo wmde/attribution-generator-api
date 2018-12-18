@@ -30,15 +30,17 @@ describe('license routes', () => {
   });
 
   describe('GET /license', () => {
+    const file = 'File:Pommes-1.jpg';
+
     function options() {
-      return { url: `/license/File:Pommes-1.jpg`, method: 'GET' };
+      return { url: `/license/{file}`, method: 'GET' };
     }
 
     async function subject() {
       return context.inject(options());
     }
 
-    it('returns a list of licenses', async () => {
+    it('returns the license of a file', async () => {
       const response = await subject({});
 
       expect(response.status).toBe(200);

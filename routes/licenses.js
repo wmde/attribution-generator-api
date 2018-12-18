@@ -1,3 +1,5 @@
+const Joi = require('joi');
+
 const routes = [];
 
 const mockResponse = [
@@ -13,6 +15,15 @@ routes.push({
   options: {
     description: 'Licenses Index',
     notes: 'Returns a List of all Licenses',
+    validate: {},
+    response: {
+      schema: Joi.array().items(
+        Joi.object().keys({
+          code: Joi.string(),
+          url: Joi.string()
+        })
+      ),
+    },
   },
   handler: async (request, h) => h.response(mockResponse),
 });
@@ -23,6 +34,13 @@ routes.push({
   options: {
     description: 'Image License',
     notes: 'Returns the most liberal license for the given image',
+    validate: {},
+    response: {
+      schema: Joi.object().keys({
+        code: Joi.string(),
+        url: Joi.string()
+      }),
+    },
   },
   handler: async (request, h) => h.response(mockResponse[0]),
 });
