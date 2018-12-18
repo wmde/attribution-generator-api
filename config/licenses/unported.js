@@ -3,12 +3,11 @@
 // Array of licenses and their attributes:
 //
 //  * id
+//  * name
 //  * groups
 //  * compatible licences
-//  * name
 //  * regexp
 //  * url
-//  * options
 //
 // Licenses are sorted by restrictiveness and are matched in order:
 //
