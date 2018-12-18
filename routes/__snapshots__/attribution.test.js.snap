@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`attribution routes GET /attribution/… returns an attribution for the given file 1`] = `
+Object {
+  "attribution_html": "Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), \\"Pair of Merops apiaster feeding\\", https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+  "attribution_plain": "Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), \\"Pair of Merops apiaster feeding\\", https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+  "attribution_text": "Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), \\"Pair of Merops apiaster feeding\\", https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+}
+`;
