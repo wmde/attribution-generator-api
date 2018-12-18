@@ -1,7 +1,6 @@
 const Joi = require('joi');
 
 const definitions = require('./__swagger__/definitions');
-const prefix = require('./__utils__/path')('/files');
 
 const routes = [];
 
@@ -13,7 +12,7 @@ const filesMock = [
 ];
 
 routes.push({
-  path: prefix(''),
+  path: '/files',
   method: 'GET',
   options: {
     description: 'Get all files for an article',
