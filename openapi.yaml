@@ -45,6 +45,28 @@ paths:
       summary: Generate attribution
       tags:
         - attribution
+  /files:
+    get:
+      description: Retrieve all files for a given article or page url.
+      operationId: files.index
+      produces:
+        - application/json
+      responses:
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BadRequestErrorResponse'
+        default:
+          description: ''
+          schema:
+            items:
+              type: string
+            type: array
+      security:
+        - default: []
+      summary: Get all files for an article
+      tags:
+        - files
   /info:
     get:
       description: Get information on the API.
