@@ -18,7 +18,7 @@ describe('license routes', () => {
 
     async function subject() {
       return context.inject(options());
-    };
+    }
 
     it('returns a list of licenses', async () => {
       const response = await subject({});
