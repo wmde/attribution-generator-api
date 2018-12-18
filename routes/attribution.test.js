@@ -15,9 +15,9 @@ describe('attribution routes', () => {
 
   describe('GET /attribution/…', () => {
     function options(overrides = {}) {
-      const defaults = { file: 'File:…' };
+      const defaults = { language: 'en', file: 'File:…' };
       const params = { ...defaults, ...overrides };
-      return { url: `/attribution/${params.file}/…`, method: 'GET' };
+      return { url: `/attribution/${params.language}/${params.file}`, method: 'GET' };
     }
 
     async function subject(overrides = {}) {
@@ -26,6 +26,14 @@ describe('attribution routes', () => {
 
     afterEach(() => {
       generator.generate.mockReset();
+    });
+
+    it('returns an attribution for the given file', async () => {
+      const response = await subject({});
+
+      expect(response.status).toBe(200);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
     });
 
     // eslint-disable-next-line jest/no-disabled-tests

@@ -18,19 +18,25 @@ definitions:
         type: string
     required:
       - version
-  UnauthorizedErrorResponse:
-    description: Unauthorized
-    properties: {}
 host: TODO
 info:
   description: Create attribution hints for images from Wikipedia and Wikimedia Commons.
   title: attribution-generator-api
   version: 0.1.0
 paths:
-  '/attribution/{file}/and-so-on':
+  '/attribution/{language}/{file}':
     get:
       description: Generate attribution hints for the given file.
       operationId: attribution.show
+      parameters:
+        - in: path
+          name: language
+          required: true
+          type: string
+        - in: path
+          name: file
+          required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -38,10 +44,6 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/BadRequestErrorResponse'
-        '401':
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/UnauthorizedErrorResponse'
         default:
           description: ''
           schema:
