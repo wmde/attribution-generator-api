@@ -2,6 +2,7 @@ const axios = require('axios');
 const Url = require('url');
 
 const defaultParams = { action: 'query', format: 'json' };
+const apiPath = 'w/api.php';
 
 function transform(data) {
   const { query } = data;
@@ -21,7 +22,7 @@ class WikiClient {
     });
   }
 
-  getResultsFromApi(titles, prop, wikiUrl, params) {
+  getResultsFromApi(titles, prop, wikiUrl, params = {}) {
     const queryParams = {
       ...defaultParams,
       ...params,
@@ -32,10 +33,9 @@ class WikiClient {
   }
 
   async query(wikiUrl, params) {
-    const path = Url.resolve(wikiUrl, 'w/api.php');
-    const { data } = await this.client.get(path, { params });
-    const result = transform(data);
-    return result;
+    const apiUrl = Url.resolve(wikiUrl, apiPath);
+    const { data } = await this.client.get(apiUrl, { params });
+    return transform(data);
   }
 }
 
