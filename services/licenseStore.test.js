@@ -93,6 +93,12 @@ describe('licenseStore', () => {
       expect(license.id).toBe('cc-by-sa-3.0-ported');
       expect(license.name).toBe('CC BY-SA 3.0 TW');
     });
+
+    it('accepts multiple input strings', () => {
+      const license = subject.match(['Cc-by-sa-2.0-de', 'Cc-by-sa-2.5']);
+      expect(license.id).toBe('cc-by-sa-2.5');
+      expect(license.name).toBe('CC BY-SA 2.5');
+    });
   });
 
   describe('compatible()', () => {
