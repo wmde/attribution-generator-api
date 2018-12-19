@@ -11,11 +11,11 @@ describe('license', () => {
   };
 
   function newLicense(overrides = {}) {
-    return new License({ ...options, ...overrides});
+    return new License({ ...options, ...overrides });
   }
 
   it('initalizes', () => {
-    const license = newLicense();
+    newLicense();
   });
 
   describe('id validation', () => {

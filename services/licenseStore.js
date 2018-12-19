@@ -12,21 +12,21 @@ function buildLicense(params) {
   return new License(attributes);
 }
 
+function normalizeLicense(string) {
+  return string
+    .toUpperCase()
+    .replace(/-/g, ' ')
+    .replace('BY SA', 'BY-SA');
+}
+
 function buildPortedLicense(license, string, url) {
   const name = normalizeLicense(string);
   const groups = [...license.groups, 'knownPorted'];
   return new License({ ...license, name, groups, url });
 }
 
-function normalizeLicense(string) {
-  return string.toUpperCase().replace(/-/g, ' ').replace('BY SA', 'BY-SA');
-}
-
 function buildLicensesIndex(licenses) {
-  return licenses.reduce((idx, license) =>
-    Object.assign(idx, { [license.id]: license }),
-    {}
-  );
+  return licenses.reduce((idx, license) => Object.assign(idx, { [license.id]: license }), {});
 }
 
 class LicenseStore {
@@ -42,8 +42,10 @@ class LicenseStore {
   }
 
   match(licenseStrings) {
+    // eslint-disable-next-line no-restricted-syntax
     for (const license of this.licenses) {
       const template = licenseStrings.find(t => license.match(t));
+      // eslint-disable-next-line no-continue
       if (typeof template === 'undefined') continue;
       return this.selectLicense(license, template);
     }
@@ -60,9 +62,8 @@ class LicenseStore {
 
     if (license.isInGroup('ported') && !!url) {
       return buildPortedLicense(license, licenseString, url);
-    } else {
-      return license;
     }
+    return license;
   }
 }
 
