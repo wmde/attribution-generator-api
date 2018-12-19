@@ -1,6 +1,7 @@
 const LicenseStore = require('./licenseStore');
 const licenses = require('../config/licenses/licenses');
 const portReferences = require('../config/licenses/portReferences');
+const compatibleCases = require('./__test__/compatibleCases');
 
 describe('licenseStore', () => {
   const subject = new LicenseStore(licenses, portReferences);
@@ -106,72 +107,8 @@ describe('licenseStore', () => {
       expect(subject.compatible('cc-by-sa-4.0')).toEqual([]);
     });
 
-    const cases = {
-      'cc-by-sa-3.0': ['cc-by-sa-3.0-de', 'cc-by-sa-4.0'],
-      'cc-by-sa-3.0-de': ['cc-by-sa-3.0', 'cc-by-sa-4.0'],
-      'cc-by-sa-2.5': ['cc-by-sa-3.0-de', 'cc-by-sa-3.0', 'cc-by-sa-4.0'],
-      'cc-by-sa-2.0': [
-        'cc-by-sa-2.0-de',
-        'cc-by-sa-2.5',
-        'cc-by-sa-3.0-de',
-        'cc-by-sa-3.0',
-        'cc-by-sa-4.0',
-      ],
-      'cc-by-sa-2.0-de': [
-        'cc-by-sa-2.0',
-        'cc-by-sa-2.5',
-        'cc-by-sa-3.0-de',
-        'cc-by-sa-3.0',
-        'cc-by-sa-4.0',
-      ],
-      'cc-by-sa-1.0': [
-        'cc-by-sa-2.0',
-        'cc-by-sa-2.0-de',
-        'cc-by-sa-2.5',
-        'cc-by-sa-3.0-de',
-        'cc-by-sa-3.0',
-        'cc-by-sa-4.0',
-      ],
-      'cc-by-4.0': ['cc-by-sa-4.0'],
-      'cc-by-3.0': ['cc-by-3.0-de', 'cc-by-sa-3.0-de', 'cc-by-sa-3.0'],
-      'cc-by-3.0-de': ['cc-by-3.0', 'cc-by-sa-3.0-de', 'cc-by-sa-3.0'],
-      'cc-by-2.5': [
-        'cc-by-3.0-de',
-        'cc-by-3.0',
-        'cc-by-4.0',
-        'cc-by-sa-2.5',
-        'cc-by-sa-3.0-de',
-        'cc-by-sa-3.0',
-      ],
-      'cc-by-2.0': [
-        'cc-by-2.0-de',
-        'cc-by-2.5',
-        'cc-by-3.0-de',
-        'cc-by-3.0',
-        'cc-by-4.0',
-        'cc-by-sa-2.0-de',
-        'cc-by-sa-2.0',
-      ],
-      'cc-by-2.0-de': [
-        'cc-by-2.0',
-        'cc-by-2.5',
-        'cc-by-3.0-de',
-        'cc-by-3.0',
-        'cc-by-sa-2.0-de',
-        'cc-by-sa-2.0',
-      ],
-      'cc-by-1.0': [
-        'cc-by-2.0-de',
-        'cc-by-2.0',
-        'cc-by-2.5',
-        'cc-by-3.0-de',
-        'cc-by-3.0',
-        'cc-by-sa-1.0',
-      ],
-    };
-
-    Object.keys(cases).forEach(id => {
-      const expected = cases[id];
+    Object.keys(compatibleCases).forEach(id => {
+      const expected = compatibleCases[id];
 
       it(`finds compatible licenses for "${id}"`, () => {
         const result = subject.compatible(id);
