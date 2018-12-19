@@ -1,9 +1,14 @@
 const axios = require('axios');
 const Url = require('url');
 
-// TODO: WikiClient
-// add default params as constant
-class Client {
+const defaultParams = { action: 'query', format: 'json' };
+
+function transform(data) {
+  const { query } = data;
+  return query;
+}
+
+class WikiClient {
   constructor() {
     this.client = axios.create({
       headers: {
@@ -18,11 +23,10 @@ class Client {
 
   getResultsFromApi(titles, prop, wikiUrl, params) {
     const queryParams = {
+      ...defaultParams,
       ...params,
-      action: 'query',
-      format: 'json',
-      prop,
       titles,
+      prop,
     };
     return this.query(wikiUrl, queryParams);
   }
@@ -35,4 +39,4 @@ class Client {
   }
 }
 
-module.exports = new Client();
+module.exports = WikiClient;

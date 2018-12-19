@@ -1,10 +1,10 @@
 const assert = require('assert');
 const axios = require('axios');
 
-const client = require('./client');
+const client = require('./wikiClient');
 
 function formatImagesInfoResponse(response) {
-  const pages = response.data.query.pages;
+  const pages = response.pages;
   assert.ok(!!pages, 'Wikimedia: No "url" option provided')
 
   // TODO: use response wrapper to extract data (ImageInfo)
@@ -26,7 +26,7 @@ class Files {
   async getImageTitles(pageTitle, wikiUrl) {
     const params = { titles: pageTitle };
     const response = await client.getResultsFromApi(pageTitle, 'images', wikiUrl, params);
-    const page = Object.values(response.data.query.pages)[0];
+    const page = Object.values(response.pages)[0];
     return page.images.map(image => image.title);
   }
 
