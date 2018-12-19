@@ -11,7 +11,7 @@ describe('license', () => {
   };
 
   function newLicense(overrides = {}) {
-    return new License(...Object.values({ ...options, ...overrides}));
+    return new License({ ...options, ...overrides});
   }
 
   it('initalizes', () => {
@@ -41,6 +41,18 @@ describe('license', () => {
 
     it('asserts valid url', () => {
       expect(() => newLicense({ url: 123 })).toThrow();
+    });
+  });
+
+  describe('match()', () => {
+    const subject = newLicense();
+
+    it('matches valid license', () => {
+      expect(subject.match('CC-BY-SA-4.0')).toBeTruthy();
+    });
+
+    it('mismatches invalid license', () => {
+      expect(subject.match('Blerg')).toBeFalsy();
     });
   });
 });

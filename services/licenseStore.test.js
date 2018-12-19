@@ -1,9 +1,9 @@
 const LicenseStore = require('./licenseStore');
-const unported = require('../config/licenses/unported');
-const ported = require('../config/licenses/ported');
+const licenses = require('../config/licenses/licenses');
+const portReferences = require('../config/licenses/portReferences');
 
 describe('licenseStore', () => {
-  const subject = new LicenseStore(unported, ported);
+  const subject = new LicenseStore(licenses, portReferences);
 
   describe('match()', () => {
     it('detects "Public Domain"', () => {

@@ -3,7 +3,7 @@ const assert = require('assert');
 const LicenseStore = require('../services/licenseStore');
 
 const licenses = require('./licenses/licenses');
-const ports = require('./licenses/ports');
+const ports = require('./licenses/portReferences');
 
 // Read service configurations from environment.
 const config = JSON.parse(process.env.SERVICES);

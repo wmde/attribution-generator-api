@@ -1,60 +1,68 @@
 const License = require('./license');
 
+function buildLicense(params) {
+  const attributes = {
+    id: params[0],
+    name: params[1],
+    groups: params[2],
+    compatibility: params[3],
+    regexp: params[4],
+    url: params[5],
+  };
+  return new License(attributes);
+}
+
+function buildPortedLicense(license, string, url) {
+  const name = normalizeLicense(string);
+  const groups = [...license.groups, 'knownPorted'];
+  return new License({ ...license, name, groups, url });
+}
+
+function normalizeLicense(string) {
+  return string.toUpperCase().replace(/-/g, ' ').replace('BY SA', 'BY-SA');
+}
+
+function buildLicensesIndex(licenses) {
+  return licenses.reduce((idx, license) =>
+    Object.assign(idx, { [license.id]: license }),
+    {}
+  );
+}
+
 class LicenseStore {
-  constructor(unportedLicenses, portedLicenses) {
-    this.licenses = unportedLicenses.map(attrs => {
-      const license = new License(...attrs);
-      return license;
-    });
-
-    this.index = this.licenses.reduce(
-      (idx, license) => Object.assign(idx, { [license.id]: license }),
-      {}
-    );
-
-    this.ports = portedLicenses;
+  constructor(licenses, portReferences) {
+    this.licenses = licenses.map(attrs => buildLicense(attrs));
+    this.portReferences = portReferences;
+    this.index = buildLicensesIndex(this.licenses);
   }
 
-  all() {
-    return this.licenses;
+  compatible(id) {
+    const { compatibility } = this.getLicense(id);
+    return compatibility.map(cid => this.getLicense(cid));
   }
 
-  get(id) {
-    return this.index[id];
-  }
-
-  match(templates) {
-    // eslint-disable-next-line no-restricted-syntax
+  match(licenseStrings) {
     for (const license of this.licenses) {
-      const template = templates.find(t => license.match(t));
-
-      // eslint-disable-next-line no-continue
+      const template = licenseStrings.find(t => license.match(t));
       if (typeof template === 'undefined') continue;
-
-      if (!license.isPortedLicense()) return license; // not a ported license
-
-      const url = this.ports[template.toLowerCase()];
-
-      if (!url) return license; // no known URL mapping for ported license found
-
-      const name = template
-        .toUpperCase()
-        .replace(/-/g, ' ')
-        .replace('BY SA', 'BY-SA');
-
-      const { id, groups, compatibility, regexp } = license;
-
-      const ported = new License(id, name, [...groups, 'knownPorted'], compatibility, regexp, url);
-
-      return ported;
+      return this.selectLicense(license, template);
     }
 
     return null;
   }
 
-  compatible(id) {
-    const { compatibility } = this.get(id);
-    return compatibility.map(cid => this.get(cid));
+  getLicense(id) {
+    return this.index[id];
+  }
+
+  selectLicense(license, licenseString) {
+    const url = this.portReferences[licenseString.toLowerCase()];
+
+    if (license.isInGroup('ported') && !!url) {
+      return buildPortedLicense(license, licenseString, url);
+    } else {
+      return license;
+    }
   }
 }
 

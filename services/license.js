@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 class License {
-  constructor(id, name, groups, compatibility, regexp, url) {
+  constructor({ id, name, groups, compatibility, regexp, url }) {
     assert(typeof id === 'string' && id.length > 0, 'License: Invalid "id" provided');
     assert(typeof name === 'string' && name.length > 0, 'License: Invalid "name" provided');
     assert(Array.isArray(groups), 'License: Invalid "groups" provided');
@@ -23,18 +23,6 @@ class License {
 
   isInGroup(groupId) {
     return this.groups.includes(groupId);
-  }
-
-  isPublicDomain() {
-    return this.isInGroup('pd');
-  }
-
-  isPortedLicense() {
-    return this.isInGroup('ported');
-  }
-
-  unportedVersionId() {
-    return this.id.replace(/-ported$/, ''); // e.g. 'cc-by-3.0' for 'cc-by-3.0-ported'
   }
 }
 
