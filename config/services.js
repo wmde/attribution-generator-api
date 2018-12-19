@@ -1,9 +1,9 @@
 const assert = require('assert');
 
-const LicenseStore = require('../services/license-store');
+const LicenseStore = require('../services/licenseStore');
 
-const unported = require('./licenses/unported');
-const ported = require('./licenses/ported');
+const licenses = require('./licenses/licenses');
+const ports = require('./licenses/ports');
 
 // Read service configurations from environment.
 const config = JSON.parse(process.env.SERVICES);
@@ -12,7 +12,7 @@ assert.ok(typeof config === 'object', 'Invalid services configuration provided')
 
 // Create configured service instances.
 const services = {
-  licenses: new LicenseStore(unported, ported),
+  licenses: new LicenseStore(licenses, ports),
 };
 
 // const services = Object.keys(registry).reduce((all, name) => {

@@ -1,9 +1,8 @@
-const LicenseStore = require('./license-store');
-
+const LicenseStore = require('./licenseStore');
 const unported = require('../config/licenses/unported');
 const ported = require('../config/licenses/ported');
 
-describe('license-store', () => {
+describe('licenseStore', () => {
   const subject = new LicenseStore(unported, ported);
 
   describe('match()', () => {
