@@ -1,6 +1,8 @@
 const axios = require('axios');
 const Url = require('url');
 
+// TODO: WikiClient
+// add default params as constant
 class Client {
   constructor() {
     this.client = axios.create({
@@ -27,13 +29,9 @@ class Client {
 
   async query(wikiUrl, params) {
     const path = Url.resolve(wikiUrl, 'w/api.php');
-    try {
-      const result = await this.client.get(path, { params });
-      return result;
-    } catch (e) {
-      console.log(e);
-      throw e;
-    }
+    const { data } = await this.client.get(path, { params });
+    const result = transform(data);
+    return result;
   }
 }
 

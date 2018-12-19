@@ -31,7 +31,11 @@ routes.push({
       },
     },
   },
-  handler: async (request, h) => h.response(filesMock),
+  handler: async (request, h) => {
+    const { files } = request.server.app.services;
+    const response = await files.getPageImages('The_Hellacopters', 'https://de.wikipedia.org');
+    return h.response(response);
+  },
 });
 
 module.exports = routes;
