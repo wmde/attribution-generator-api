@@ -10,8 +10,2648 @@ Object {
 exports[`license routes GET /licenses returns a list of licenses 1`] = `
 Array [
   Object {
+    "code": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/legalcode",
+  },
+  Object {
+    "code": "CC BY-SA 3.0 DE",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0/de/legalcode",
+  },
+  Object {
     "code": "CC BY-SA 3.0",
     "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+  },
+  Object {
+    "code": "CC BY-SA 3.0",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+  },
+  Object {
+    "code": "CC BY-SA 2.5",
+    "url": "https://creativecommons.org/licenses/by-sa/2.5/legalcode",
+  },
+  Object {
+    "code": "CC BY-SA 2.5",
+    "url": "https://creativecommons.org/licenses/by-sa/2.5/legalcode",
+  },
+  Object {
+    "code": "CC BY-SA 2.0 DE",
+    "url": "https://creativecommons.org/licenses/by-sa/2.0/de/legalcode",
+  },
+  Object {
+    "code": "CC BY-SA 2.0",
+    "url": "https://creativecommons.org/licenses/by-sa/2.0/legalcode",
+  },
+  Object {
+    "code": "CC BY-SA 2.0",
+    "url": "https://creativecommons.org/licenses/by-sa/2.0/legalcode/",
+  },
+  Object {
+    "code": "CC BY-SA 1.0",
+    "url": "https://creativecommons.org/licenses/by-sa/1.0/legalcode",
+  },
+  Object {
+    "code": "CC BY-SA 1.0",
+    "url": "https://creativecommons.org/licenses/by-sa/1.0/legalcode",
+  },
+  Object {
+    "code": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/legalcode",
+  },
+  Object {
+    "code": "CC BY 3.0 DE",
+    "url": "https://creativecommons.org/licenses/by/3.0/de/legalcode",
+  },
+  Object {
+    "code": "CC BY 3.0",
+    "url": "https://creativecommons.org/licenses/by/3.0/legalcode",
+  },
+  Object {
+    "code": "CC BY 3.0",
+    "url": "https://creativecommons.org/licenses/by/3.0/legalcode",
+  },
+  Object {
+    "code": "CC BY 2.5",
+    "url": "https://creativecommons.org/licenses/by/2.5/legalcode",
+  },
+  Object {
+    "code": "CC BY 2.5",
+    "url": "https://creativecommons.org/licenses/by/2.5/legalcode",
+  },
+  Object {
+    "code": "CC BY 2.0 DE",
+    "url": "https://creativecommons.org/licenses/by/2.0/de/legalcode",
+  },
+  Object {
+    "code": "CC BY 2.0",
+    "url": "https://creativecommons.org/licenses/by/2.0/legalcode",
+  },
+  Object {
+    "code": "CC BY 2.0",
+    "url": "https://creativecommons.org/licenses/by/2.0/legalcode",
+  },
+  Object {
+    "code": "CC BY 1.0",
+    "url": "https://creativecommons.org/licenses/by/1.0/legalcode",
+  },
+  Object {
+    "code": "CC BY 1.0",
+    "url": "https://creativecommons.org/licenses/by/1.0/legalcode",
+  },
+  Object {
+    "code": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-1923",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AB-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Acid",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Afghanistan",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AIGA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Albania",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Albania-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Algeria",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Algeria-photo-except",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AM-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ancient-script",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Andorra-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Angola",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-animal",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-anon-1923",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-anon-50",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-anon-70",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-anon-70-EU",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-anon-auto-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Antigua and Barbuda",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AR-Anonymous",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AR-Deputies",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AR-Gov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AR-Movie",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AR-Music",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AR-Photo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AR-Signs",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Archivesnormandie",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ARHI-RM",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Armenia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Art-YorckProject",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Australia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Australia-currency",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Austria",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Austria-1932",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Austria-survey",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AustrianGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-author",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AWM",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-AZ-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Azerbaijan",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-B-road-sign",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Bahamas-anonymous",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Bahrain",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Bangladesh",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Barbados",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-because",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Belarus",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Belgium-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Belize",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Benin",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-BG-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-BH-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Bhutan",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Bishop",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-BNF",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Bolivia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Bosnia and Herzegovina",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Botswana",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-BR-1937",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-BR-URAAanon",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-BR-URAAwriter",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Brazil-media",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-BrazilGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Brunei",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-BulgarianGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Burkina Faso",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Burundi",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-BW",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-BY-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-CAGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Cambodia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-CambodiaGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Cameroon",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Canada",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Canada-anon",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Canada-creator",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Canada-Crown",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Canada-stamp",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Central African Republic",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Chad",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-chem",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Chile",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-China",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-China-film",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Coa-Finland",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Coa-Germany",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Coa-Germany-b1945",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Coa-Hungary",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Coa-Mexico",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Coa-Norway",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Coa-Switzerland",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Colombia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Comoros",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Cook Islands",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-copyright holder",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Costa Rica",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Cote d'Ivoire",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Croatia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Croatia-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-CSIRO",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-CSPAN",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Cuba",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-CzechGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-DBZ stamps",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Democratic Republic of the Congo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Denmark",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Denmark50",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-DenmarkGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Deutsche Bundespost Berlin stamps",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Deutsche Bundespost stamps",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Directory-Germany",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Djibouti",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Dominica",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-DPRKGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-DPRKOld",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-EC-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-EdictGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Edison Records",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-EE-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-EEA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Egypt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Egypt-folklore",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Egypt-official",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Egypt-stamp",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Empire of China Government Gazette",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Eritrea",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Estonia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Ethiopia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-EU-audio",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-EU-no author disclosure",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-EU-unpublished",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-EUGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Faroe Islands50",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Fiji",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Finland",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Finland50",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-FinlandGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-FinlandStamp",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-flag-50",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Flag-Germany",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-FLGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-font",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-France",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-GallicaScan",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Gambia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-GDR stamps",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-GE-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Georgia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-German Empire stamps",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-German logos",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-German stamps",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-GermanGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-GermanGov-currency",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Germany-§134",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Germany-§134-KUG",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-GHAGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Ghana",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-GreekGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-GreekGov-HellenicNavy",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Grenada",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Guinea-Bissau",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Gutenberg",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Guyana",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Haiti",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-heirs",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-HK",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-HK-factsheet",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-HK-PR",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-HU-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-HU-unknown",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Hubble",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Hungary",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Iceland50",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-IcelandGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-IDGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-IDNoCopyright",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-IDOld-Art29",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-IDOld-Art30",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-imf.org",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-India",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-India-photo-1958",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-India-URAA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ineligible",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Iran",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Iraq",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-IrishGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-IS-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Israel",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-IsraelGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Italy",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Italy-audio",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Italy-EdictGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Jamaica",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Japan",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Japan-audio",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Japan-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Japan-film",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Japan-oldphoto",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Japan-organization",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Jordan",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-JordanU",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-JORF",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-JORF-nor-conso",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Kansallisarkisto",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Kenya",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-KenyaGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-KG-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Kiribati",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-KoreaGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Kosovo-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-KosovoGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Kuwait",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-KZ-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-La Moncloa",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-LACMA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Laos",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Lebanon",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Lebanon-Photo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Liberia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Libya",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Liechtenstein",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-link",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-LN",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-LT-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-LV-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MacaoGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MacaoGov-text",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Macedonia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Macedonia-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Madagascar",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MAGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Malawi",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Malaysia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Maldives",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Mali",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Manchukuo-stamps",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MapLibrary",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Mauritania",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Mauritius",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MD-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-medical",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Mexico",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Mexico-NIP",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MH",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Micronesia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MNEGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MO",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MO-old-art",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MO-old-audiovisual",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MO-old-broadcast",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MO-old-media",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MO-old-photo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ModernMarvels",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Moldova",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-money-CZ",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Mongolia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Mongolia-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Montenegro",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Morocco",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Mozambique",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-music-ineligible",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-AK",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-AZ",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-CA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-CO",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-ID",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-IL",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-IN",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-MA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-MI",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-MN",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-MO",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-NC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-NE",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-NY",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-OH",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-OR",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-PA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-SC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-TX",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-UT",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-VA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-WA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MUTCD-WI",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-MX-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Myanmar",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Namibia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-NamibiaGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Nauru",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Nepal",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Netherlands Antilles",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-New Zealand",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-NI-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Niger",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Nigeria",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Niue",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-NKR-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-NL-gemeentevlag",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-NL-gemeentewapen",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-NL-verkeersbord",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-NL-water transport sign",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-North Korea",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Norway-record",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Norway50",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Norway70",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-NorwayGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-NWS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ODFW",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-OK-LSBPD",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-100",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-100-1923",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-100-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-50",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-50-1923",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-50-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-60-1923",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-60-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-70",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-70-1923",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-70-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-75",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-75-1923",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-75-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-80",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-80-1923",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-80-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-90",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-90-1923",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-90-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-auto-1923",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-auto-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-auto-unpublished",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-old-Edition",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Ottoman Empire",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Pakistan",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Palau",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Panama",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Papua New Guinea",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Paraguay",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PCL-portraits",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PDFnet",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Philippines",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PhilippinesGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PhilippinesPubDoc",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PMR-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Polish",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Polishsymbol",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Portugal-URAA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PRC-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PRC-GB mandatory standard",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PRC-Road Traffic Markings",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PRC-Road Traffic Signs",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PRGov-OfficialPortraits",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-PRGov-PRSHP",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Raita",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Republic of the Congo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-retouched-user",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-retouched-user-w",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-RO-1956",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-RO-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-RO-photo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-Generalissimo Government Gazette",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-Government Gazette",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-Military Government Gazette",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-National Government Gazette",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-official",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-oldphoto",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-Presidential Office Gazette",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-Provisional Gazette",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-Provisional Government Gazette",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-Traffic Markings",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ROC-Traffic Signs",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Romania",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-RU-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-RU-trivial-securitycam",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-RusEmpire",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Russia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Rwanda",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SabuCat",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SAGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Saint Kitts and Nevis",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Saint Lucia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Samoa",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-San Marino",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SanMarino",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SanMarino/en",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Sao Tome and Principe",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Saudi Arabia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SCGGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-script",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SDASM",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Seal-Germany",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-self",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Senegal",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Serbia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SerbiaGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Seychelles",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SFJ",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SG-artisticwork",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SG-broadcast",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SG-edition",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SG-film",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SG-lifetimepub",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SG-photo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SG-posthumouspub",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SG-soundrec",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SG-unknownauthor",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-shape",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-signature",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Sjöfartsverket",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SLNC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SlovakGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SloveneGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Slovenia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Slovenia-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Slovenia-exempt/en",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Somalia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-South Korea",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-South-Africa",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-South-Africa-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-SpanishGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Sri Lanka",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Statens vegvesen",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-STFP",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-StVZVO",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Sudan",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Sudan-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Sudan-Photo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Suomen",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Sweden-photo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Sweden-URL9",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Swiss National Bank",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Switzerland-mapdata",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Switzerland-official",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Switzerland-old-unknown",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Switzerland-photo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Syria",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Taiwan",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Tanzania",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-text",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-textlogo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-TH-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Thailand",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-THW",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-TJ-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-TK-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Togo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Tonga",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-TR-currency",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-traditional",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Transportstyrelsen",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Trinidad and Tobago",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Tunisia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Turkey",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Tuvalu",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UA-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UAexMilitary",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UAGov-Award",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UAGov-Money",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UAGovDoc",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Uganda",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UK-posthumous-non-photo-1996",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UK-unknown",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UKGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Ukraine",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Ukraine-pre2001",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UN-doc",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UN-map",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Unicode",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-United Arab Emirates",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-United Arab Emirates photo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-United Arab Emirates stamp",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-University-of-Wisconsin-Archives",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-URAA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-URAA-noformalities-unrestored",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-URAA-Simul",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-URB-RM",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Uruguay",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Uruguay-anon",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-1978-89",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-architecture",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-Codes-and-Standards-as-Statutory-Law",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-defective notice",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-GovEdict",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-Longines",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-no notice",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-no notice-UN",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-not renewed",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-patent",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-patent-no notice",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-record",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-US-unpublished",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USCG",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-user",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-user-at-project",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-user-w",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-ARM",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Atlas",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-AVO",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Award",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-BBG",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-BLM",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-CIA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-CIA-WF",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Congress",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Congress-AOC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DEA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DHS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DHS-TSA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DIA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DOC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DOC-Census",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DOE",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DOJ",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DOL",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DOS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DOT",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DVA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-ED",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-EEOC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-EPA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-FAA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-FBI",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-FCC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-FDA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Federal Reserve",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-FEMA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-FSA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-FTC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-FWS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-GAO",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-GSA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-HHS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-HHS-CDC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-HHS-IHS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-HHS-NHLBI",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-HHS-NIH",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-HHS-NTP",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-HUD",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Interior",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Interior-BOEMRE",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Interior-MMS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Interior-USBR",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Interior-USGS-Minerals",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Interior-USGS-NBII",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Judiciary",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military award",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Air Force",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Air National Guard",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Army",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Army-USACE",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Army-USACMH",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Army-USAIOH",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Badge",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-DARPA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-DIA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-DVIC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Marines",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-MDA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-National Guard",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Navy",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-NGA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-money",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-MUTCD",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NASA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NASA-AP",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NASA-SRTM",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NCBI-scienceprimer",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NEH",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NIH",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NIH-NIAID",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NIST",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NOAA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NOAA-GLERL",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NPS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NRC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NRO",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NSA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NSF",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NTSB",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-OSS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-OSTP",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-PHS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-POTUS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-SI",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-SSA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Treasury",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-TVA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USAID",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USDA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USDA-ARS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USDA-FS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USDA-NAL",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USDA-NAL-Pomological-Watercolors",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USDA-NRCS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USDA-NRCS-Gallery",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USGS",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USIA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-USTR",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-VOA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-WPA",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UWASH-FMIB",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-UZ-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Uzbekistan",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Vanuatu",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-VE-Photo",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-VE-Pic",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Vegagerdin",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Venezuela",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-VenezuelaGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Vietnam",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-VietnamGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Vlaams-gemeentewapen",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Vlaamse-gemeentevlag",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-VzKat",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Wikinews",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-WorldWind",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-WSMRM",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-WSRC",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Yemen",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Yemen-exempt",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Yugoslavia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-YugoslaviaGov",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Zambia",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-Zimbabwe",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:PD-ZW-currency",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:SIA-no known copyright restrictions",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:WSM no known restrictions",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:Library of Congress-no known copyright restrictions",
+  },
+  Object {
+    "code": "Public Domain",
+    "url": "https://commons.wikimedia.org/wiki/Template:Cc-pd",
+  },
+  Object {
+    "code": "CC-0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0",
   },
 ]
 `;

@@ -2,6 +2,11 @@ const Joi = require('joi');
 
 const routes = [];
 
+const licenseSchema = Joi.object({
+  url: Joi.string(),
+  code: Joi.string(),
+});
+
 const mockResponse = [
   {
     code: 'CC BY-SA 3.0',
@@ -16,16 +21,16 @@ routes.push({
     description: 'Licenses Index',
     notes: 'Returns a List of all Licenses',
     validate: {},
-    response: {
-      schema: Joi.array().items(
-        Joi.object().keys({
-          code: Joi.string(),
-          url: Joi.string(),
-        })
-      ),
-    },
+    // response: {
+    //   schema: Joi.array().items(licenseSchema),
+    // },
   },
-  handler: async (request, h) => h.response(mockResponse),
+  handler: async (request, h) => {
+    const licenseStore = request.server.app.services.licenses;
+    const licenses = licenseStore.all();
+    const response = licenses.map(({ url, name }) => ({ url: url, code: name }));
+    return h.response(response);
+  },
 });
 
 routes.push({
