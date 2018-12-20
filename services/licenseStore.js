@@ -36,11 +36,14 @@ class LicenseStore {
     this.index = buildLicensesIndex(this.licenses);
   }
 
+  // Returns all compatible licenses for the passed license id.
   compatible(id) {
     const { compatibility } = this.getLicense(id);
     return compatibility.map(cid => this.getLicense(cid));
   }
 
+  // Returns the first license in the list of licenses.js that matches one of the
+  // passed licenseStrings.
   match(licenseStrings) {
     // eslint-disable-next-line no-restricted-syntax
     for (const license of this.licenses) {
@@ -57,6 +60,9 @@ class LicenseStore {
     return this.index[id];
   }
 
+  // Returns the `license` with updated `url` from the list of portReferences
+  // if the `licenseString` is present as key in portReferences AND the `license`
+  // is in group 'ported'; otherwise it returns the original `license`.
   selectLicense(license, licenseString) {
     const url = this.portReferences[licenseString.toLowerCase()];
 
