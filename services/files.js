@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 const WikiClient = require('./wikiClient');
-const WikiUrlParser = require('./wikiUrlParser');
+const parse = require('./parseWikiUrl');
 
 function formatImagesInfoResponse(response) {
   const { pages } = response;
@@ -18,11 +18,10 @@ function formatImagesInfoResponse(response) {
 class Files {
   constructor() {
     this.client = new WikiClient();
-    this.parser = new WikiUrlParser();
   }
 
   async getPageImages(url) {
-    const { title, wikiUrl } = await this.parser.parse(url);
+    const { title, wikiUrl } = parse(url);
     const imageTitles = await this.getImageTitles(title, wikiUrl);
 
     return this.getImagesInfo(imageTitles, wikiUrl);
