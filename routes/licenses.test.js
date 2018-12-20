@@ -20,7 +20,7 @@ describe('license routes', () => {
       return context.inject(options());
     }
 
-    fit('returns a list of licenses', async () => {
+    it('returns a list of licenses', async () => {
       const response = await subject({});
 
       expect(response.status).toBe(200);

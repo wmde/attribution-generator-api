@@ -3,7 +3,7 @@ const Joi = require('joi');
 const routes = [];
 
 const licenseSchema = Joi.object({
-  url: Joi.string(),
+  url: Joi.string().uri(),
   code: Joi.string(),
 });
 
@@ -21,14 +21,14 @@ routes.push({
     description: 'Licenses Index',
     notes: 'Returns a List of all Licenses',
     validate: {},
-    // response: {
-    //   schema: Joi.array().items(licenseSchema),
-    // },
+    response: {
+      schema: Joi.array().items(licenseSchema),
+    },
   },
   handler: async (request, h) => {
     const licenseStore = request.server.app.services.licenses;
     const licenses = licenseStore.all();
-    const response = licenses.map(({ url, name }) => ({ url: url, code: name }));
+    const response = licenses.map(({ url, name }) => ({ url: encodeURI(url), code: name }));
     return h.response(response);
   },
 });

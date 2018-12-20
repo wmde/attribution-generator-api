@@ -37,7 +37,7 @@ class LicenseStore {
   }
 
   all() {
-    return this.licenses.filter(({ name, url }) => (!!name && !!url));
+    return this.licenses.filter(({ name, url }) => !!name && !!url);
   }
 
   // Returns all compatible licenses for the passed license id.
