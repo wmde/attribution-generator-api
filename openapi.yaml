@@ -18,6 +18,12 @@ definitions:
         type: string
     required:
       - version
+  UrlCodeModel:
+    properties:
+      code:
+        type: string
+      url:
+        type: string
 host: TODO
 info:
   description: Create attribution hints for images from Wikipedia and Wikimedia Commons.
@@ -117,7 +123,7 @@ paths:
           description: ''
           schema:
             items:
-              $ref: '#/definitions/CodeUrlModel'
+              $ref: '#/definitions/UrlCodeModel'
             type: array
       summary: Licenses Index
       tags:
