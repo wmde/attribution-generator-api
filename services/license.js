@@ -1,20 +1,22 @@
 const assert = require('assert');
 
-class License {
-  constructor({ id, name, groups, compatibility, regexp, url }) {
-    assert(typeof id === 'string' && id.length > 0, 'License: Invalid "id" provided');
-    assert(typeof name === 'string' && name.length > 0, 'License: Invalid "name" provided');
-    assert(Array.isArray(groups), 'License: Invalid "groups" provided');
-    assert(Array.isArray(compatibility), 'License: Invalid "compatibility" provided');
-    assert(regexp instanceof RegExp, 'License: Invalid "regexp" provided');
-    assert(!url || typeof url === 'string', 'License: Invalid "url" provided');
+function validationError(attribute) {
+  return `License: Invalid "${attribute}" provided`;
+}
 
-    this.id = id;
-    this.name = name;
-    this.groups = groups;
-    this.compatibility = compatibility;
-    this.regexp = regexp;
-    this.url = url;
+function assertParams({ id, name, groups, compatibility, regexp, url }) {
+  assert(typeof id === 'string' && id.length > 0, validationError('id'));
+  assert(typeof name === 'string' && name.length > 0, validationError('id'));
+  assert(Array.isArray(groups), validationError('id'));
+  assert(Array.isArray(compatibility), validationError('id'));
+  assert(regexp instanceof RegExp, validationError('id'));
+  assert(!url || typeof url === 'string', validationError('id'));
+}
+
+class License {
+  constructor(params) {
+    assertParams(params);
+    Object.assign(this, params);
   }
 
   match(value) {
