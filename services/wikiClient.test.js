@@ -5,6 +5,12 @@ const WikiClient = require('./wikiClient');
 jest.mock('axios');
 
 describe('WikiClient', () => {
+  const axiosClient = { get: jest.fn() };
+
+  beforeEach(() => {
+    axios.create.mockReturnValue(axiosClient);
+  });
+
   it('initializes a new axios client with defaults for header and timeout', () => {
     const headers = {
       common: {
@@ -14,13 +20,13 @@ describe('WikiClient', () => {
     };
     const timeout = 5000;
 
-    const subject = new WikiClient(); // eslint-disable-line no-unused-vars
+    const subject = new WikiClient();
 
     expect(axios.create).toHaveBeenCalledWith({ headers, timeout });
+    expect(subject.client).toBe(axiosClient);
   });
 
   describe('getResultsFromApi()', () => {
-    const axiosClient = { get: jest.fn() };
     const wikiUrl = 'https://en.wikipedia.org';
     const apiUrl = 'https://en.wikipedia.org/w/api.php';
     const defaultParams = { action: 'query', format: 'json' };
@@ -28,7 +34,6 @@ describe('WikiClient', () => {
 
     beforeEach(() => {
       axiosClient.get.mockResolvedValue(response);
-      axios.create.mockReturnValue(axiosClient);
     });
 
     describe('when querying for images of a page', () => {
