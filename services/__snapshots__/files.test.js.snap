@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Files getPageImages() parses the url and retrieves all images for the article 1`] = `
+Array [
+  Object {
+    "title": "File:Graphic 01.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Graphic_01.jpg",
+  },
+  Object {
+    "title": "File:logo.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/logo.svg",
+  },
+]
+`;

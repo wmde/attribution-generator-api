@@ -1,5 +1,6 @@
 const assert = require('assert');
 
+const Files = require('../services/files');
 const LicenseStore = require('../services/licenseStore');
 
 const licenses = require('./licenses/licenses');
@@ -13,6 +14,7 @@ assert.ok(typeof config === 'object', 'Invalid services configuration provided')
 // Create configured service instances.
 const services = {
   licenses: new LicenseStore(licenses, portReferences),
+  files: new Files(),
 };
 
 // const services = Object.keys(registry).reduce((all, name) => {

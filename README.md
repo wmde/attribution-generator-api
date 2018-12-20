@@ -17,7 +17,12 @@ You will need a few things to get started:
 
 All of the application's configuration is read from [environment variables](https://12factor.net/config).
 If a `.env` file is present in the current working directory, the application reads it via [`dotenv`](https://github.com/motdotla/dotenv) when starting.
-For a quick start in development, just copy `.env.test` and update its values.
+
+For a quick start in development, just copy `.env.test` and update its values:
+
+```shell
+cp .env.test .env
+```
 
 In case you need to generate secure app secrets, run `scripts/gen-secret`.
 
@@ -53,5 +58,11 @@ We use npm scripts for development-related tasks:
 
   * Run linting: `yarn lint`, to autocorrect issues `yarn lint --fix`
   * Run tests: `yarn test`, to start in watch mode `yarn test --watch`
+
+Generate / update the API documentation:
+
+```shell
+scripts/gen-apidoc > openapi.yaml
+```
 
 <!-- TODO: Add sections on contribution guidelines…? -->
