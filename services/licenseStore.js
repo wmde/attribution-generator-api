@@ -1,4 +1,4 @@
-const License = require('./license');
+const License = require('../models/license');
 
 function buildLicense(params) {
   const attributes = {
