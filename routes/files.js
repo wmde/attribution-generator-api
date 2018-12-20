@@ -4,15 +4,8 @@ const definitions = require('./__swagger__/definitions');
 
 const routes = [];
 
-const filesMock = [
-  {
-    file: 'Datei:Sunday 3 Besetzung (retouched).jpg',
-    url: 'https://de.wikipedia.org/wiki/Datei:Sunday_3_Besetzung_(retouched).jpg',
-  },
-];
-
 routes.push({
-  path: '/files',
+  path: '/files/{pageUrl}',
   method: 'GET',
   options: {
     description: 'Get all files for an article',
@@ -33,7 +26,7 @@ routes.push({
   },
   handler: async (request, h) => {
     const { files } = request.server.app.services;
-    const response = await files.getPageImages('The_Hellacopters', 'https://de.wikipedia.org');
+    const response = await files.getPageImages(request.params.pageUrl);
     return h.response(response);
   },
 });
