@@ -26,15 +26,17 @@ describe('WikiClient', () => {
     const defaultParams = { action: 'query', format: 'json' };
     const response = { data: { query: { foo: 'bar' } } };
 
+    beforeEach(() => {
+      axiosClient.get.mockResolvedValue(response);
+      axios.create.mockReturnValue(axiosClient);
+    });
+
     describe('when querying for images of a page', () => {
       const titles = 'Def_Leppard';
       const prop = 'image';
       const params = { ...defaultParams, prop, titles };
 
-      it('calls the respective api and returs the query result', async () => {
-        axiosClient.get.mockResolvedValue(response);
-        axios.create.mockReturnValue(axiosClient);
-
+      it('calls the respective api and returns the query result', async () => {
         const client = new WikiClient();
         const subject = await client.getResultsFromApi(titles, 'image', wikiUrl);
 
@@ -49,9 +51,6 @@ describe('WikiClient', () => {
       const params = { ...defaultParams, prop, titles, iiprop: 'url' };
 
       it('calls the respective api and returns the query result', async () => {
-        axiosClient.get.mockResolvedValue(response);
-        axios.create.mockReturnValue(axiosClient);
-
         const client = new WikiClient();
         const subject = await client.getResultsFromApi(titles, prop, wikiUrl, {
           titles,
