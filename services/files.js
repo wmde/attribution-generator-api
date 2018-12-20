@@ -1,17 +1,16 @@
 const assert = require('assert');
-const axios = require('axios');
 
 const WikiClient = require('./wikiClient');
 const WikiUrlParser = require('./wikiUrlParser');
 
 function formatImagesInfoResponse(response) {
-  const pages = response.pages;
+  const { pages } = response;
   assert.ok(!!pages, 'Wikimedia: No "url" option provided');
 
   // TODO: use response wrapper to extract data (ImageInfo)
   return Object.values(pages).map(page => {
     const { title, imageinfo } = page;
-    const url = imageinfo[0].url;
+    const { url } = imageinfo[0];
     return { title, url };
   });
 }
@@ -26,7 +25,7 @@ class Files {
     const { title, wikiUrl } = await this.parser.parse(url);
     const imageTitles = await this.getImageTitles(title, wikiUrl);
 
-    return await this.getImagesInfo(imageTitles, wikiUrl);
+    return this.getImagesInfo(imageTitles, wikiUrl);
   }
 
   // TODO: handle no images found
