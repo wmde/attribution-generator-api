@@ -46,7 +46,27 @@ describe('license routes', () => {
     });
   });
 
-  describe('GET /license', () => {
+  describe('GET /licenses/compatible/{license}', () => {
+    const license = 'CC+BY-SA+3.0';
+
+    function options() {
+      return { url: `/licenses/compatible/${license}`, method: 'GET' };
+    }
+
+    async function subject() {
+      return context.inject(options());
+    }
+
+    fit('returns a list of licenses', async () => {
+      const response = await subject({});
+
+      expect(response.status).toBe(200);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+  });
+
+  describe('GET /license/{file}', () => {
     const file = 'File:Pommes-1.jpg';
 
     function options() {

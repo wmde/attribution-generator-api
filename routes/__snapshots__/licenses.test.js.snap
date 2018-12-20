@@ -7,6 +7,13 @@ Object {
 }
 `;
 
+exports[`license routes GET /license/{file} returns the license of a file 1`] = `
+Object {
+  "code": "CC BY-SA 3.0",
+  "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+}
+`;
+
 exports[`license routes GET /licenses returns a list of licenses 1`] = `
 Array [
   Object {
@@ -19,3 +26,5 @@ Array [
   },
 ]
 `;
+
+exports[`license routes GET /licenses/compatible/{license} returns a list of licenses 1`] = `Array []`;

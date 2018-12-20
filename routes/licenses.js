@@ -15,6 +15,26 @@ const mockResponse = [
 ];
 
 routes.push({
+  path: '/licenses/compatible/{license}',
+  method: 'GET',
+  options: {
+    description: 'Compatible Licenses',
+    notes: 'Returns a List of compatible Licenses',
+    validate: {},
+    response: {
+      schema: Joi.array().items(licenseSchema),
+    },
+  },
+  handler: async (request, h) => {
+    const licenseStore = request.server.app.services.licenses;
+    const param = decodeURIComponent(request.params.license).replace(/\+/g,' ');
+    const licenses = licenseStore.compatible(param);
+    const response = licenses.map(({ url, name }) => ({ url: encodeURI(url), code: name }));
+    return h.response(response);
+  },
+});
+
+routes.push({
   path: '/licenses',
   method: 'GET',
   options: {

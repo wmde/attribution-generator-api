@@ -26,7 +26,11 @@ function buildPortedLicense(license, string, url) {
 }
 
 function buildLicensesIndex(licenses) {
-  return licenses.reduce((idx, license) => Object.assign(idx, { [license.id]: license }), {});
+  return licenses.reduce((idx, license) => {
+    Object.assign(idx, { [license.id]: license });
+    Object.assign(idx, { [license.name]: license });
+    return idx;
+  }, {});
 }
 
 class LicenseStore {
@@ -42,7 +46,8 @@ class LicenseStore {
 
   // Returns all compatible licenses for the passed license id.
   compatible(id) {
-    const { compatibility } = this.getLicense(id);
+    const license = this.getLicense(id);
+    const { compatibility } = license;
     return compatibility.map(cid => this.getLicense(cid));
   }
 
