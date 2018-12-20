@@ -1,10 +1,34 @@
 const LicenseStore = require('./licenseStore');
+const License = require('./license');
 const licenses = require('../config/licenses/licenses');
 const portReferences = require('../config/licenses/portReferences');
 const compatibleCases = require('./__test__/compatibleCases');
 
 describe('licenseStore', () => {
   const subject = new LicenseStore(licenses, portReferences);
+
+  describe('all()', () => {
+    const expectedLicenseParams = {
+      compatibility: [],
+      groups: ['cc', 'cc4'],
+      id: 'cc-by-sa-4.0',
+      name: 'CC BY-SA 4.0',
+      regexp: /^(Bild-)?CC-BY-SA(-|\/)4.0(([^-]+.+|-migrated)*)?$/i,
+      url: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode',
+    };
+
+    it('returns licenses', () => {
+      const allLicenses = subject.all();
+      expect(allLicenses.length).toBeGreaterThan(600);
+      expect(allLicenses[0]).toEqual(new License(expectedLicenseParams));
+    });
+
+    it('filters out licenses that do not contain a name or url', () => {
+      const allLicenses = subject.all();
+      expect(allLicenses.every(license => !!license.name)).toBeTruthy();
+      expect(allLicenses.every(license => !!license.url)).toBeTruthy();
+    });
+  });
 
   describe('match()', () => {
     it('detects "Public Domain"', () => {

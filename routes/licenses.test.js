@@ -3,8 +3,10 @@ const setup = require('./__helpers__/setup');
 describe('license routes', () => {
   let context;
 
+  const licenseStore = { all: jest.fn() };
+
   beforeEach(async () => {
-    context = await setup();
+    context = await setup({ services: { licenses: licenseStore } });
   });
 
   afterEach(async () => {
@@ -12,6 +14,17 @@ describe('license routes', () => {
   });
 
   describe('GET /licenses', () => {
+    const licenses = [
+      {
+        url: 'https://foo.bar/path with spaces',
+        name: 'bar',
+      },
+      {
+        url: 'https://foo.bar/just-a-regular-path',
+        name: 'foo',
+      },
+    ];
+
     function options() {
       return { url: `/licenses`, method: 'GET' };
     }
@@ -19,6 +32,10 @@ describe('license routes', () => {
     async function subject() {
       return context.inject(options());
     }
+
+    beforeEach(() => {
+      licenseStore.all.mockReturnValue(licenses);
+    });
 
     it('returns a list of licenses', async () => {
       const response = await subject({});
