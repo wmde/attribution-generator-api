@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Licenses getLicenseForFile() gets the file location and returns a matching license based on the page templates 1`] = `
+License {
+  "compatibility": Array [
+    "cc-by-sa-3.0-de",
+    "cc-by-sa-4.0",
+  ],
+  "groups": Array [
+    "cc",
+    "cc3",
+  ],
+  "id": "cc-by-sa-3.0",
+  "name": "CC BY-SA 3.0",
+  "regexp": /\\^\\(Bild-\\)\\?CC-BY-SA\\(-\\|\\\\/\\)3\\.0\\(\\(\\[\\^-\\]\\+\\.\\+\\|-migrated\\)\\*\\)\\?\\$/i,
+  "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+}
+`;
