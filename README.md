@@ -65,4 +65,12 @@ Generate / update the API documentation:
 scripts/gen-apidoc > openapi.yaml
 ```
 
+### Debugging
+
+It can be useful to run tests with the `DEBUG` flag enabled in order to get more information on errors:
+
+```shell
+DEBUG=true yarn test
+```
+
 <!-- TODO: Add sections on contribution guidelines…? -->

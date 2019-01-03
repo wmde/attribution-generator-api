@@ -36,6 +36,10 @@ class LicenseStore {
     this.index = buildLicensesIndex(this.licenses);
   }
 
+  all() {
+    return this.licenses.filter(({ name, url }) => !!name && !!url);
+  }
+
   // Returns all compatible licenses for the passed license id.
   compatible(id) {
     const { compatibility } = this.getLicense(id);

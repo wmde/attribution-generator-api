@@ -10,8 +10,12 @@ Object {
 exports[`license routes GET /licenses returns a list of licenses 1`] = `
 Array [
   Object {
-    "code": "CC BY-SA 3.0",
-    "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+    "code": "bar",
+    "url": "https://foo.bar/path%20with%20spaces",
+  },
+  Object {
+    "code": "foo",
+    "url": "https://foo.bar/just-a-regular-path",
   },
 ]
 `;
