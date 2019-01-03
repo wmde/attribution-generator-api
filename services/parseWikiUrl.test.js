@@ -1,6 +1,7 @@
 const parse = require('./parseWikiUrl');
 
 // according to https://en.wikipedia.org/wiki/Help:URL#URLs_of_Wikipedia_pages
+// and some upload urls
 const cases = [
   {
     name: 'plain article url',
@@ -56,6 +57,23 @@ const cases = [
     expected: {
       title: 'File:SoilTexture_USDA.png',
       wikiUrl: 'https://en.wikipedia.org/',
+    },
+  },
+  {
+    name: 'upload url',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Helene_Fischer_2010.jpg',
+    expected: {
+      title: 'File:Helene_Fischer_2010.jpg',
+      wikiUrl: 'https://commons.wikimedia.org/',
+    },
+  },
+  {
+    name: 'upload url thumbnail',
+    url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Helene_Fischer_2010.jpg/171px-Helene_Fischer_2010.jpg',
+    expected: {
+      title: 'File:Helene_Fischer_2010.jpg',
+      wikiUrl: 'https://commons.wikimedia.org/',
     },
   },
 ];
