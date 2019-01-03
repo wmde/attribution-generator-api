@@ -1,5 +1,5 @@
 const LicenseStore = require('./licenseStore');
-const License = require('./license');
+const License = require('../models/license');
 const licenses = require('../config/licenses/licenses');
 const portReferences = require('../config/licenses/portReferences');
 const compatibleCases = require('./__test__/compatibleCases');
