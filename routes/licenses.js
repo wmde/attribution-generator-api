@@ -18,8 +18,8 @@ routes.push({
   path: '/licenses/compatible/{license}',
   method: 'GET',
   options: {
-    description: 'Compatible Licenses',
-    notes: 'Returns a List of compatible Licenses',
+    description: 'Compatible licenses',
+    notes: 'Returns a list of licenses that are compatible to the passed license',
     validate: {},
     response: {
       schema: Joi.array().items(licenseSchema),
@@ -38,8 +38,8 @@ routes.push({
   path: '/licenses',
   method: 'GET',
   options: {
-    description: 'Licenses Index',
-    notes: 'Returns a List of all Licenses',
+    description: 'Licenses index',
+    notes: 'Returns a list of all licenses',
     validate: {},
     response: {
       schema: Joi.array().items(licenseSchema),
@@ -57,7 +57,7 @@ routes.push({
   path: '/license/{file}',
   method: 'GET',
   options: {
-    description: 'Image License',
+    description: 'Image license',
     notes: 'Returns the most liberal license for the given image',
     validate: {
       params: {
