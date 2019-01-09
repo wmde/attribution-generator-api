@@ -85,8 +85,23 @@ describe('parse()', () => {
     });
   });
 
-  it('returns nothing for non-wiki url', () => {
+  it('returns null for non-wiki url', () => {
     const url = 'https://en.pokepedia.org/wiki/Lower_Saxony';
+    expect(parse(url)).toEqual(null);
+  });
+
+  it('returns null for empty urls', () => {
+    const url = '';
+    expect(parse(url)).toEqual(null);
+  });
+
+  it('returns null for null urls', () => {
+    const url = null;
+    expect(parse(url)).toEqual(null);
+  });
+
+  it('returns null for undefined urls', () => {
+    const url = undefined;
     expect(parse(url)).toEqual(null);
   });
 });

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Licenses getLicenseForFile() gets the file location and returns a matching license based on the page templates 1`] = `
+exports[`Licenses getLicenseForFile() with a valid wikiUrl gets the file location and returns a matching license based on the page templates 1`] = `
 License {
   "compatibility": Array [
     "cc-by-sa-3.0-de",

@@ -75,7 +75,14 @@ routes.push({
       }),
     },
   },
-  handler: async (request, h) => h.response(mockResponse[0]),
+  handler: async (request, h) =>
+    // try {
+    //   await action();
+    // } catch(error) {
+    //   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch
+    //   h.error('unauthorized', 'this is wrong')
+    // }
+    h.response(mockResponse[0]),
 });
 
 module.exports = routes;

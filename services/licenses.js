@@ -33,8 +33,12 @@ class Lisences {
   }
 
   async getLicenseForFile(titleOrUrl) {
-    // TODO: handle case of parsing retuning null
-    const { title, wikiUrl } = parseWikiUrl(titleOrUrl);
+    const parsedUrl = parseWikiUrl(titleOrUrl);
+    // this would be either BadRequest (400) or NotFound (404)...
+    // e.g. 400 not a valid file url (second param to ok must be error or string message...)
+    assert.ok(parsedUrl, 'badRequest');
+
+    const { title, wikiUrl } = parsedUrl;
 
     // get actual url
     const { url: fileUrl } = await this.getImageInfo(title, wikiUrl);
