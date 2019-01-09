@@ -26,6 +26,11 @@ class License {
   isInGroup(groupId) {
     return this.groups.includes(groupId);
   }
+
+  // Returns the license id with any `-ported` suffix removed.
+  unportedId() {
+    return this.id.replace(/-ported+$/, '');
+  }
 }
 
 module.exports = License;
