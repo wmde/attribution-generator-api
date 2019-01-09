@@ -25,14 +25,14 @@ function buildPortedLicense(license, string, url) {
   return new License({ ...license, name, groups, url });
 }
 
-function buildIndexById(licenses) {
+function buildLicensesIndex(licenses) {
   return licenses.reduce((idx, license) => {
     Object.assign(idx, { [license.id]: license });
     return idx;
   }, {});
 }
 
-function buildIndexByName(licenses) {
+function buildLicenseNamesIndex(licenses) {
   return licenses.reduce((idx, license) => {
     const page = idx[license.name];
     if (page) {
@@ -61,8 +61,8 @@ class LicenseStore {
     this.licenses = licenses.map(attrs => buildLicense(attrs));
     this.portReferences = portReferences;
     this.indices = {
-      id: buildIndexById(this.licenses),
-      name: buildIndexByName(this.licenses),
+      id: buildLicensesIndex(this.licenses),
+      name: buildLicenseNamesIndex(this.licenses),
     };
   }
 

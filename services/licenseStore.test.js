@@ -127,7 +127,16 @@ describe('licenseStore', () => {
   });
 
   describe('compatible()', () => {
-    it('finds compatible license for "CC BY-SA 3.0"', () => {
+    const expectedKeys = ['id', 'name', 'groups', 'compatibility', 'regexp', 'url'];
+
+    it('returns an array of licenses', () => {
+      const compatible = subject.compatible('CC BY-SA 3.0');
+      compatible.forEach(license => {
+        expect(Object.keys(license)).toEqual(expectedKeys);
+      });
+    });
+
+    it('finds compatible licenses for "CC BY-SA 3.0"', () => {
       const compatible = subject.compatible('CC BY-SA 3.0');
       expect(compatible.map(license => license.id)).toEqual(['cc-by-sa-3.0-de', 'cc-by-sa-4.0']);
     });

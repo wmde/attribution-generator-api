@@ -20,7 +20,11 @@ routes.push({
   options: {
     description: 'Compatible licenses',
     notes: 'Returns a list of licenses that are compatible to the passed license',
-    validate: {},
+    validate: {
+      params: {
+        license: Joi.string(),
+      },
+    },
     response: {
       schema: Joi.array().items(licenseSchema),
     },

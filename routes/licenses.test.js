@@ -50,10 +50,8 @@ describe('license routes', () => {
   });
 
   describe('GET /licenses/compatible/{license}', () => {
-    const license = 'CC+BY-SA+3.0';
-
     function options() {
-      return { url: `/licenses/compatible/${license}`, method: 'GET' };
+      return { url: `/licenses/compatible/CC+BY-SA+3.0`, method: 'GET' };
     }
 
     async function subject() {
@@ -65,7 +63,7 @@ describe('license routes', () => {
     });
 
     it('returns a list of licenses', async () => {
-      const response = await subject({});
+      const response = await subject();
 
       expect(response.status).toBe(200);
       expect(response.type).toBe('application/json');
@@ -73,7 +71,7 @@ describe('license routes', () => {
     });
 
     it('calls service with decoded license parameter string', async () => {
-      await subject({});
+      await subject();
 
       expect(licenseStore.compatible).toHaveBeenCalledWith('CC BY-SA 3.0');
     });
