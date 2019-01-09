@@ -47,7 +47,8 @@ function splitUrl(url) {
   if (wikipediaRegExp.test(url)) {
     return splitWikipediaUrl(url);
   }
-  return null;
+  // TODO: use a dedicated Error object here
+  throw new Error('badData');
 }
 
 function parse(url) {

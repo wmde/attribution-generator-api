@@ -85,23 +85,23 @@ describe('parse()', () => {
     });
   });
 
-  it('returns null for non-wiki url', () => {
+  it('throws a 422 exception for for non-wiki url', () => {
     const url = 'https://en.pokepedia.org/wiki/Lower_Saxony';
-    expect(parse(url)).toEqual(null);
+    expect(() => parse(url)).toThrow('badData');
   });
 
-  it('returns null for empty urls', () => {
+  it('throws a 422 exception for empty urls', () => {
     const url = '';
-    expect(parse(url)).toEqual(null);
+    expect(() => parse(url)).toThrow('badData');
   });
 
-  it('returns null for null urls', () => {
+  it('throws a 422 exception for null urls', () => {
     const url = null;
-    expect(parse(url)).toEqual(null);
+    expect(() => parse(url)).toThrow('badData');
   });
 
-  it('returns null for undefined urls', () => {
+  it('throws a 422 exception for undefined urls', () => {
     const url = undefined;
-    expect(parse(url)).toEqual(null);
+    expect(() => parse(url)).toThrow('badData');
   });
 });
