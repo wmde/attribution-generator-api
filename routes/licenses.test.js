@@ -72,7 +72,7 @@ describe('license routes', () => {
       expect(response.payload).toMatchSnapshot();
     });
 
-    it('decodes license parameter string', async () => {
+    it('calls service with decoded license parameter string', async () => {
       await subject({});
 
       expect(licenseStore.compatible).toHaveBeenCalledWith('CC BY-SA 3.0');

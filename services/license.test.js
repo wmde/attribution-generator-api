@@ -55,16 +55,4 @@ describe('license', () => {
       expect(subject.match('Blerg')).toBeFalsy();
     });
   });
-
-  describe('unportedId()', () => {
-    it('removes the "-ported" version suffix', () => {
-      const license = newLicense({ id: 'cc-by-sa-3.0-ported' });
-      expect(license.unportedId()).toEqual('cc-by-sa-3.0');
-    });
-
-    it('returns unmodified id for ids without "-ported" suffix', () => {
-      const license = newLicense({ id: 'cc-by-sa-3.0' });
-      expect(license.unportedId()).toEqual('cc-by-sa-3.0');
-    });
-  });
 });
