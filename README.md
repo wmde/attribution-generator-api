@@ -65,7 +65,9 @@ Generate / update the API documentation:
 scripts/gen-apidoc > openapi.yaml
 ```
 
-### Debugging
+## Debugging
+
+You can debug this application with `ndb` by running `yarn debug`. Set break points in the pop-up window and run the test file in the terminal tab of the pop-up window.
 
 It can be useful to run tests with the `DEBUG` flag enabled in order to get more information on errors:
 
