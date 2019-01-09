@@ -25,30 +25,57 @@ function buildPortedLicense(license, string, url) {
   return new License({ ...license, name, groups, url });
 }
 
-function buildLicensesIndex(licenses) {
+function buildIndexById(licenses) {
   return licenses.reduce((idx, license) => {
     Object.assign(idx, { [license.id]: license });
-    Object.assign(idx, { [license.name]: license });
     return idx;
   }, {});
+}
+
+function buildIndexByName(licenses) {
+  return licenses.reduce((idx, license) => {
+    const page = idx[license.name];
+    if (page) {
+      page.push(license.id);
+    } else {
+      Object.assign(idx, { [license.name]: [license.id] });
+    }
+    return idx;
+  }, {});
+}
+
+// Returns the `license` with updated `url` from the list of portReferences
+// if the `licenseString` is present as key in portReferences AND the `license`
+// is in group 'ported'; otherwise it returns the original `license`.
+function selectLicense(license, licenseString, portReferences) {
+  const url = portReferences[licenseString.toLowerCase()];
+
+  if (license.isInGroup('ported') && !!url) {
+    return buildPortedLicense(license, licenseString, url);
+  }
+  return license;
 }
 
 class LicenseStore {
   constructor(licenses, portReferences) {
     this.licenses = licenses.map(attrs => buildLicense(attrs));
     this.portReferences = portReferences;
-    this.index = buildLicensesIndex(this.licenses);
+    this.indices = {
+      id: buildIndexById(this.licenses),
+      name: buildIndexByName(this.licenses),
+    };
   }
 
+  // Returns all licenses with a name and url from `config/licenses/licenses.js`.
   all() {
     return this.licenses.filter(({ name, url }) => !!name && !!url);
   }
 
-  // Returns all compatible licenses for the passed license id.
-  compatible(id) {
-    const license = this.getLicense(id);
+  // Returns all compatible licenses for the passed license name.
+  compatible(name) {
+    const license = this.getLicenseByName(name);
     const { compatibility } = license;
-    return compatibility.map(cid => this.getLicense(cid));
+    return compatibility.map(cid => this.getLicenseById(cid));
   }
 
   // Returns the first license in the list of licenses.js that matches one of the
@@ -59,26 +86,22 @@ class LicenseStore {
       const template = licenseStrings.find(t => license.match(t));
       // eslint-disable-next-line no-continue
       if (typeof template === 'undefined') continue;
-      return this.selectLicense(license, template);
+      return selectLicense(license, template, this.portReferences);
     }
 
     return null;
   }
 
-  getLicense(id) {
-    return this.index[id];
+  // Returns the license with the passed id.
+  getLicenseById(id) {
+    return this.indices.id[id];
   }
 
-  // Returns the `license` with updated `url` from the list of portReferences
-  // if the `licenseString` is present as key in portReferences AND the `license`
-  // is in group 'ported'; otherwise it returns the original `license`.
-  selectLicense(license, licenseString) {
-    const url = this.portReferences[licenseString.toLowerCase()];
-
-    if (license.isInGroup('ported') && !!url) {
-      return buildPortedLicense(license, licenseString, url);
-    }
-    return license;
+  // Returns the first license with the passed name.
+  // Ordered by occurrence in `config/licenses/licenses.js`.
+  getLicenseByName(name) {
+    const id = this.indices.name[name][0];
+    return this.getLicenseById(id);
   }
 }
 

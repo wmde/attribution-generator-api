@@ -1,5 +1,4 @@
 const setup = require('./__helpers__/setup');
-const licenses = require('../config/licenses/licenses');
 
 describe('license routes', () => {
   let context;
@@ -17,7 +16,7 @@ describe('license routes', () => {
 
   const licenseStore = {
     all: jest.fn(),
-    compatible: jest.fn()
+    compatible: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -74,7 +73,7 @@ describe('license routes', () => {
     });
 
     it('decodes license parameter string', async () => {
-      const response = await subject({});
+      await subject({});
 
       expect(licenseStore.compatible).toHaveBeenCalledWith('CC BY-SA 3.0');
     });

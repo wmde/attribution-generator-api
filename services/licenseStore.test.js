@@ -127,19 +127,34 @@ describe('licenseStore', () => {
   });
 
   describe('compatible()', () => {
-    it('finds no compatible licences for "cc by-sa 4.0"', () => {
-      expect(subject.compatible('cc-by-sa-4.0')).toEqual([]);
+    it('finds compatible license for "CC BY-SA 3.0"', () => {
+      const compatible = subject.compatible('CC BY-SA 3.0');
+      expect(compatible.map(license => license.id)).toEqual(['cc-by-sa-3.0-de', 'cc-by-sa-4.0']);
+    });
+
+    it('finds no compatible licences for "CC BY-SA 4.0"', () => {
+      const compatible = subject.compatible('CC BY-SA 4.0');
+      expect(compatible).toEqual([]);
     });
 
     Object.keys(compatibleCases).forEach(id => {
       const expected = compatibleCases[id];
+      const license = subject.getLicenseById(id);
 
-      it(`finds compatible licenses for "${id}"`, () => {
-        const result = subject.compatible(id);
-        expect(result).toHaveLength(expected.length);
-        const ids = result.map(license => license.id);
+      it(`finds compatible licenses for "${license.name}"`, () => {
+        const compatible = subject.compatible(license.name);
+        expect(compatible).toHaveLength(expected.length);
+        const ids = compatible.map(l => l.id);
         expect(ids).toEqual(expect.arrayContaining(expected));
       });
+    });
+  });
+
+  describe('getLicenseByName()', () => {
+    it('returns the first license with that name', () => {
+      const license = subject.getLicenseByName('CC BY-SA 3.0');
+      expect(license.id).toEqual('cc-by-sa-3.0');
+      expect(license.name).toEqual('CC BY-SA 3.0');
     });
   });
 });
