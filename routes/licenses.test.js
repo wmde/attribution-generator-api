@@ -1,9 +1,24 @@
 const setup = require('./__helpers__/setup');
+const licenses = require('../config/licenses/licenses');
 
 describe('license routes', () => {
   let context;
 
-  const licenseStore = { all: jest.fn() };
+  const licenses = [
+    {
+      url: 'https://foo.bar/path with spaces',
+      name: 'bar',
+    },
+    {
+      url: 'https://foo.bar/just-a-regular-path',
+      name: 'foo',
+    },
+  ];
+
+  const licenseStore = {
+    all: jest.fn(),
+    compatible: jest.fn()
+  };
 
   beforeEach(async () => {
     context = await setup({ services: { licenses: licenseStore } });
@@ -14,17 +29,6 @@ describe('license routes', () => {
   });
 
   describe('GET /licenses', () => {
-    const licenses = [
-      {
-        url: 'https://foo.bar/path with spaces',
-        name: 'bar',
-      },
-      {
-        url: 'https://foo.bar/just-a-regular-path',
-        name: 'foo',
-      },
-    ];
-
     function options() {
       return { url: `/licenses`, method: 'GET' };
     }
@@ -57,12 +61,22 @@ describe('license routes', () => {
       return context.inject(options());
     }
 
-    fit('returns a list of licenses', async () => {
+    beforeEach(() => {
+      licenseStore.compatible.mockReturnValue(licenses);
+    });
+
+    it('returns a list of licenses', async () => {
       const response = await subject({});
 
       expect(response.status).toBe(200);
       expect(response.type).toBe('application/json');
       expect(response.payload).toMatchSnapshot();
+    });
+
+    it('decodes license parameter string', async () => {
+      const response = await subject({});
+
+      expect(licenseStore.compatible).toHaveBeenCalledWith('CC BY-SA 3.0');
     });
   });
 
