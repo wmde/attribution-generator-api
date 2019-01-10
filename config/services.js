@@ -16,7 +16,7 @@ assert.ok(typeof config === 'object', 'Invalid services configuration provided')
 const client = new Client();
 
 const services = {
-  licenses: new LicenseStore(licenses, portReferences),
+  licenseStore: new LicenseStore(licenses, portReferences),
   files: new Files({ client }),
 };
 

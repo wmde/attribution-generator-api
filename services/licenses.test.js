@@ -10,6 +10,7 @@ describe('Licenses', () => {
   const parseIdentifier = { getFileData: jest.fn() };
   const retrieveLicense = { getLicenseForFile: jest.fn() };
   const client = { getResultsFromApi: jest.fn() };
+  const licenseStore = jest.fn();
 
   beforeEach(() => {
     ParseIdentifier.mockImplementation(() => parseIdentifier);
@@ -28,7 +29,7 @@ describe('Licenses', () => {
       });
 
       it('gets the file location and returns a matching license based on the page templates', async () => {
-        const service = new Licenses({ client });
+        const service = new Licenses({ client, licenseStore });
         const license = await service.getLicense(url);
 
         expect(parseIdentifier.getFileData).toHaveBeenCalledWith(url);

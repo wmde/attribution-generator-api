@@ -1,14 +1,11 @@
-const LicenseStore = require('./licenseStore');
-const licenses = require('../config/licenses/licenses');
-const portReferences = require('../config/licenses/portReferences');
 const FetchTemplates = require('./fetchTemplates');
 
 // TODO: does this even need to be a class?
 class RetrieveLicense {
-  constructor() {
-    this.licenseStore = new LicenseStore(licenses, portReferences);
+  constructor({ client, licenseStore }) {
+    this.licenseStore = licenseStore;
     // TODO: we would prefer to only have a single instance of each service
-    this.fetchTemplates = new FetchTemplates();
+    this.fetchTemplates = new FetchTemplates({ client });
   }
 
   async getLicenseForFile({ title, wikiUrl }) {

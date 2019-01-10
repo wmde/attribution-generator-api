@@ -2,9 +2,9 @@ const ParseIdentifier = require('./parseIdentifier');
 const RetrieveLicense = require('./retrieveLicense');
 
 class Licences {
-  constructor({ client }) {
+  constructor({ client, licenseStore }) {
     this.parseIdentifier = new ParseIdentifier({ client });
-    this.retrieveLicense = new RetrieveLicense();
+    this.retrieveLicense = new RetrieveLicense({ client, licenseStore });
   }
 
   async getLicense(titleOrUrl) {

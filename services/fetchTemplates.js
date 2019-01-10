@@ -1,7 +1,5 @@
 const assert = require('assert');
 
-const WikiClient = require('./wikiClient');
-
 function normalizeTemplate(template) {
   const { title } = template;
   return title.replace(/^Template:/, '');
@@ -15,8 +13,8 @@ function formatPageTemplates(response) {
 }
 
 class FetchTemplates {
-  constructor() {
-    this.client = new WikiClient();
+  constructor({ client }) {
+    this.client = client;
   }
 
   async getPageTemplates({ title, wikiUrl }) {
