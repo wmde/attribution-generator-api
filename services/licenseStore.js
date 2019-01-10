@@ -74,8 +74,11 @@ class LicenseStore {
   // Returns all compatible licenses for the passed license name.
   compatible(name) {
     const license = this.getLicenseByName(name);
-    const { compatibility } = license;
-    return compatibility.map(cid => this.getLicenseById(cid));
+    if (license) {
+      const { compatibility } = license;
+      return compatibility.map(cid => this.getLicenseById(cid));
+    }
+    return [];
   }
 
   // Returns the first license in the list of licenses.js that matches one of the
@@ -94,14 +97,17 @@ class LicenseStore {
 
   // Returns the license with the passed id.
   getLicenseById(id) {
-    return this.indices.id[id];
+    return this.indices.id[id] || null;
   }
 
   // Returns the first license with the passed name.
   // Ordered by occurrence in `config/licenses/licenses.js`.
   getLicenseByName(name) {
-    const id = this.indices.name[name][0];
-    return this.getLicenseById(id);
+    const licenseIds = this.indices.name[name];
+    if (licenseIds) {
+      return this.getLicenseById(licenseIds[0]);
+    }
+    return null;
   }
 }
 

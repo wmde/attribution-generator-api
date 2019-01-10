@@ -146,6 +146,11 @@ describe('licenseStore', () => {
       expect(compatible).toEqual([]);
     });
 
+    it('finds no compatible license for invalid license name', () => {
+      const compatible = subject.compatible('XX BY-SA 3.0');
+      expect(compatible).toEqual([]);
+    });
+
     Object.keys(compatibleCases).forEach(id => {
       const expected = compatibleCases[id];
       const license = subject.getLicenseById(id);
@@ -164,6 +169,11 @@ describe('licenseStore', () => {
       const license = subject.getLicenseByName('CC BY-SA 3.0');
       expect(license.id).toEqual('cc-by-sa-3.0');
       expect(license.name).toEqual('CC BY-SA 3.0');
+    });
+
+    it('returns no license for invalid license name', () => {
+      const license = subject.getLicenseByName('XX BY-SA 3.0');
+      expect(license).toBeNull();
     });
   });
 });
