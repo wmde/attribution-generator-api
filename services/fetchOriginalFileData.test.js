@@ -11,6 +11,8 @@ jest.mock('./parseWikiUrl');
 describe('FetchOriginalFileData', () => {
   const wikiClient = { getResultsFromApi: jest.fn() };
 
+  beforeEach(() => WikiClient.mockImplementation(() => wikiClient));
+
   describe('getFileData', () => {
     const title = 'File:Apple_Lisa2-IMG_1517.jpg';
     const wikiUrl = 'https://en.wikipedia.org';
@@ -21,9 +23,7 @@ describe('FetchOriginalFileData', () => {
         '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo';
 
       beforeEach(() => {
-        WikiClient.mockImplementation(() => wikiClient);
         parse.mockImplementationOnce(() => ({ title, wikiUrl: originalWikiUrl }));
-
         wikiClient.getResultsFromApi.mockResolvedValueOnce(imageInfoMock);
       });
 
@@ -43,15 +43,22 @@ describe('FetchOriginalFileData', () => {
 
     describe('when the original url cannot be parsed', () => {
       beforeEach(() => {
-        WikiClient.mockImplementation(() => wikiClient);
-        parse.mockImplementationOnce(() => new Error());
-
         wikiClient.getResultsFromApi.mockResolvedValueOnce(imageInfoMock);
+        parse.mockImplementationOnce(() => new Error());
       });
 
       it('forwards the exception thrown when attempting to parse the url', async () => {
         const service = new FetchOriginalFileData();
         expect(service.getFileData({ title, wikiUrl })).rejects.toThrow('badData');
+      });
+    });
+
+    describe('when the imageinfo response does not include pages', () => {
+      beforeEach(() => wikiClient.getResultsFromApi.mockResolvedValueOnce({}));
+
+      it('throws a notFound error', async () => {
+        const service = new FetchOriginalFileData();
+        expect(service.getFileData({ title, wikiUrl })).rejects.toThrow('notFound');
       });
     });
   });

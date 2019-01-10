@@ -1,9 +1,11 @@
+const assert = require('assert');
+
 const WikiClient = require('./wikiClient');
 const parseWikiUrl = require('./parseWikiUrl');
 
 function parseImageInfoResponse(response) {
   const { pages } = response;
-  // TODO: assert that pages are present, otherwise 404
+  assert.ok(pages, 'notFound');
   const { imageinfo } = Object.values(pages)[0];
   return imageinfo[0];
 }
@@ -15,7 +17,6 @@ class FetchOriginalFileData {
 
   async getFileData(params) {
     const imageInfo = await this.getImageInfo(params);
-    // TODO: 404 if no imageInfor
     const { url, extmetadata } = imageInfo;
     const { title, wikiUrl } = parseWikiUrl(url);
     // TODO: find out if we ALWAYS have an Artist
