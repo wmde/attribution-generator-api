@@ -25,22 +25,30 @@ function buildPortedLicense(license, string, url) {
   return new License({ ...license, name, groups, url });
 }
 
+// Returns an index of licenses by license-id.
+//
+// Example:
+// {
+//   'cc-by-sa-3.0': { id: ..., name: ..., ... },
+// }
 function buildLicensesIndex(licenses) {
-  return licenses.reduce((idx, license) => {
-    Object.assign(idx, { [license.id]: license });
-    return idx;
-  }, {});
+  return licenses.reduce(
+    (licensesIndex, license) => Object.assign(licensesIndex, { [license.id]: license }),
+    {}
+  );
 }
 
+// Returns an index of license-ids by license name.
+//
+// Example:
+// {
+//   'CC BY-SA 3.0': ['cc-by-sa-3.0', 'cc-by-sa-3.0-ported'],
+// }
 function buildLicenseNamesIndex(licenses) {
-  return licenses.reduce((idx, license) => {
-    const page = idx[license.name];
-    if (page) {
-      page.push(license.id);
-    } else {
-      Object.assign(idx, { [license.name]: [license.id] });
-    }
-    return idx;
+  return licenses.reduce((licenseNamesIndex, license) => {
+    const licensesWithSameName = licenseNamesIndex[license.name] || [];
+    licensesWithSameName.push(license.id);
+    return Object.assign(licenseNamesIndex, { [license.name]: licensesWithSameName });
   }, {});
 }
 
