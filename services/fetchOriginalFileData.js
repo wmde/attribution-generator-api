@@ -19,9 +19,7 @@ class FetchOriginalFileData {
     const imageInfo = await this.getImageInfo(params);
     const { url, extmetadata } = imageInfo;
     const { title, wikiUrl } = parseWikiUrl(url);
-    // TODO: find out if we ALWAYS have an Artist
-    // (for now I could not find a different example - even for public domain images)
-    const { value: artistHtml } = extmetadata.Artist;
+    const { value: artistHtml = null } = extmetadata.Artist || {};
     return { title, wikiUrl, artistHtml };
   }
 
