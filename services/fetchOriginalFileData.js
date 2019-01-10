@@ -18,7 +18,8 @@ class FetchOriginalFileData {
     // TODO: 404 if no imageInfor
     const { url, extmetadata } = imageInfo;
     const { title, wikiUrl } = parseWikiUrl(url);
-    // TODO: 404 if not parseable
+    // TODO: find out if we ALWAYS have an Artist
+    // (for now I could not find a different example - even for public domain images)
     const { value: artistHtml } = extmetadata.Artist;
     return { title, wikiUrl, artistHtml };
   }

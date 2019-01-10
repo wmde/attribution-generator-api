@@ -23,11 +23,11 @@ describe('FetchOriginalFileData', () => {
       beforeEach(() => {
         WikiClient.mockImplementation(() => wikiClient);
         parse.mockImplementationOnce(() => ({ title, wikiUrl: originalWikiUrl }));
+
+        wikiClient.getResultsFromApi.mockResolvedValueOnce(imageInfoMock);
       });
 
       it('retrieves the original wikiUrl, title and artistHtml information', async () => {
-        wikiClient.getResultsFromApi.mockResolvedValueOnce(imageInfoMock);
-
         const service = new FetchOriginalFileData();
         const imageInfo = await service.getFileData({ title, wikiUrl });
 
@@ -38,6 +38,20 @@ describe('FetchOriginalFileData', () => {
         });
 
         expect(imageInfo).toEqual({ title, wikiUrl: originalWikiUrl, artistHtml });
+      });
+    });
+
+    describe('when the original url cannot be parsed', () => {
+      beforeEach(() => {
+        WikiClient.mockImplementation(() => wikiClient);
+        parse.mockImplementationOnce(() => new Error());
+
+        wikiClient.getResultsFromApi.mockResolvedValueOnce(imageInfoMock);
+      });
+
+      it('forwards the exception thrown when attempting to parse the url', async () => {
+        const service = new FetchOriginalFileData();
+        expect(service.getFileData({ title, wikiUrl })).rejects.toThrow('badData');
       });
     });
   });
