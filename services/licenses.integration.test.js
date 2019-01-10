@@ -8,7 +8,7 @@ describe('getLicenseForFile', () => {
 
   it('returns the lisence for the uploaded file on commons', async () => {
     const url = 'https://en.wikipedia.org/wiki/Apple_Lisa#/media/File:Apple_Lisa.jpg';
-    const response = await service.getLicenseForFile(url);
+    const response = await service.getLicense(url);
     expect(response).toMatchObject({ id: 'cc-by-sa-3.0', name: 'CC BY-SA 3.0' });
   });
 });
