@@ -1,10 +1,12 @@
 const Files = require('./files');
+const Client = require('./wikiClient');
 
 // NOTE: this is a tmp integration test to easify development
 // we probably do not want to run this by default in the future
 // (only on CI maybe)
 describe('getPageImages()', () => {
-  const service = new Files();
+  const client = new Client();
+  const service = new Files({ client });
   const url = 'https://de.wikipedia.org/wiki/The_Hellacopters';
   const expectedFiles = [
     {

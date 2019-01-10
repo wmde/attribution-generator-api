@@ -1,9 +1,9 @@
 const ParseIdentifier = require('./parseIdentifier');
 const RetrieveLicense = require('./retrieveLicense');
 
-class Lisences {
-  constructor() {
-    this.parseIdentifier = new ParseIdentifier();
+class Licences {
+  constructor({ client }) {
+    this.parseIdentifier = new ParseIdentifier({ client });
     this.retrieveLicense = new RetrieveLicense();
   }
 
@@ -13,4 +13,4 @@ class Lisences {
   }
 }
 
-module.exports = Lisences;
+module.exports = Licences;

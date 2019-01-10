@@ -11,6 +11,7 @@ jest.mock('./parseWikiUrl');
 describe('ParseIdentifier', () => {
   const fetchOriginalFileData = { getFileData: jest.fn() };
   const parseFileTitle = { enhanceFileIdentifier: jest.fn() };
+  const client = { getResultsFromApi: jest.fn() };
 
   beforeEach(() => {
     FetchOriginalFileData.mockImplementation(() => fetchOriginalFileData);
@@ -29,7 +30,7 @@ describe('ParseIdentifier', () => {
       beforeEach(() => parseFileTitle.enhanceFileIdentifier.mockResolvedValueOnce(fileData));
 
       it('calls the respective services and returns the extended file data', async () => {
-        const service = new ParseIdentifier();
+        const service = new ParseIdentifier({ client });
         const data = await service.getFileData(titleOrUrl);
 
         expect(parseFileTitle.enhanceFileIdentifier).toHaveBeenCalledWith(titleOrUrl);
@@ -46,7 +47,7 @@ describe('ParseIdentifier', () => {
       });
 
       it('parses the url and then enhances it with extra information', async () => {
-        const service = new ParseIdentifier();
+        const service = new ParseIdentifier({ client });
         const data = await service.getFileData(titleOrUrl);
 
         expect(parseWikiUrl).toHaveBeenCalledWith(titleOrUrl);

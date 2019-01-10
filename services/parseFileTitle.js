@@ -6,8 +6,8 @@ const defaultWikiUrl = 'https://commons.wikimedia.org';
 const filePrefix = 'File:';
 
 class ParseFileTitle {
-  constructor() {
-    this.fetchOriginalFileData = new FetchOriginalFileData();
+  constructor({ client }) {
+    this.fetchOriginalFileData = new FetchOriginalFileData({ client });
   }
 
   enhanceFileIdentifier(title) {

@@ -6,6 +6,7 @@ jest.mock('./fetchOriginalFileData');
 
 describe('ParseFileTitle', () => {
   const fetchOriginalFileData = { getFileData: jest.fn() };
+  const client = { getResultsFromApi: jest.fn() };
 
   beforeEach(() => FetchOriginalFileData.mockImplementation(() => fetchOriginalFileData));
 
@@ -20,7 +21,7 @@ describe('ParseFileTitle', () => {
       beforeEach(() => fetchOriginalFileData.getFileData.mockResolvedValueOnce(fileDataMock));
 
       it('defaults to the commons wikiUrl and retrieves the data via another service', async () => {
-        const service = new ParseFileTitle();
+        const service = new ParseFileTitle({ client });
         const fileData = await service.enhanceFileIdentifier(title);
 
         expect(fetchOriginalFileData.getFileData).toHaveBeenCalledWith({
@@ -36,7 +37,7 @@ describe('ParseFileTitle', () => {
       const title = 'Apple_Lisa2-IMG_1517.jpg';
 
       it('throws a 422 exception', () => {
-        const service = new ParseFileTitle();
+        const service = new ParseFileTitle({ client });
         expect(() => service.enhanceFileIdentifier(title)).toThrow('badData');
       });
     });

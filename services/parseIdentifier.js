@@ -5,9 +5,9 @@ const parseWikiUrl = require('./parseWikiUrl');
 const urlRegex = /^(https|http)?:\/\//;
 
 class ParseIdentifier {
-  constructor() {
-    this.fetchOriginalFileData = new FetchOriginalFileData();
-    this.parseFileTitle = new ParseFileTitle();
+  constructor({ client }) {
+    this.fetchOriginalFileData = new FetchOriginalFileData({ client });
+    this.parseFileTitle = new ParseFileTitle({ client });
   }
 
   getFileData(titleOrUrl) {

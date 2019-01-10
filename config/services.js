@@ -2,6 +2,7 @@ const assert = require('assert');
 
 const Files = require('../services/files');
 const LicenseStore = require('../services/licenseStore');
+const Client = require('../services/wikiClient');
 
 const licenses = require('./licenses/licenses');
 const portReferences = require('./licenses/portReferences');
@@ -12,9 +13,11 @@ const config = JSON.parse(process.env.SERVICES);
 assert.ok(typeof config === 'object', 'Invalid services configuration provided');
 
 // Create configured service instances.
+const client = new Client();
+
 const services = {
   licenses: new LicenseStore(licenses, portReferences),
-  files: new Files(),
+  files: new Files({ client }),
 };
 
 // const services = Object.keys(registry).reduce((all, name) => {

@@ -1,6 +1,5 @@
 const assert = require('assert');
 
-const WikiClient = require('./wikiClient');
 const parseWikiUrl = require('./parseWikiUrl');
 
 function parseImageInfoResponse(response) {
@@ -11,8 +10,8 @@ function parseImageInfoResponse(response) {
 }
 
 class FetchOriginalFileData {
-  constructor() {
-    this.client = new WikiClient();
+  constructor({ client }) {
+    this.client = client;
   }
 
   async getFileData(params) {
