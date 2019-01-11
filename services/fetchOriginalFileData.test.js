@@ -1,11 +1,11 @@
 const FetchOriginalFileData = require('./fetchOriginalFileData');
 
-const parse = require('./parseWikiUrl');
+const parse = require('./util/parseWikiUrl');
 
 const imageInfoMock = require('./__fixtures__/imageInfo');
 const imageInfoWithoutArtistMock = require('./__fixtures__/imageInfoWithoutArtist');
 
-jest.mock('./parseWikiUrl');
+jest.mock('./util/parseWikiUrl');
 
 describe('FetchOriginalFileData', () => {
   const client = { getResultsFromApi: jest.fn() };

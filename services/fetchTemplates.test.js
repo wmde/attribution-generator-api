@@ -3,7 +3,7 @@ const FetchTemplates = require('./fetchTemplates');
 const templatesMock = require('./__fixtures__/templates');
 const emptyTemplatesMock = require('./__fixtures__/emptyTemplates');
 
-jest.mock('./parseWikiUrl');
+jest.mock('./util/parseWikiUrl');
 
 describe('FetchTemplates', () => {
   const client = { getResultsFromApi: jest.fn() };

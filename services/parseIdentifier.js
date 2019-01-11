@@ -1,6 +1,6 @@
 const FetchOriginalFileData = require('./fetchOriginalFileData');
 const ParseFileTitle = require('./parseFileTitle');
-const parseWikiUrl = require('./parseWikiUrl');
+const parseWikiUrl = require('./util/parseWikiUrl');
 
 const urlRegex = /^(https|http)?:\/\//;
 

@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const parse = require('./parseWikiUrl');
+const parse = require('./util/parseWikiUrl');
 
 function formatImagesInfoResponse(response) {
   const { pages } = response;

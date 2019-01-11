@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const Files = require('../services/files');
 const LicenseStore = require('../services/licenseStore');
-const Client = require('../services/wikiClient');
+const Client = require('../services/util/client');
 
 const licenses = require('./licenses/licenses');
 const portReferences = require('./licenses/portReferences');

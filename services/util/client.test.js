@@ -1,10 +1,10 @@
 const axios = require('axios');
 
-const WikiClient = require('./wikiClient');
+const Client = require('./client');
 
 jest.mock('axios');
 
-describe('WikiClient', () => {
+describe('Client', () => {
   const axiosClient = { get: jest.fn() };
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('WikiClient', () => {
     };
     const timeout = 5000;
 
-    const subject = new WikiClient();
+    const subject = new Client();
 
     expect(axios.create).toHaveBeenCalledWith({ headers, timeout });
     expect(subject.client).toBe(axiosClient);
@@ -42,7 +42,7 @@ describe('WikiClient', () => {
       const params = { ...defaultParams, prop, titles };
 
       it('calls the respective api and returns the query result', async () => {
-        const client = new WikiClient();
+        const client = new Client();
         const subject = await client.getResultsFromApi(titles, 'image', wikiUrl);
 
         expect(axiosClient.get).toHaveBeenCalledWith(apiUrl, { params });
@@ -56,7 +56,7 @@ describe('WikiClient', () => {
       const params = { ...defaultParams, prop, titles, iiprop: 'url' };
 
       it('calls the respective api and returns the query result', async () => {
-        const client = new WikiClient();
+        const client = new Client();
         const subject = await client.getResultsFromApi(titles, prop, wikiUrl, {
           titles,
           iiprop: 'url',

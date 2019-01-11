@@ -9,7 +9,7 @@ function transform(data) {
   return query;
 }
 
-class WikiClient {
+class Client {
   constructor() {
     this.client = axios.create({
       headers: {
@@ -39,4 +39,4 @@ class WikiClient {
   }
 }
 
-module.exports = WikiClient;
+module.exports = Client;

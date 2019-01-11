@@ -2,11 +2,11 @@ const ParseIdentifier = require('./parseIdentifier');
 
 const FetchOriginalFileData = require('./fetchOriginalFileData');
 const ParseFileTitle = require('./parseFileTitle');
-const parseWikiUrl = require('./parseWikiUrl');
+const parseWikiUrl = require('./util/parseWikiUrl');
 
 jest.mock('./fetchOriginalFileData');
 jest.mock('./parseFileTitle');
-jest.mock('./parseWikiUrl');
+jest.mock('./util/parseWikiUrl');
 
 describe('ParseIdentifier', () => {
   const fetchOriginalFileData = { getFileData: jest.fn() };

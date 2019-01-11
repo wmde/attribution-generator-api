@@ -1,11 +1,11 @@
 const Files = require('./files');
 
-const parse = require('./parseWikiUrl');
+const parse = require('./util/parseWikiUrl');
 
 const imageTitles = require('./__fixtures__/imageTitles');
 const imagesInfo = require('./__fixtures__/imagesInfo');
 
-jest.mock('./parseWikiUrl');
+jest.mock('./util/parseWikiUrl');
 
 describe('Files', () => {
   const client = { getResultsFromApi: jest.fn() };

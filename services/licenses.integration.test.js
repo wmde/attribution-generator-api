@@ -1,6 +1,6 @@
 const Licenses = require('./licenses');
 
-const WikiClient = require('./wikiClient');
+const Client = require('./util/client');
 const LicenseStore = require('./licenseStore');
 
 const licenses = require('../config/licenses/licenses');
@@ -10,7 +10,7 @@ const portReferences = require('../config/licenses/portReferences');
 // we probably do not want to run this by default in the future
 // (only on CI maybe)
 describe('getLicenseForFile', () => {
-  const client = new WikiClient();
+  const client = new Client();
   const licenseStore = new LicenseStore(licenses, portReferences);
   const service = new Licenses({ client, licenseStore });
 

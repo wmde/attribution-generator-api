@@ -1,5 +1,5 @@
 const Files = require('./files');
-const Client = require('./wikiClient');
+const Client = require('./util/client');
 
 // NOTE: this is a tmp integration test to easify development
 // we probably do not want to run this by default in the future
