@@ -2,6 +2,10 @@ const assert = require('assert');
 
 const parseWikiUrl = require('./util/parseWikiUrl');
 
+const urlRegex = /^(https|http)?:\/\//;
+const filePrefix = 'File:';
+const defaultWikiUrl = 'https://commons.wikimedia.org/';
+
 function parseImageInfoResponse(response) {
   const { pages } = response;
   assert.ok(pages, 'notFound');
@@ -9,12 +13,30 @@ function parseImageInfoResponse(response) {
   return imageinfo[0];
 }
 
-class FetchOriginalFileData {
+function parseFileTitle(title) {
+  assert.ok(title.startsWith(filePrefix), 'badData');
+  return { title, wikiUrl: defaultWikiUrl };
+}
+
+function parseIdentifier(identifier) {
+  if (urlRegex.test(identifier)) {
+    return parseWikiUrl(identifier);
+  }
+  return parseFileTitle(identifier);
+}
+
+class FileData {
   constructor({ client }) {
     this.client = client;
   }
 
-  async getFileData(params) {
+  getFileData(titleOrUrl) {
+    const identifier = decodeURIComponent(titleOrUrl);
+    const { title, wikiUrl } = parseIdentifier(identifier);
+    return this.getOriginalFileData({ title, wikiUrl });
+  }
+
+  async getOriginalFileData(params) {
     const imageInfo = await this.getImageInfo(params);
     const { url, extmetadata } = imageInfo;
     const { title, wikiUrl } = parseWikiUrl(url);
@@ -29,4 +51,4 @@ class FetchOriginalFileData {
   }
 }
 
-module.exports = FetchOriginalFileData;
+module.exports = FileData;

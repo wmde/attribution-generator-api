@@ -7,13 +7,6 @@ const licenseSchema = Joi.object({
   code: Joi.string(),
 });
 
-const mockResponse = [
-  {
-    code: 'CC BY-SA 3.0',
-    url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-  },
-];
-
 routes.push({
   path: '/licenses/compatible/{license}',
   method: 'GET',
@@ -50,7 +43,7 @@ routes.push({
     },
   },
   handler: async (request, h) => {
-    const licenseStore = request.server.app.services.licenses;
+    const { licenseStore } = request.server.app.services;
     const licenses = licenseStore.all();
     const response = licenses.map(({ url, name }) => ({ url: encodeURI(url), code: name }));
     return h.response(response);
@@ -75,14 +68,19 @@ routes.push({
       }),
     },
   },
-  handler: async (request, h) =>
-    // try {
-    //   await action();
-    // } catch(error) {
-    //   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch
-    //   h.error('unauthorized', 'this is wrong')
-    // }
-    h.response(mockResponse[0]),
+  handler: async (request, h) => {
+    const { fileData, licenses } = request.server.app.services;
+    const { file } = request.params;
+    try {
+      const { title, wikiUrl } = await fileData.getFileData(file);
+      const license = await licenses.getLicense({ title, wikiUrl });
+      const response = { url: encodeURI(license.url), code: license.name };
+      return h.response(response);
+    } catch (error) {
+      const { message } = error;
+      return h.error(message);
+    }
+  },
 });
 
 module.exports = routes;

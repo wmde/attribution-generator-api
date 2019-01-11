@@ -1,43 +1,60 @@
 const Licenses = require('./licenses');
 
-const ParseIdentifier = require('./parseIdentifier');
-const RetrieveLicense = require('./retrieveLicense');
-
-jest.mock('./parseIdentifier');
-jest.mock('./retrieveLicense');
+const templatesMock = require('./__fixtures__/templates');
+const emptyTemplatesMock = require('./__fixtures__/emptyTemplates');
 
 describe('Licenses', () => {
-  const parseIdentifier = { getFileData: jest.fn() };
-  const retrieveLicense = { getLicenseForFile: jest.fn() };
   const client = { getResultsFromApi: jest.fn() };
-  const licenseStore = jest.fn();
+  const licenseStore = { match: jest.fn() };
 
-  beforeEach(() => {
-    ParseIdentifier.mockImplementation(() => parseIdentifier);
-    RetrieveLicense.mockImplementation(() => retrieveLicense);
-  });
+  describe('getLicense()', () => {
+    const service = new Licenses({ client, licenseStore });
+    const title = 'File:Apple_Lisa2-IMG_1517.jpg';
+    const wikiUrl = 'https://en.wikipedia.org';
+    const licenseMock = {};
+    const normalizedTemplates = [
+      'CC-Layout',
+      'Cc-by-sa-3.0-migrated',
+      'Description',
+      'Dir',
+      'En',
+      'Es',
+      'Fr',
+      'GFDL',
+      'GNU-Layout',
+      'License migration',
+      'License migration complete',
+      'License template tag',
+      'Original upload log',
+    ];
 
-  describe('getLicensee()', () => {
-    describe('with a valid wikiUrl', () => {
-      const url = 'https://en.wikipedia.org/wiki/Apple_Lisa#/media/File:Apple_Lisa.jpg';
-      const title = 'File:Apple_Lisa.jpg';
-      const wikiUrl = 'https://commons.wikipedia.org/';
+    it('returns a license based on the templates for the file page', async () => {
+      client.getResultsFromApi.mockResolvedValueOnce(templatesMock);
+      licenseStore.match.mockImplementation(() => licenseMock);
 
-      beforeEach(() => {
-        parseIdentifier.getFileData.mockResolvedValueOnce({ title, wikiUrl });
-        retrieveLicense.getLicenseForFile.mockResolvedValueOnce('a license');
+      const license = await service.getLicense({ title, wikiUrl });
+
+      expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'templates', wikiUrl, {
+        tlnamespace: 10,
+        tllimit: 100,
       });
+      expect(licenseStore.match).toHaveBeenCalledWith(normalizedTemplates);
+      expect(license).toEqual(licenseMock);
+    });
 
-      it('gets the file location and returns a matching license based on the page templates', async () => {
-        const service = new Licenses({ client, licenseStore });
-        const license = await service.getLicense(url);
+    it('returns null when no templates are available', async () => {
+      client.getResultsFromApi.mockResolvedValueOnce(emptyTemplatesMock);
+      licenseStore.match.mockImplementation(() => null);
 
-        expect(parseIdentifier.getFileData).toHaveBeenCalledWith(url);
-        expect(retrieveLicense.getLicenseForFile).toHaveBeenCalledWith({ title, wikiUrl });
+      const license = await service.getLicense({ title, wikiUrl });
 
-        // TODO: return a close to the real world value here
-        expect(license).toEqual('a license');
-      });
+      expect(licenseStore.match).toHaveBeenCalledWith([]);
+      expect(license).toBe(null);
+    });
+
+    it('throws a notFound error if the response is fully empty', async () => {
+      client.getResultsFromApi.mockResolvedValueOnce({});
+      expect(service.getLicense({ title, wikiUrl })).rejects.toThrow('notFound');
     });
   });
 });

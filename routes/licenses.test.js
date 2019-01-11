@@ -3,24 +3,13 @@ const setup = require('./__helpers__/setup');
 describe('license routes', () => {
   let context;
 
-  const licenses = [
-    {
-      url: 'https://foo.bar/path with spaces',
-      name: 'bar',
-    },
-    {
-      url: 'https://foo.bar/just-a-regular-path',
-      name: 'foo',
-    },
-  ];
-
-  const licenseStore = {
-    all: jest.fn(),
-    compatible: jest.fn(),
-  };
+  const licenseStore = { all: jest.fn(), compatible: jest.fn() };
+  const fileData = { getFileData: jest.fn() };
+  const licenses = { getLicense: jest.fn() };
+  const services = { licenseStore, fileData, licenses };
 
   beforeEach(async () => {
-    context = await setup({ services: { licenses: licenseStore } });
+    context = await setup({ services });
   });
 
   afterEach(async () => {
@@ -28,6 +17,17 @@ describe('license routes', () => {
   });
 
   describe('GET /licenses', () => {
+    const licensesResponse = [
+      {
+        url: 'https://foo.bar/path with spaces',
+        name: 'bar',
+      },
+      {
+        url: 'https://foo.bar/just-a-regular-path',
+        name: 'foo',
+      },
+    ];
+
     function options() {
       return { url: `/licenses`, method: 'GET' };
     }
@@ -37,7 +37,7 @@ describe('license routes', () => {
     }
 
     beforeEach(() => {
-      licenseStore.all.mockReturnValue(licenses);
+      licenseStore.all.mockReturnValue(licensesResponse);
     });
 
     it('returns a list of licenses', async () => {
@@ -77,16 +77,30 @@ describe('license routes', () => {
     });
   });
 
-  describe('GET /license/{file}', () => {
-    const file = 'File:Pommes-1.jpg';
+  describe('GET /license', () => {
+    const title = 'File:Apple_Lisa2-IMG_1517.jpg';
+    const wikiUrl = 'https://en.wikipedia.org';
+    const license = {
+      id: 'cc-by-sa-3.0',
+      name: 'CC BY-SA 3.0',
+      groups: ['cc', 'cc3'],
+      compatibility: ['cc-by-sa-3.0-de', 'cc-by-sa-4.0'],
+      regexp: {},
+      url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
+    };
 
     function options() {
-      return { url: `/license/${file}`, method: 'GET' };
+      return { url: `/license/${title}`, method: 'GET' };
     }
 
     async function subject() {
       return context.inject(options());
     }
+
+    beforeEach(() => {
+      fileData.getFileData.mockReturnValue({ title, wikiUrl });
+      licenses.getLicense.mockReturnValue(license);
+    });
 
     it('returns the license of a file', async () => {
       const response = await subject({});
