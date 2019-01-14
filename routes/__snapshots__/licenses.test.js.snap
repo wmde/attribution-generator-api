@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`license routes GET /license/{file} returns the license of a file 1`] = `
+exports[`license routes GET /license when the license can be retrieved returns the license of a file 1`] = `
 Object {
   "code": "CC BY-SA 3.0",
   "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",

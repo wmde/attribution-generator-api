@@ -1,4 +1,6 @@
-const regExp = /([-a-z]{2,})(\.m)?\.wikipedia\.org\//i;
+const wikipediaRegExp = /([-a-z]{2,})(\.m)?\.wikipedia\.org\//i;
+const uploadRegExp = /upload.wikimedia\.org\/wikipedia\/([-a-z]{2,})\//i;
+
 const namePrefixes = ['#mediaviewer/', '#/media/', 'wiki/'];
 
 // Returns the tail part of `string` after `subString`
@@ -21,14 +23,32 @@ function extractName(url) {
   return checks.find(name => !!name);
 }
 
-function splitUrl(url) {
-  if (!regExp.test(url)) {
-    return null;
-  }
-  const matches = url.match(regExp);
+function splitUploadUrl(url) {
+  const matches = url.match(uploadRegExp);
+  const domain = matches[1] === 'commons' ? 'wikimedia' : 'wikipedia';
+  const wikiUrl = `https://${matches[1]}.${domain}.org/`;
+  const segments = url.split('/');
+  const fileName = segments.includes('thumb') ? segments[segments.length - 2] : segments.pop();
+  const title = `File:${fileName}`;
+  return { title, wikiUrl };
+}
+
+function splitWikipediaUrl(url) {
+  const matches = url.match(wikipediaRegExp);
   const wikiUrl = `https://${matches[1]}.wikipedia.org/`;
   const title = extractName(url);
   return { title, wikiUrl };
+}
+
+function splitUrl(url) {
+  if (uploadRegExp.test(url)) {
+    return splitUploadUrl(url);
+  }
+  if (wikipediaRegExp.test(url)) {
+    return splitWikipediaUrl(url);
+  }
+  // TODO: use a dedicated Error object here
+  throw new Error('badData');
 }
 
 function parse(url) {

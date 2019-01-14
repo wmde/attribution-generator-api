@@ -3,7 +3,11 @@ const setup = require('./__helpers__/setup');
 describe('license routes', () => {
   let context;
 
-  const licenses = [
+  const licenseStore = { all: jest.fn(), compatible: jest.fn() };
+  const fileData = { getFileData: jest.fn() };
+  const licenses = { getLicense: jest.fn() };
+  const services = { licenseStore, fileData, licenses };
+  const licensesMock = [
     {
       url: 'https://foo.bar/path with spaces',
       name: 'bar',
@@ -14,13 +18,8 @@ describe('license routes', () => {
     },
   ];
 
-  const licenseStore = {
-    all: jest.fn(),
-    compatible: jest.fn(),
-  };
-
   beforeEach(async () => {
-    context = await setup({ services: { licenses: licenseStore } });
+    context = await setup({ services });
   });
 
   afterEach(async () => {
@@ -37,7 +36,7 @@ describe('license routes', () => {
     }
 
     beforeEach(() => {
-      licenseStore.all.mockReturnValue(licenses);
+      licenseStore.all.mockReturnValue(licensesMock);
     });
 
     it('returns a list of licenses', async () => {
@@ -59,7 +58,7 @@ describe('license routes', () => {
     }
 
     beforeEach(() => {
-      licenseStore.compatible.mockReturnValue(licenses);
+      licenseStore.compatible.mockReturnValue(licensesMock);
     });
 
     it('returns a list of licenses', async () => {
@@ -77,23 +76,51 @@ describe('license routes', () => {
     });
   });
 
-  describe('GET /license/{file}', () => {
-    const file = 'File:Pommes-1.jpg';
+  describe('GET /license', () => {
+    const title = 'File:Apple_Lisa2-IMG_1517.jpg';
+    const wikiUrl = 'https://en.wikipedia.org';
+    const license = {
+      id: 'cc-by-sa-3.0',
+      name: 'CC BY-SA 3.0',
+      url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
+    };
 
     function options() {
-      return { url: `/license/${file}`, method: 'GET' };
+      return { url: `/license/${title}`, method: 'GET' };
     }
 
     async function subject() {
       return context.inject(options());
     }
 
-    it('returns the license of a file', async () => {
-      const response = await subject({});
+    describe('when the license can be retrieved', () => {
+      beforeEach(() => {
+        fileData.getFileData.mockReturnValue({ title, wikiUrl });
+        licenses.getLicense.mockReturnValue(license);
+      });
 
-      expect(response.status).toBe(200);
-      expect(response.type).toBe('application/json');
-      expect(response.payload).toMatchSnapshot();
+      it('returns the license of a file', async () => {
+        const response = await subject({});
+
+        expect(response.status).toBe(200);
+        expect(response.type).toBe('application/json');
+        expect(response.payload).toMatchSnapshot();
+      });
+    });
+
+    describe('when there is a problem retrieving the file data', () => {
+      beforeEach(() => {
+        fileData.getFileData.mockImplementation(() => {
+          throw new Error('notFound');
+        });
+      });
+
+      it('returns a 404', async () => {
+        const response = await subject({});
+
+        expect(response.status).toBe(404);
+        expect(response.type).toBe('application/json');
+      });
     });
   });
 });

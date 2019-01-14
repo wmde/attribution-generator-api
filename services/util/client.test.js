@@ -1,10 +1,16 @@
 const axios = require('axios');
 
-const WikiClient = require('./wikiClient');
+const Client = require('./client');
 
 jest.mock('axios');
 
-describe('WikiClient', () => {
+describe('Client', () => {
+  const axiosClient = { get: jest.fn() };
+
+  beforeEach(() => {
+    axios.create.mockReturnValue(axiosClient);
+  });
+
   it('initializes a new axios client with defaults for header and timeout', () => {
     const headers = {
       common: {
@@ -14,13 +20,13 @@ describe('WikiClient', () => {
     };
     const timeout = 5000;
 
-    const subject = new WikiClient(); // eslint-disable-line no-unused-vars
+    const subject = new Client();
 
     expect(axios.create).toHaveBeenCalledWith({ headers, timeout });
+    expect(subject.client).toBe(axiosClient);
   });
 
   describe('getResultsFromApi()', () => {
-    const axiosClient = { get: jest.fn() };
     const wikiUrl = 'https://en.wikipedia.org';
     const apiUrl = 'https://en.wikipedia.org/w/api.php';
     const defaultParams = { action: 'query', format: 'json' };
@@ -28,7 +34,6 @@ describe('WikiClient', () => {
 
     beforeEach(() => {
       axiosClient.get.mockResolvedValue(response);
-      axios.create.mockReturnValue(axiosClient);
     });
 
     describe('when querying for images of a page', () => {
@@ -37,7 +42,7 @@ describe('WikiClient', () => {
       const params = { ...defaultParams, prop, titles };
 
       it('calls the respective api and returns the query result', async () => {
-        const client = new WikiClient();
+        const client = new Client();
         const subject = await client.getResultsFromApi(titles, 'image', wikiUrl);
 
         expect(axiosClient.get).toHaveBeenCalledWith(apiUrl, { params });
@@ -51,7 +56,7 @@ describe('WikiClient', () => {
       const params = { ...defaultParams, prop, titles, iiprop: 'url' };
 
       it('calls the respective api and returns the query result', async () => {
-        const client = new WikiClient();
+        const client = new Client();
         const subject = await client.getResultsFromApi(titles, prop, wikiUrl, {
           titles,
           iiprop: 'url',

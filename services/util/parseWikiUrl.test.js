@@ -1,6 +1,7 @@
 const parse = require('./parseWikiUrl');
 
 // according to https://en.wikipedia.org/wiki/Help:URL#URLs_of_Wikipedia_pages
+// and some upload urls
 const cases = [
   {
     name: 'plain article url',
@@ -58,6 +59,23 @@ const cases = [
       wikiUrl: 'https://en.wikipedia.org/',
     },
   },
+  {
+    name: 'upload url',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Helene_Fischer_2010.jpg',
+    expected: {
+      title: 'File:Helene_Fischer_2010.jpg',
+      wikiUrl: 'https://commons.wikimedia.org/',
+    },
+  },
+  {
+    name: 'upload url thumbnail',
+    url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Helene_Fischer_2010.jpg/171px-Helene_Fischer_2010.jpg',
+    expected: {
+      title: 'File:Helene_Fischer_2010.jpg',
+      wikiUrl: 'https://commons.wikimedia.org/',
+    },
+  },
 ];
 
 describe('parse()', () => {
@@ -67,8 +85,23 @@ describe('parse()', () => {
     });
   });
 
-  it('returns nothing for non-wiki url', () => {
+  it('throws a 422 exception for for non-wiki url', () => {
     const url = 'https://en.pokepedia.org/wiki/Lower_Saxony';
-    expect(parse(url)).toEqual(null);
+    expect(() => parse(url)).toThrow('badData');
+  });
+
+  it('throws a 422 exception for empty urls', () => {
+    const url = '';
+    expect(() => parse(url)).toThrow('badData');
+  });
+
+  it('throws a 422 exception for null urls', () => {
+    const url = null;
+    expect(() => parse(url)).toThrow('badData');
+  });
+
+  it('throws a 422 exception for undefined urls', () => {
+    const url = undefined;
+    expect(() => parse(url)).toThrow('badData');
   });
 });
