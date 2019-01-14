@@ -5,7 +5,6 @@ const imageInfoWithoutArtistMock = require('./__fixtures__/imageInfoWithoutArtis
 
 describe('FileData', () => {
   const client = { getResultsFromApi: jest.fn() };
-  const service = new FileData({ client });
 
   describe('getFileData', () => {
     const title = 'File:Apple_Lisa2-IMG_1517.jpg';
@@ -14,12 +13,13 @@ describe('FileData', () => {
       '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo';
 
     describe('when passing a valid url', () => {
-      const titleOrUrl = 'https://en.wikipedia.org/wiki/Apple_Lisa#/media/File:Apple_Lisa.jpg';
+      const url = 'https://en.wikipedia.org/wiki/Apple_Lisa#/media/File:Apple_Lisa.jpg';
 
       it('retrieves the original file data', async () => {
         client.getResultsFromApi.mockResolvedValueOnce(imageInfoMock);
 
-        const fileData = await service.getFileData(titleOrUrl);
+        const service = new FileData({ client });
+        const fileData = await service.getFileData(url);
 
         expect(client.getResultsFromApi).toHaveBeenCalledWith(
           'File:Apple_Lisa.jpg',
@@ -37,16 +37,18 @@ describe('FileData', () => {
       it('skips the artist information if not available for the file', async () => {
         client.getResultsFromApi.mockResolvedValueOnce(imageInfoWithoutArtistMock);
 
-        const fileData = await service.getFileData(titleOrUrl);
+        const service = new FileData({ client });
+        const fileData = await service.getFileData(url);
 
         expect(fileData).toEqual({ title, wikiUrl, artistHtml: null });
       });
 
       it('throws a notFound error when the imageinfo response is empty', async () => {
         client.getResultsFromApi.mockResolvedValueOnce({});
-        await service
-          .getFileData(titleOrUrl)
-          .catch(e => expect(e).toMatchObject({ message: 'notFound' }));
+
+        const service = new FileData({ client });
+
+        await expect(service.getFileData(url)).rejects.toThrow('notFound');
       });
     });
 
@@ -54,6 +56,7 @@ describe('FileData', () => {
       it('retrieves the original file data defaulting to the commons API', async () => {
         client.getResultsFromApi.mockResolvedValueOnce(imageInfoMock);
 
+        const service = new FileData({ client });
         const fileData = await service.getFileData(title);
 
         expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'imageinfo', wikiUrl, {
@@ -65,7 +68,9 @@ describe('FileData', () => {
       });
 
       it('throws an exception when the title has the wrong format', () => {
+        const service = new FileData({ client });
         const badTitle = 'Apple_Lisa2-IMG_1517.jpg';
+
         expect(service.getFileData(badTitle)).rejects.toThrow('badData');
       });
     });
