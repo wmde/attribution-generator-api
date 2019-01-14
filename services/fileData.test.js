@@ -66,7 +66,7 @@ describe('FileData', () => {
 
       it('throws an exception when the title has the wrong format', () => {
         const badTitle = 'Apple_Lisa2-IMG_1517.jpg';
-        expect(() => service.getFileData(badTitle)).toThrow('badData');
+        expect(service.getFileData(badTitle)).rejects.toThrow('badData');
       });
     });
   });

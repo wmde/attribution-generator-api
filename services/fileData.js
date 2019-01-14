@@ -30,7 +30,7 @@ class FileData {
     this.client = client;
   }
 
-  getFileData(titleOrUrl) {
+  async getFileData(titleOrUrl) {
     const identifier = decodeURIComponent(titleOrUrl);
     const { title, wikiUrl } = parseIdentifier(identifier);
     return this.getOriginalFileData({ title, wikiUrl });
