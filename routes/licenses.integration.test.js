@@ -8,9 +8,10 @@ const Licenses = require('../services/licenses');
 const licenseData = require('../config/licenses/licenses');
 const portReferences = require('../config/licenses/portReferences');
 
-// NOTE: this is a tmp integration test to easify development
-// we probably do not want to run this by default in the future
-// (only on CI maybe)
+// NOTE: this is a temporary integration test to easify development
+// We probably do not always want to run this as part of the normal test suite
+// since this is hitting actual Wikipedia and Wikimedia APIs.
+// We could consider running it only on CI or introduce a JS-equivalent to VCR
 describe('license routes', () => {
   let context;
 
