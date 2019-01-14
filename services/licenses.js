@@ -1,15 +1,15 @@
 const assert = require('assert');
 
-function normalizeTemplate(template) {
+function normalizeTemplateTitle(template) {
   const { title } = template;
   return title.replace(/^Template:/, '');
 }
 
-function formatPageTemplates(response) {
+function formatPageTemplateTitles(response) {
   const { pages } = response;
   assert.ok(pages, 'notFound');
   const { templates = [] } = Object.values(pages)[0];
-  return templates.map(normalizeTemplate);
+  return templates.map(normalizeTemplateTitle);
 }
 
 class Licences {
@@ -27,7 +27,7 @@ class Licences {
   async getPageTemplates({ title, wikiUrl }) {
     const params = { tlnamespace: 10, tllimit: 100 };
     const response = await this.client.getResultsFromApi(title, 'templates', wikiUrl, params);
-    return formatPageTemplates(response);
+    return formatPageTemplateTitles(response);
   }
 }
 
