@@ -83,9 +83,6 @@ describe('license routes', () => {
     const license = {
       id: 'cc-by-sa-3.0',
       name: 'CC BY-SA 3.0',
-      groups: ['cc', 'cc3'],
-      compatibility: ['cc-by-sa-3.0-de', 'cc-by-sa-4.0'],
-      regexp: {},
       url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
     };
 
@@ -97,17 +94,34 @@ describe('license routes', () => {
       return context.inject(options());
     }
 
-    beforeEach(() => {
-      fileData.getFileData.mockReturnValue({ title, wikiUrl });
-      licenses.getLicense.mockReturnValue(license);
+    describe('when the license can be retrieved', () => {
+      beforeEach(() => {
+        fileData.getFileData.mockReturnValue({ title, wikiUrl });
+        licenses.getLicense.mockReturnValue(license);
+      });
+
+      it('returns the license of a file', async () => {
+        const response = await subject({});
+
+        expect(response.status).toBe(200);
+        expect(response.type).toBe('application/json');
+        expect(response.payload).toMatchSnapshot();
+      });
     });
 
-    it('returns the license of a file', async () => {
-      const response = await subject({});
+    describe('when there is a problem retrieving the file data', () => {
+      beforeEach(() => {
+        fileData.getFileData.mockImplementation(() => {
+          throw new Error('notFound');
+        });
+      });
 
-      expect(response.status).toBe(200);
-      expect(response.type).toBe('application/json');
-      expect(response.payload).toMatchSnapshot();
+      it('returns a 404', async () => {
+        const response = await subject({});
+
+        expect(response.status).toBe(404);
+        expect(response.type).toBe('application/json');
+      });
     });
   });
 });
