@@ -36,6 +36,7 @@ class FileData {
     return this.getOriginalFileData({ title, wikiUrl });
   }
 
+  // TODO: add separate tests for this or indicated the method as private
   async getOriginalFileData(params) {
     const imageInfo = await this.getImageInfo(params);
     const { url, extmetadata } = imageInfo;
@@ -44,6 +45,7 @@ class FileData {
     return { title, wikiUrl, artistHtml };
   }
 
+  // TODO: add separate tests for this or indicated the method as private
   async getImageInfo({ title, wikiUrl }) {
     const params = { iiprop: 'url|extmetadata', iilimit: 1, iiurlheight: 300 };
     const response = await this.client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);

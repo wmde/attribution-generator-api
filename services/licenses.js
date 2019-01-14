@@ -23,6 +23,7 @@ class Licences {
     return this.licenseStore.match(templates);
   }
 
+  // TODO: add separate tests for this or indicated the method as private
   async getPageTemplates({ title, wikiUrl }) {
     const params = { tlnamespace: 10, tllimit: 100 };
     const response = await this.client.getResultsFromApi(title, 'templates', wikiUrl, params);
