@@ -67,11 +67,11 @@ describe('FileData', () => {
         expect(fileData).toEqual({ title, wikiUrl, artistHtml });
       });
 
-      it('throws an exception when the title has the wrong format', () => {
+      it('throws an exception when the title has the wrong format', async () => {
         const service = new FileData({ client });
         const badTitle = 'Apple_Lisa2-IMG_1517.jpg';
 
-        expect(service.getFileData(badTitle)).rejects.toThrow('badData');
+        await expect(service.getFileData(badTitle)).rejects.toThrow('badData');
       });
     });
   });

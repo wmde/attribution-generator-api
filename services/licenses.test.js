@@ -54,7 +54,7 @@ describe('Licenses', () => {
 
     it('throws a notFound error if the response is fully empty', async () => {
       client.getResultsFromApi.mockResolvedValueOnce({});
-      expect(service.getLicense({ title, wikiUrl })).rejects.toThrow('notFound');
+      await expect(service.getLicense({ title, wikiUrl })).rejects.toThrow('notFound');
     });
   });
 });
