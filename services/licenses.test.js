@@ -1,7 +1,7 @@
 const Licenses = require('./licenses');
 
 const templatesMock = require('./__fixtures__/templates');
-const emptyTemplatesMock = require('./__fixtures__/emptyTemplates');
+const templatesMissingMock = require('./__fixtures__/templatesMissing');
 
 describe('Licenses', () => {
   const client = { getResultsFromApi: jest.fn() };
@@ -43,7 +43,7 @@ describe('Licenses', () => {
     });
 
     it('returns null when no templates are available', async () => {
-      client.getResultsFromApi.mockResolvedValueOnce(emptyTemplatesMock);
+      client.getResultsFromApi.mockResolvedValueOnce(templatesMissingMock);
       licenseStore.match.mockImplementation(() => null);
 
       const license = await service.getLicense({ title, wikiUrl });

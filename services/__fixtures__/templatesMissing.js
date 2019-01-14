@@ -1,3 +1,5 @@
+// An example response where the whole "templates" section is missing.
+// See "services/__fixtures__/templates.js" for the expected payload.
 module.exports = {
   normalized: [
     {
