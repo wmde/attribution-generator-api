@@ -15,11 +15,35 @@ const mockResponse = [
 ];
 
 routes.push({
+  path: '/licenses/compatible/{license}',
+  method: 'GET',
+  options: {
+    description: 'Compatible licenses',
+    notes: 'Returns a list of licenses that are compatible to the passed license',
+    validate: {
+      params: {
+        license: Joi.string(),
+      },
+    },
+    response: {
+      schema: Joi.array().items(licenseSchema),
+    },
+  },
+  handler: async (request, h) => {
+    const licenseStore = request.server.app.services.licenses;
+    const param = decodeURIComponent(request.params.license).replace(/\+/g, ' ');
+    const licenses = licenseStore.compatible(param);
+    const response = licenses.map(({ url, name }) => ({ url: encodeURI(url), code: name }));
+    return h.response(response);
+  },
+});
+
+routes.push({
   path: '/licenses',
   method: 'GET',
   options: {
-    description: 'Licenses Index',
-    notes: 'Returns a List of all Licenses',
+    description: 'Licenses index',
+    notes: 'Returns a list of all licenses',
     validate: {},
     response: {
       schema: Joi.array().items(licenseSchema),
@@ -37,7 +61,7 @@ routes.push({
   path: '/license/{file}',
   method: 'GET',
   options: {
-    description: 'Image License',
+    description: 'Image license',
     notes: 'Returns the most liberal license for the given image',
     validate: {
       params: {

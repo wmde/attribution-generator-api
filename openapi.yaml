@@ -110,12 +110,12 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/CodeUrlModel'
-      summary: Image License
+      summary: Image license
       tags:
         - license
   /licenses:
     get:
-      description: Returns a List of all Licenses
+      description: Returns a list of all licenses
       produces:
         - application/json
       responses:
@@ -125,7 +125,27 @@ paths:
             items:
               $ref: '#/definitions/UrlCodeModel'
             type: array
-      summary: Licenses Index
+      summary: Licenses index
+      tags:
+        - licenses
+  '/licenses/compatible/{license}':
+    get:
+      description: Returns a list of licenses that are compatible to the passed license
+      parameters:
+        - in: path
+          name: license
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        default:
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/UrlCodeModel'
+            type: array
+      summary: Compatible licenses
       tags:
         - licenses
   /swagger:
