@@ -23,7 +23,7 @@ routes.push({
     },
   },
   handler: async (request, h) => {
-    const licenseStore = request.server.app.services.licenses;
+    const { licenseStore } = request.server.app.services;
     const param = decodeURIComponent(request.params.license).replace(/\+/g, ' ');
     const licenses = licenseStore.compatible(param);
     const response = licenses.map(({ url, name }) => ({ url: encodeURI(url), code: name }));

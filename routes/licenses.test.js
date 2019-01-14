@@ -7,6 +7,16 @@ describe('license routes', () => {
   const fileData = { getFileData: jest.fn() };
   const licenses = { getLicense: jest.fn() };
   const services = { licenseStore, fileData, licenses };
+  const licensesMock = [
+    {
+      url: 'https://foo.bar/path with spaces',
+      name: 'bar',
+    },
+    {
+      url: 'https://foo.bar/just-a-regular-path',
+      name: 'foo',
+    },
+  ];
 
   beforeEach(async () => {
     context = await setup({ services });
@@ -17,17 +27,6 @@ describe('license routes', () => {
   });
 
   describe('GET /licenses', () => {
-    const licensesResponse = [
-      {
-        url: 'https://foo.bar/path with spaces',
-        name: 'bar',
-      },
-      {
-        url: 'https://foo.bar/just-a-regular-path',
-        name: 'foo',
-      },
-    ];
-
     function options() {
       return { url: `/licenses`, method: 'GET' };
     }
@@ -37,7 +36,7 @@ describe('license routes', () => {
     }
 
     beforeEach(() => {
-      licenseStore.all.mockReturnValue(licensesResponse);
+      licenseStore.all.mockReturnValue(licensesMock);
     });
 
     it('returns a list of licenses', async () => {
@@ -59,7 +58,7 @@ describe('license routes', () => {
     }
 
     beforeEach(() => {
-      licenseStore.compatible.mockReturnValue(licenses);
+      licenseStore.compatible.mockReturnValue(licensesMock);
     });
 
     it('returns a list of licenses', async () => {
