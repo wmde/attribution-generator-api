@@ -2,17 +2,27 @@ const assert = require('assert');
 
 const parseWikiUrl = require('./util/parseWikiUrl');
 
+async function getImageTitles({ client, title, wikiUrl }) {
+  const { pages } = await client.getResultsFromApi(title, 'images', wikiUrl);
+  assert.ok(pages, 'notFound');
+  const { images = [] } = Object.values(pages)[0];
+
+  return images.map(image => image.title);
+}
+
 function formatImageInfo(page) {
   const { title, imageinfo } = page;
   const { url } = imageinfo[0];
+
   return { title, url };
 }
 
-function parseImageInfoResponse(response) {
-  const { pages } = response;
-  assert.ok(!!pages, 'Wikimedia: No "url" option provided');
+async function getImageUrls({ client, titles, wikiUrl }) {
+  const params = { iiprop: 'url' };
+  const title = titles.join('|');
+  const { pages } = await client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
+  assert.ok(pages, 'notFound');
 
-  // TODO: raise error when length === 1
   return Object.values(pages).map(formatImageInfo);
 }
 
@@ -23,24 +33,11 @@ class Files {
 
   async getPageImages(url) {
     const { title, wikiUrl } = parseWikiUrl(url);
-    const titles = await this.getImageTitles({ title, wikiUrl });
+    const { client } = this;
+    const titles = await getImageTitles({ client, title, wikiUrl });
+    if (titles.length === 0) return [];
 
-    return this.getImageUrls({ titles, wikiUrl });
-  }
-
-  // TODO: handle no images found
-  async getImageTitles({ title, wikiUrl }) {
-    const response = await this.client.getResultsFromApi(title, 'images', wikiUrl);
-    const page = Object.values(response.pages)[0];
-    return page.images.map(image => image.title);
-  }
-
-  // TODO: what happens with too long titles (too many images)
-  async getImageUrls({ titles, wikiUrl }) {
-    const params = { iiprop: 'url' };
-    const title = titles.join('|');
-    const response = await this.client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
-    return parseImageInfoResponse(response);
+    return getImageUrls({ client, titles, wikiUrl });
   }
 }
 

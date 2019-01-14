@@ -1,8 +1,9 @@
 const Files = require('./files');
 
-const parse = require('./util/parseWikiUrl');
+const parseWikiUrl = require('./util/parseWikiUrl');
 
 const imageTitles = require('./__fixtures__/imageTitles');
+const imageTitlesMissing = require('./__fixtures__/imageTitlesMissing');
 const imagesInfo = require('./__fixtures__/imagesInfo');
 
 jest.mock('./util/parseWikiUrl');
@@ -15,24 +16,62 @@ describe('Files', () => {
     const title = 'Article_Title';
     const wikiUrl = 'https://en.wikipedia.org';
 
-    beforeEach(() => parse.mockImplementation(() => ({ title, wikiUrl })));
-
-    it('parses the url and retrieves all images for the article', async () => {
-      client.getResultsFromApi.mockResolvedValueOnce(imageTitles).mockResolvedValueOnce(imagesInfo);
-
+    it('passes on the error if the url cannot be parsed', async () => {
+      parseWikiUrl.mockImplementation(() => {
+        throw new Error('badData');
+      });
       const service = new Files({ client });
-      const files = await service.getPageImages(url);
+      await expect(service.getPageImages(url)).rejects.toThrow('badData');
+    });
 
-      expect(parse).toHaveBeenCalledWith(url);
-      expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'images', wikiUrl);
-      expect(client.getResultsFromApi).toHaveBeenCalledWith(
-        'File:Graphic 01.jpg|File:logo.svg',
-        'imageinfo',
-        wikiUrl,
-        { iiprop: 'url' }
-      );
+    describe('with a valid wikipedia url', () => {
+      beforeEach(() => parseWikiUrl.mockReturnValue({ title, wikiUrl }));
 
-      expect(files).toMatchSnapshot();
+      it('returns a list of all images from the given article', async () => {
+        client.getResultsFromApi
+          .mockResolvedValueOnce(imageTitles)
+          .mockResolvedValueOnce(imagesInfo);
+
+        const service = new Files({ client });
+        const files = await service.getPageImages(url);
+
+        expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'images', wikiUrl);
+        expect(client.getResultsFromApi).toHaveBeenCalledWith(
+          'File:Graphic 01.jpg|File:logo.svg',
+          'imageinfo',
+          wikiUrl,
+          { iiprop: 'url' }
+        );
+        expect(files).toMatchSnapshot();
+      });
+
+      it('returns an empty array if no images can be found', async () => {
+        client.getResultsFromApi.mockResolvedValueOnce(imageTitlesMissing);
+
+        const service = new Files({ client });
+        const files = await service.getPageImages(url);
+
+        expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'images', wikiUrl);
+        expect(files).toEqual([]);
+      });
+
+      it('returns an empty array if no image url can be found', async () => {
+        client.getResultsFromApi
+          .mockResolvedValueOnce(imageTitles)
+          .mockResolvedValueOnce({ pages: {} });
+
+        const service = new Files({ client });
+        const files = await service.getPageImages(url);
+
+        expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'images', wikiUrl);
+        expect(client.getResultsFromApi).toHaveBeenCalledWith(
+          'File:Graphic 01.jpg|File:logo.svg',
+          'imageinfo',
+          wikiUrl,
+          { iiprop: 'url' }
+        );
+        expect(files).toEqual([]);
+      });
     });
   });
 });
