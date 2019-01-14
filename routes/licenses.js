@@ -51,14 +51,14 @@ routes.push({
 });
 
 routes.push({
-  path: '/license/{file}',
+  path: '/license/{fileUrlOrTitle}',
   method: 'GET',
   options: {
     description: 'Image license',
     notes: 'Returns the most liberal license for the given image',
     validate: {
       params: {
-        file: Joi.string(),
+        fileUrlOrTitle: Joi.string(),
       },
     },
     response: {
@@ -70,9 +70,9 @@ routes.push({
   },
   handler: async (request, h) => {
     const { fileData, licenses } = request.server.app.services;
-    const { file } = request.params;
+    const { fileUrlOrTitle } = request.params;
     try {
-      const { title, wikiUrl } = await fileData.getFileData(file);
+      const { title, wikiUrl } = await fileData.getFileData(fileUrlOrTitle);
       const license = await licenses.getLicense({ title, wikiUrl });
       const response = { url: encodeURI(license.url), code: license.name };
       return h.response(response);

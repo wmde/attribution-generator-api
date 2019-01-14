@@ -95,12 +95,12 @@ paths:
       summary: Get information
       tags:
         - info
-  '/license/{file}':
+  '/license/{fileUrlOrTitle}':
     get:
       description: Returns the most liberal license for the given image
       parameters:
         - in: path
-          name: file
+          name: fileUrlOrTitle
           required: true
           type: string
       produces:
