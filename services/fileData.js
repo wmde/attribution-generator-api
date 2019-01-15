@@ -25,6 +25,21 @@ function parseIdentifier(identifier) {
   return parseFileTitle(identifier);
 }
 
+async function getImageInfo({ client, title, wikiUrl }) {
+  const params = { iiprop: 'url|extmetadata', iilimit: 1, iiurlheight: 300 };
+  const response = await client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
+  return parseImageInfoResponse(response);
+}
+
+async function getOriginalFileData({ client, ...params }) {
+  const imageInfo = await getImageInfo({ client, ...params });
+  const { url, extmetadata } = imageInfo;
+  const { title, wikiUrl } = parseWikiUrl(url);
+  const { value: artistHtml = null } = extmetadata.Artist || {};
+
+  return { title, wikiUrl, artistHtml };
+}
+
 class FileData {
   constructor({ client }) {
     this.client = client;
@@ -33,23 +48,9 @@ class FileData {
   async getFileData(titleOrUrl) {
     const identifier = decodeURIComponent(titleOrUrl);
     const { title, wikiUrl } = parseIdentifier(identifier);
-    return this.getOriginalFileData({ title, wikiUrl });
-  }
+    const { client } = this;
 
-  // TODO: add separate tests for this or indicated the method as private
-  async getOriginalFileData(params) {
-    const imageInfo = await this.getImageInfo(params);
-    const { url, extmetadata } = imageInfo;
-    const { title, wikiUrl } = parseWikiUrl(url);
-    const { value: artistHtml = null } = extmetadata.Artist || {};
-    return { title, wikiUrl, artistHtml };
-  }
-
-  // TODO: add separate tests for this or indicated the method as private
-  async getImageInfo({ title, wikiUrl }) {
-    const params = { iiprop: 'url|extmetadata', iilimit: 1, iiurlheight: 300 };
-    const response = await this.client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
-    return parseImageInfoResponse(response);
+    return getOriginalFileData({ client, title, wikiUrl });
   }
 }
 
