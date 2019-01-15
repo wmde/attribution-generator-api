@@ -7,9 +7,15 @@ function normalizeTemplateTitle(template) {
 
 function formatPageTemplateTitles(response) {
   const { pages } = response;
-  assert.ok(pages, 'notFound');
+  assert.ok(pages, 'empty-response');
   const { templates = [] } = Object.values(pages)[0];
   return templates.map(normalizeTemplateTitle);
+}
+
+async function getPageTemplates({ client, title, wikiUrl }) {
+  const params = { tlnamespace: 10, tllimit: 100 };
+  const response = await client.getResultsFromApi(title, 'templates', wikiUrl, params);
+  return formatPageTemplateTitles(response);
 }
 
 class Licences {
@@ -19,15 +25,9 @@ class Licences {
   }
 
   async getLicense({ title, wikiUrl }) {
-    const templates = await this.getPageTemplates({ title, wikiUrl });
+    const { client } = this;
+    const templates = await getPageTemplates({ client, title, wikiUrl });
     return this.licenseStore.match(templates);
-  }
-
-  // TODO: add separate tests for this or indicated the method as private
-  async getPageTemplates({ title, wikiUrl }) {
-    const params = { tlnamespace: 10, tllimit: 100 };
-    const response = await this.client.getResultsFromApi(title, 'templates', wikiUrl, params);
-    return formatPageTemplateTitles(response);
   }
 }
 
