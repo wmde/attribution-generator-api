@@ -1,8 +1,18 @@
 const Joi = require('joi');
+const Boom = require('boom');
 
 const definitions = require('./__swagger__/definitions');
 
 const routes = [];
+
+function handleError(error) {
+  const { message } = error;
+  if (message === 'invalid-url') {
+    throw new Boom(error, { statusCode: 422 });
+  } else {
+    throw new Boom(error);
+  }
+}
 
 routes.push({
   path: '/files/{articleUrl}',
@@ -27,8 +37,12 @@ routes.push({
   handler: async (request, h) => {
     const { files } = request.server.app.services;
     const { articleUrl } = request.params;
-    const response = await files.getPageImages(articleUrl);
-    return h.response(response);
+    try {
+      const response = await files.getPageImages(articleUrl);
+      return h.response(response);
+    } catch (error) {
+      return handleError(error);
+    }
   },
 });
 
