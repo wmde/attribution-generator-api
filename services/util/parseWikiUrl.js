@@ -47,13 +47,17 @@ function splitUrl(url) {
   if (wikipediaRegExp.test(url)) {
     return splitWikipediaUrl(url);
   }
-  // TODO: use a dedicated Error object here
-  throw new Error('badData');
+  throw new Error('invalid-url');
 }
 
 function parse(url) {
-  const sanitizedUrl = decodeURI(url);
-  return splitUrl(sanitizedUrl);
+  try {
+    const sanitizedUrl = decodeURI(url);
+    return splitUrl(sanitizedUrl);
+  } catch (error) {
+    if (error instanceof URIError) throw new Error('invalid-url');
+    throw error;
+  }
 }
 
 module.exports = parse;
