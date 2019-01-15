@@ -59,7 +59,7 @@ paths:
       summary: Generate attribution
       tags:
         - attribution
-  '/files/{pageUrl}':
+  '/files/{articleUrl}':
     get:
       description: Retrieve all files for a given article or page url.
       operationId: files.index

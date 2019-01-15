@@ -5,7 +5,7 @@ const definitions = require('./__swagger__/definitions');
 const routes = [];
 
 routes.push({
-  path: '/files/{pageUrl}',
+  path: '/files/{articleUrl}',
   method: 'GET',
   options: {
     description: 'Get all files for an article',
@@ -26,7 +26,8 @@ routes.push({
   },
   handler: async (request, h) => {
     const { files } = request.server.app.services;
-    const response = await files.getPageImages(request.params.pageUrl);
+    const { articleUrl } = request.params;
+    const response = await files.getPageImages(articleUrl);
     return h.response(response);
   },
 });

@@ -19,10 +19,10 @@ describe('files routes', () => {
       return context.inject({ ...defaults, ...options });
     }
 
-    const pageUrl = 'https://en.wikipedia.org/wiki/Wikimedia_Foundation';
+    const articleUrl = 'https://en.wikipedia.org/wiki/Wikimedia_Foundation';
 
     describe('with a valid encoded url', () => {
-      const encodedPageUrl = encodeURIComponent(pageUrl);
+      const encodedPageUrl = encodeURIComponent(articleUrl);
       const files = [
         { file: 'File:image.jpg', url: 'https://en.wikipedia.org/wiki/File:image.jpg' },
       ];
@@ -39,7 +39,7 @@ describe('files routes', () => {
 
     describe('with an unencoded url', () => {
       it('returns a 404', async () => {
-        const response = await subject({ url: `/files/${pageUrl}` });
+        const response = await subject({ url: `/files/${articleUrl}` });
         expect(response.status).toBe(404);
       });
     });
