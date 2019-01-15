@@ -33,6 +33,7 @@
     "hapi-router": "^4.0.0",
     "hapi-swaggered": "^3.0.3",
     "joi": "^14.3.0",
+    "jsdom": "^13.1.0",
     "repl.history": "^0.1.4"
   },
   "devDependencies": {
