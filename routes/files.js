@@ -6,10 +6,13 @@ const definitions = require('./__swagger__/definitions');
 const routes = [];
 
 function handleError({ message }) {
-  if (message === 'invalid-url') {
-    throw new Boom(message, { statusCode: 422 });
-  } else {
-    throw new Boom(message);
+  switch (message) {
+    case 'invalid-url':
+      throw new Boom(message, { statusCode: 422 });
+    case 'api-unavailable':
+      throw new Boom(message, { statusCode: 503 });
+    default:
+      throw new Boom(message);
   }
 }
 

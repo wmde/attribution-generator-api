@@ -29,7 +29,7 @@ describe('Client', () => {
     const defaultParams = { action: 'query', format: 'json' };
     const mockedResponse = { data: { query: { foo: 'bar' } } };
 
-    it('returns a 503 if the API cannot be reached', async () => {
+    it('returns an error if the API cannot be reached', async () => {
       const titles = 'Def_Leppard';
       const error = { request: {} };
       axiosClient.get.mockImplementation(() => {
@@ -38,7 +38,7 @@ describe('Client', () => {
       const client = new Client();
 
       await expect(client.getResultsFromApi(titles, 'image', wikiUrl)).rejects.toThrow(
-        'serviceUnavailable'
+        'api-unavailable'
       );
     });
 

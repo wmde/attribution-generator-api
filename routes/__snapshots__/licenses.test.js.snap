@@ -24,6 +24,14 @@ Object {
 }
 `;
 
+exports[`license routes GET /license returns a 503 response when the wiki api is not reachable 1`] = `
+Object {
+  "error": "Service Unavailable",
+  "message": "api-unavailable",
+  "statusCode": 503,
+}
+`;
+
 exports[`license routes GET /license returns the license of a file 1`] = `
 Object {
   "code": "CC BY-SA 3.0",

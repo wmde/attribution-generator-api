@@ -14,6 +14,8 @@ function handleError({ message }) {
       throw new Boom(message, { statusCode: 422 });
     case 'empty-response':
       throw new Boom(message, { statusCode: 404 });
+    case 'api-unavailable':
+      throw new Boom(message, { statusCode: 503 });
     default:
       throw new Boom(message);
   }

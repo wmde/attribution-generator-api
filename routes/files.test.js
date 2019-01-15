@@ -65,6 +65,20 @@ describe('files routes', () => {
       expect(response.payload).toMatchSnapshot();
     });
 
+    it('returns a 503 response when the wiki api is not reachable', async () => {
+      const articleUrl = 'something-random';
+      files.getPageImages.mockImplementation(() => {
+        throw new Error('api-unavailable');
+      });
+
+      const response = await subject({ url: `/files/${articleUrl}` });
+
+      expect(files.getPageImages).toHaveBeenCalledWith(articleUrl);
+      expect(response.status).toBe(503);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
     it('returns a 404 when called with an unencoded articleUrl', async () => {
       const articleUrl = 'https://en.wikipedia.org/wiki/Wikimedia_Foundation';
 

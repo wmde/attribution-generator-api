@@ -149,5 +149,19 @@ describe('license routes', () => {
       expect(response.type).toBe('application/json');
       expect(response.payload).toMatchSnapshot();
     });
+
+    it('returns a 503 response when the wiki api is not reachable', async () => {
+      fileData.getFileData.mockImplementation(() => {
+        throw new Error('api-unavailable');
+      });
+
+      const response = await subject({});
+
+      expect(fileData.getFileData).toHaveBeenCalledWith(title);
+      expect(licenses.getLicense).not.toHaveBeenCalled();
+      expect(response.status).toBe(503);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
   });
 });

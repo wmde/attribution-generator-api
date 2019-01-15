@@ -24,6 +24,14 @@ Object {
 }
 `;
 
+exports[`files routes GET /files returns a 503 response when the wiki api is not reachable 1`] = `
+Object {
+  "error": "Service Unavailable",
+  "message": "api-unavailable",
+  "statusCode": 503,
+}
+`;
+
 exports[`files routes GET /files returns a list of all files from the given article 1`] = `
 Array [
   Object {

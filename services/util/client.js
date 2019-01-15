@@ -10,7 +10,7 @@ function transform(data) {
 }
 
 function handleError(error) {
-  if (error.request) throw new Error('serviceUnavailable');
+  if (error.request) throw new Error('api-unavailable');
   throw error;
 }
 
