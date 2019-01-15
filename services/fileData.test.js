@@ -43,12 +43,12 @@ describe('FileData', () => {
         expect(fileData).toEqual({ title, wikiUrl, artistHtml: null });
       });
 
-      it('throws a notFound error when the imageinfo response is empty', async () => {
+      it('throws an error when the imageinfo response is empty', async () => {
         client.getResultsFromApi.mockResolvedValueOnce({});
 
         const service = new FileData({ client });
 
-        await expect(service.getFileData(url)).rejects.toThrow('notFound');
+        await expect(service.getFileData(url)).rejects.toThrow('empty-response');
       });
     });
 
@@ -68,10 +68,11 @@ describe('FileData', () => {
       });
 
       it('throws an exception when the title has the wrong format', async () => {
+        const message = 'invalid-url';
         const service = new FileData({ client });
         const badTitle = 'Apple_Lisa2-IMG_1517.jpg';
 
-        await expect(service.getFileData(badTitle)).rejects.toThrow('badData');
+        await expect(service.getFileData(badTitle)).rejects.toThrow(message);
       });
     });
   });

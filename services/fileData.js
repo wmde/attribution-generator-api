@@ -8,13 +8,13 @@ const defaultWikiUrl = 'https://commons.wikimedia.org/';
 
 function parseImageInfoResponse(response) {
   const { pages } = response;
-  assert.ok(pages, 'notFound');
+  assert.ok(pages, 'empty-response');
   const { imageinfo } = Object.values(pages)[0];
   return imageinfo[0];
 }
 
 function parseFileTitle(title) {
-  assert.ok(title.startsWith(filePrefix), 'badData');
+  assert.ok(title.startsWith(filePrefix), 'invalid-url');
   return { title, wikiUrl: defaultWikiUrl };
 }
 

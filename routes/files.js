@@ -5,12 +5,11 @@ const definitions = require('./__swagger__/definitions');
 
 const routes = [];
 
-function handleError(error) {
-  const { message } = error;
+function handleError({ message }) {
   if (message === 'invalid-url') {
-    throw new Boom(error, { statusCode: 422 });
+    throw new Boom(message, { statusCode: 422 });
   } else {
-    throw new Boom(error);
+    throw new Boom(message);
   }
 }
 
