@@ -9,6 +9,21 @@ function transform(data) {
   return query;
 }
 
+function handleError(error) {
+  if (error.request) throw new Error('serviceUnavailable');
+  throw error;
+}
+
+async function queryApi({ client, wikiUrl, params }) {
+  const apiUrl = Url.resolve(wikiUrl, apiPath);
+  try {
+    const { data } = await client.get(apiUrl, { params });
+    return transform(data);
+  } catch (error) {
+    return handleError(error);
+  }
+}
+
 class Client {
   constructor() {
     this.client = axios.create({
@@ -23,19 +38,14 @@ class Client {
   }
 
   getResultsFromApi(titles, prop, wikiUrl, params = {}) {
+    const { client } = this;
     const queryParams = {
       ...defaultParams,
       ...params,
       titles,
       prop,
     };
-    return this.query(wikiUrl, queryParams);
-  }
-
-  async query(wikiUrl, params) {
-    const apiUrl = Url.resolve(wikiUrl, apiPath);
-    const { data } = await this.client.get(apiUrl, { params });
-    return transform(data);
+    return queryApi({ client, wikiUrl, params: queryParams });
   }
 }
 
