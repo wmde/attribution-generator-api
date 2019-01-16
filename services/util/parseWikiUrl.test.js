@@ -105,7 +105,7 @@ describe('parse()', () => {
     expect(() => parse(url)).toThrow('invalid-url');
   });
 
-  it('throws an expception for invalid urls', () => {
+  it('throws an exception for invalid urls', () => {
     const url = '%';
     expect(() => parse(url)).toThrow('invalid-url');
   });
