@@ -3,6 +3,7 @@ const assert = require('assert');
 const Attribution = require('../models/attribution');
 
 class AttributionGenerator {
+  // TODO: think about doing some validations and data wrangling here
   generateAttribution(params) {
     const attribution = new Attribution(params);
     assert.ok(attribution);

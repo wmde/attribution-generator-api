@@ -36,15 +36,19 @@ describe('attribution routes', () => {
   });
 
   describe('GET /attribution/... (unmodified)', () => {
+    const file = 'File:Foobar.jpg';
+    const languageCode = 'en';
+    const typeOfUse = 'online';
+
     const defaults = {
-      language: 'en',
-      file: 'File:Foobar.jpg',
-      typeOfUse: 'online',
+      languageCode,
+      file,
+      typeOfUse,
     };
 
     function options(overrides = {}) {
       const params = { ...defaults, ...overrides };
-      const url = `/attribution/${params.language}/${params.file}/${params.typeOfUse}/unmodified`;
+      const url = `/attribution/${params.languageCode}/${params.file}/${params.typeOfUse}/unmodified`;
       return { method: 'GET', url };
     }
 
@@ -55,7 +59,7 @@ describe('attribution routes', () => {
     beforeEach(() => {
       services.fileData.getFileData.mockResolvedValue(fileInfoMock);
       services.licenses.getLicense.mockResolvedValue(licenseMock);
-      services.attributionGenerator.generateAttribution.mockResolvedValue(attributionMock);
+      services.attributionGenerator.generateAttribution.mockReturnValue(attributionMock);
     });
 
     afterEach(() => {
@@ -64,27 +68,21 @@ describe('attribution routes', () => {
       services.attributionGenerator.generateAttribution.mockReset();
     });
 
-    it('returns an attribution for the given file', async () => {
+    it('returns attribution information for the given file', async () => {
       const response = await subject({});
+      const isEdited = false;
+      const { rawUrl: fileUrl, title: fileTitle } = fileInfoMock;
+
+      expect(services.fileData.getFileData).toHaveBeenCalledWith(file);
+      expect(services.licenses.getLicense).toHaveBeenCalledWith(fileInfoMock);
+      expect(services.attributionGenerator.generateAttribution).toHaveBeenCalledWith({
+        license: licenseMock, languageCode, typeOfUse, isEdited, fileUrl, fileTitle,...fileInfoMock
+
+      });
 
       expect(response.status).toBe(200);
       expect(response.type).toBe('application/json');
       expect(response.payload).toMatchSnapshot();
-    });
-
-    it('calls services', async () => {
-      const response = await subject({});
-      const expectedParams = {
-        language: 'en',
-        license: {
-          code: 'CC BY-SA 3.0',
-          url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode'
-        },
-        typeOfUse: 'online'
-      };
-
-      expect(services.licenseService.fetchLicense).toHaveBeenCalledWith(defaults.file);
-      expect(services.attributionGenerator.generateAttribution).toHaveBeenCalledWith(expectedParams);
     });
   });
 });

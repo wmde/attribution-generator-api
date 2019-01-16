@@ -34,21 +34,23 @@ describe('attribution routes', () => {
 
   describe('GET /attribution/... (unmodified)', () => {
     const defaults = {
-      language: 'en',
+      languageCode: 'en',
       file: 'File:Foobar.jpg',
       typeOfUse: 'online',
     };
 
-    const attribution = {
-      license: 'CC BY-SA 3.0',
-      license_url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-      attribution_plain: 'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-      attribution_html: 'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-    };
+    const attribution =
+      {
+        licenseId: 'cc-zero',
+        licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/legalcode',
+        attributionHtml: '<a href="https://commons.wikimedia.org/wiki/User:Kaldari">Kaldari</a>, <a href="https://upload.wikimedia.org/wikipedia/commons/3/3a/Foobar.jpg">Foobar</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode" rel="license">CC0 1.0</a>',
+        attributionPlain: 'Kaldari (https://upload.wikimedia.org/wikipedia/commons/3/3a/Foobar.jpg), „Foobar“, https://creativecommons.org/publicdomain/zero/1.0/legalcode'
+      };
+
 
     function options(overrides = {}) {
       const params = { ...defaults, ...overrides };
-      const url = `/attribution/${params.language}/${params.file}/${params.typeOfUse}/unmodified`;
+      const url = `/attribution/${params.languageCode}/${params.file}/${params.typeOfUse}/unmodified`;
       return { url, method: 'GET' };
     }
 
