@@ -8,9 +8,10 @@ function normalizeTemplateTitle(template) {
 }
 
 function formatPageTemplateTitles(response) {
-  const { pages } = response;
-  assert.ok(pages, errors.emptyResponse);
-  const { templates = [] } = Object.values(pages)[0];
+  assert.ok(response.pages, errors.emptyResponse);
+  const pages = Object.values(response.pages);
+  assert.ok(pages.length === 1);
+  const { templates = [] } = pages[0];
   return templates.map(normalizeTemplateTitle);
 }
 

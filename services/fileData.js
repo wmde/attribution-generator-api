@@ -8,9 +8,10 @@ const filePrefix = 'File:';
 const defaultWikiUrl = 'https://commons.wikimedia.org/';
 
 function parseImageInfoResponse(response) {
-  const { pages } = response;
-  assert.ok(pages, errors.emptyResponse);
-  const { imageinfo } = Object.values(pages)[0];
+  assert.ok(response.pages, errors.emptyResponse);
+  const pages = Object.values(response.pages);
+  assert.ok(pages.length === 1);
+  const { imageinfo } = pages[0];
   return imageinfo[0];
 }
 

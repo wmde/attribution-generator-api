@@ -4,9 +4,11 @@ const parseWikiUrl = require('./util/parseWikiUrl');
 const errors = require('./util/errors');
 
 async function getImageTitles({ client, title, wikiUrl }) {
-  const { pages } = await client.getResultsFromApi(title, 'images', wikiUrl);
-  assert.ok(pages, errors.emptyResponse);
-  const { images = [] } = Object.values(pages)[0];
+  const response = await client.getResultsFromApi(title, 'images', wikiUrl);
+  assert.ok(response.pages, errors.emptyResponse);
+  const pages = Object.values(response.pages);
+  assert.ok(pages.length === 1);
+  const { images = [] } = pages[0];
 
   return images.map(image => image.title);
 }
