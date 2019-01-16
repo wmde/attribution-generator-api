@@ -1,4 +1,5 @@
 const jsdom = require('jsdom');
+
 const { JSDOM } = jsdom;
 
 function convertToNode(html) {
@@ -9,22 +10,22 @@ function convertToNode(html) {
 function sanitizeUrls(node) {
   const container = node.cloneNode(true);
 
-  [].slice.call(container.getElementsByTagName('a')).forEach((link) => {
+  [].slice.call(container.getElementsByTagName('a')).forEach(link => {
     if (link.href.indexOf('/w/index.php?title=User:') >= 0) {
       link.href = link.href.replace(
         /^.*?\/w\/index\.php\?title\=([^&]+).*$/,
         'https://commons.wikimedia.org/wiki/$1'
       );
-    } else if (link.href.indexOf( '/wiki/User:' ) === 0) {
-      link.href = 'https://commons.wikimedia.org' + link.href;
-    } else if (link.href.indexOf( '//' ) === 0) {
-      link.href = 'https:' + link.href;
+    } else if (link.href.indexOf('/wiki/User:') === 0) {
+      link.href = `https://commons.wikimedia.org${link.href}`;
+    } else if (link.href.indexOf('//') === 0) {
+      link.href = `https:${link.href}`;
     }
 
     const linkAttributes = link.attributes;
-    for(var i = linkAttributes.length - 1; i >= 0; i--) {
+    for (let i = linkAttributes.length - 1; i >= 0; i--) {
       if (linkAttributes[i].name !== 'href') {
-        linkAttributes.removeNamedItem(linkAttributes[i].name)
+        linkAttributes.removeNamedItem(linkAttributes[i].name);
       }
     }
   });
@@ -35,7 +36,7 @@ function sanitizeUrls(node) {
 function flattenVcardDivs(node) {
   const container = node.cloneNode(true);
 
-  [].slice.call(container.querySelectorAll('div.vcard')).forEach((vcard) => {
+  [].slice.call(container.querySelectorAll('div.vcard')).forEach(vcard => {
     const creator = vcard.querySelector('span#creator');
     if (creator) {
       vcard.innerHTML = creator.innerHTML;
@@ -62,10 +63,10 @@ function removeUselessWrappingNodes(node) {
 function removeTalkLink(node) {
   const container = node.cloneNode(true);
   const childNodes = [].slice.call(container.childNodes);
-  const talkLinkIndex = childNodes.findIndex((child) => {
-    return child.nodeName === 'A' && child.text === 'talk';
-  });
-  if (talkLinkIndex >= 1 && talkLinkIndex < (container.childNodes.length - 1)) {
+  const talkLinkIndex = childNodes.findIndex(
+    child => child.nodeName === 'A' && child.text === 'talk'
+  );
+  if (talkLinkIndex >= 1 && talkLinkIndex < container.childNodes.length - 1) {
     container.removeChild(childNodes[talkLinkIndex - 1]);
     container.removeChild(childNodes[talkLinkIndex]);
     container.removeChild(childNodes[talkLinkIndex + 1]);
@@ -78,14 +79,14 @@ function removeUnwantedHtmlTags(node) {
 
   // leaves links and textNodes intact
   // replaces all other elements with their innerHTML content
-  const childHtml = [].slice.call(container.childNodes).map((child) => {
+  const childHtml = [].slice.call(container.childNodes).map(child => {
     if (child.nodeName === 'A') {
       return child.outerHTML;
-    } else if (child.nodeName === '#text') {
-      return child.textContent;
-    } else {
-      return child.innerHTML;
     }
+    if (child.nodeName === '#text') {
+      return child.textContent;
+    }
+    return child.innerHTML;
   });
 
   container.innerHTML = childHtml.join('');
@@ -94,9 +95,10 @@ function removeUnwantedHtmlTags(node) {
 
 function removeUnwantedWhiteSpace(node) {
   const container = node.cloneNode(true);
-  container.innerHTML = container.innerHTML.replace('&nbsp;', ' ')
-                                           .replace(/\s+/g, ' ')
-                                           .trim()
+  container.innerHTML = container.innerHTML
+    .replace('&nbsp;', ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
   return container;
 }
 
@@ -105,7 +107,7 @@ function removeUnwantedWhiteSpace(node) {
 // Takes a HTML string and returns a sanitized HTML string.
 class HtmlSanitizer {
   sanitize(html) {
-    var node = convertToNode(html);
+    let node = convertToNode(html);
 
     node = sanitizeUrls(node);
     node = flattenVcardDivs(node);
