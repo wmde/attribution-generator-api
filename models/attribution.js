@@ -6,6 +6,7 @@
 
 const assert = require('assert');
 const License = require('./license')
+const HtmlSaniziter = require('../services/htmlSanitizer')
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
@@ -78,6 +79,13 @@ function extractTextFromHtml(html) {
   return dom.window.document.body.textContent;
 }
 
+// takes a file identifier string like "File:something.jpg" and returns a
+// file name from it ("something").
+function fileNameFromIdentifier(identifier) {
+  var {groups: {name}} = /^(?:.+:)?(?<name>.*?)(?:\.[^.]+)?$/.exec(identifier)
+  return name;
+}
+
 function isEdited(self) {
   return isStringPresent(self.modification) ||
          isStringPresent(self.modificationAuthor);
@@ -99,10 +107,10 @@ function getEditingAttribution(self) {
 }
 
 function getAuthorAttribution(self) {
-  getAttributionText(self) || getArtistText(self)
+  return getAttributionTextOrHtml(self) || getArtistText(self);
 }
 
-function getAttributionText(self) {
+function getAttributionTextOrHtml(self) {
   const attributionText = self.attributionHtml && extractTextFromHtml(self.attributionHtml).trim();
 
   if (!isStringPresent(attributionText)) { return; }
@@ -131,11 +139,16 @@ function getArtistHtml(self) {
   return html;
 }
 
+function sanitizeHtml( html ) {
+  const sanitizer = new HtmlSaniziter();
+  return sanitizer.sanitize(html);
+}
+
 function getPrintAttribution(self) {
   var attribution = `${getAuthorAttribution(self)} (${self.fileUrl})`;
 
   if (!self.license.isInGroup( 'cc4' )) {
-    attribution += `, „${self.fileTitle}“`;
+    attribution += `, „${fileNameFromIdentifier(self.fileTitle)}“`;
   }
   var editingAttribution = getEditingAttribution(self);
   if (editingAttribution) {
@@ -174,8 +187,8 @@ function getHtmlAttribution(self) {
     editingAttribution = ', ' + editingAttribution;
   }
 
-  return ( getAuthorAttribution(self) || getArtistHtml(self) ) + ', '
-    + `<a href="${self.fileUrl}">${self.fileTitle}</a>`
+  return ( getAttributionTextOrHtml(self) || getArtistHtml(self) ) + ', '
+    + `<a href="${self.fileUrl}">${fileNameFromIdentifier(self.fileTitle)}</a>`
     + editingAttribution
     + attributionLink;
 }
@@ -183,7 +196,7 @@ function getHtmlAttribution(self) {
 function getHtmlLicense(self) {
   var url = self.license.url;
   if (url) {
-    return `<a href="${url}">${self.license.name}</a>`;
+    return `<a href="${url}" rel="license">${self.license.name}</a>`;
   }
 
   return self.license.name;
@@ -199,7 +212,7 @@ function getAttributionAsTextWithLinks(self) {
 
 
   return getAuthorAttribution(self)
-         + ` (${self.fileUrl}), „${self.fileTitle}“`
+         + ` (${self.fileUrl}), „${fileNameFromIdentifier(self.fileTitle)}“`
          + editingAttribution
          + urlSnippet;
 }
@@ -207,8 +220,15 @@ function getAttributionAsTextWithLinks(self) {
 class Attribution {
   constructor(params) {
     validateParams(params);
+
+    if (isStringPresent(params.artistHtml)) {
+      params.artistHtml = sanitizeHtml(params.artistHtml);
+    }
+    if (isStringPresent(params.attributionHtml)) {
+      params.attributionHtml = sanitizeHtml(params.attributionHtml);
+    }
+
     Object.assign(this, params);
-    console.log({this: this})
   }
 
   html() {

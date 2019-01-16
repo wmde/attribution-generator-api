@@ -11,22 +11,23 @@ describe('attribution', () => {
     url: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode',
   });
 
-  const exampleCC3License = new License({
-    id: 'cc-by-sa-3.0',
-    name: 'CC BY-SA 3.0',
-    groups: ['cc', 'cc3'],
+  const exampleCC2License = new License({
+    id: 'cc-by-sa-2.5',
+    name: 'CC BY-SA 2.5',
+    groups: ['cc', 'cc2.5', 'ccby'],
     compatibility: [],
-    regexp: /^(Bild-)?CC-BY-SA(-|\/)3.0(([^-]+.+|-migrated)*)?$/i,
-    url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
+    regexp: /^CC-BY-2.5-\w+$/i,
+    url: 'https://creativecommons.org/licenses/by-sa/2.5/legalcode',
   });
+
   const options = {
     fileUrl: 'https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg',
-    fileTitle: 'File:Eisklettern_kl_engstligenfall.jpg',
+    fileTitle: 'File:Eisklettern kl engstligenfall.jpg',
     typeOfUse: 'online',
     languageCode: 'de',
     artistHtml: '<a href="//commons.wikimedia.org/w/index.php?title=User:Bernhard&amp;action=edit&amp;redlink=1" class="new" title="User:Bernhard (page does not exist)">Bernhard</a>',
-    attributionHtml: '<a href="https://en.wikipedia.org/wiki/User:Rhorn" class="extiw" title="en:User:Rhorn">Rhorn</a> at the <a href="https://en.wikipedia.org/wiki/" class="extiw" title="w:">English language Wikipedia</a>',
-    license: exampleCC3License,
+    attributionHtml: null,
+    license: exampleCC2License,
     modification: null,
     modificationAuthor: null,
   };
@@ -81,14 +82,14 @@ describe('attribution', () => {
     const subject = newAttribution();
 
     it('generates an attribution', () => {
-      expect(subject.html()).toEqual('');
+      expect(subject.html()).toEqual('<a href="https://commons.wikimedia.org/wiki/User:Bernhard">Bernhard</a>, <a href="https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg">Eisklettern kl engstligenfall</a>, <a href="https://creativecommons.org/licenses/by-sa/2.5/legalcode" rel="license">CC BY-SA 2.5</a>');
     });
 
     describe('when typeOfUse is offline', () => {
       const subject = newAttribution({ typeOfUse: 'offline' });
 
       it('generates an attribution', () => {
-        expect(subject.html()).toEqual('');
+        expect(subject.html()).toEqual('Bernhard (https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg), „Eisklettern kl engstligenfall“, https://creativecommons.org/licenses/by-sa/2.5/legalcode');
       });
     });
   });
@@ -97,14 +98,14 @@ describe('attribution', () => {
     const subject = newAttribution();
 
     it('generates an attribution', () => {
-      expect(subject.html()).toEqual('');
+      expect(subject.plainText()).toEqual('Bernhard (https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg), „Eisklettern kl engstligenfall“, https://creativecommons.org/licenses/by-sa/2.5/legalcode');
     });
 
     describe('when typeOfUse is offline', () => {
       const subject = newAttribution({ typeOfUse: 'offline' });
 
       it('generates an attribution', () => {
-        expect(subject.html()).toEqual('');
+        expect(subject.plainText()).toEqual('Bernhard (https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg), „Eisklettern kl engstligenfall“, https://creativecommons.org/licenses/by-sa/2.5/legalcode');
       });
     });
   });
