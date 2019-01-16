@@ -13,7 +13,7 @@ function sanitizeUrls(node) {
   [].slice.call(container.getElementsByTagName('a')).forEach(link => {
     if (link.href.indexOf('/w/index.php?title=User:') >= 0) {
       link.href = link.href.replace(
-        /^.*?\/w\/index\.php\?title\=([^&]+).*$/,
+        /^.*?\/w\/index\.php\?title=([^&]+).*$/,
         'https://commons.wikimedia.org/wiki/$1'
       );
     } else if (link.href.indexOf('/wiki/User:') === 0) {
@@ -23,7 +23,7 @@ function sanitizeUrls(node) {
     }
 
     const linkAttributes = link.attributes;
-    for (let i = linkAttributes.length - 1; i >= 0; i--) {
+    for (let i = linkAttributes.length - 1; i >= 0; i -= 1) {
       if (linkAttributes[i].name !== 'href') {
         linkAttributes.removeNamedItem(linkAttributes[i].name);
       }
@@ -106,8 +106,12 @@ function removeUnwantedWhiteSpace(node) {
 // HTML sanitization strategy.
 // Takes a HTML string and returns a sanitized HTML string.
 class HtmlSanitizer {
-  sanitize(html) {
-    let node = convertToNode(html);
+  constructor(html) {
+    this.html = html;
+  }
+
+  sanitize() {
+    let node = convertToNode(this.html);
 
     node = sanitizeUrls(node);
     node = flattenVcardDivs(node);

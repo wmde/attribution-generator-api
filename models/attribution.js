@@ -171,8 +171,8 @@ function getArtistHtml(self) {
 }
 
 function sanitizeHtml(html) {
-  const sanitizer = new HtmlSaniziter();
-  return sanitizer.sanitize(html);
+  const sanitizer = new HtmlSaniziter(html);
+  return sanitizer.sanitize();
 }
 
 function getPrintAttribution(self) {
