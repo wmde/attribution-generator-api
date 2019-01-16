@@ -1,4 +1,5 @@
 const parse = require('./parseWikiUrl');
+const errors = require('./errors');
 
 // according to https://en.wikipedia.org/wiki/Help:URL#URLs_of_Wikipedia_pages
 // and some upload urls
@@ -87,26 +88,26 @@ describe('parse()', () => {
 
   it('throws an exception for for non-wiki url', () => {
     const url = 'https://en.pokepedia.org/wiki/Lower_Saxony';
-    expect(() => parse(url)).toThrow('invalid-url');
+    expect(() => parse(url)).toThrow(errors.invalidUrl);
   });
 
   it('throws an exception for empty urls', () => {
     const url = '';
-    expect(() => parse(url)).toThrow('invalid-url');
+    expect(() => parse(url)).toThrow(errors.invalidUrl);
   });
 
   it('throws an exception for null urls', () => {
     const url = null;
-    expect(() => parse(url)).toThrow('invalid-url');
+    expect(() => parse(url)).toThrow(errors.invalidUrl);
   });
 
   it('throws an exception for undefined urls', () => {
     const url = undefined;
-    expect(() => parse(url)).toThrow('invalid-url');
+    expect(() => parse(url)).toThrow(errors.invalidUrl);
   });
 
   it('throws an exception for invalid urls', () => {
     const url = '%';
-    expect(() => parse(url)).toThrow('invalid-url');
+    expect(() => parse(url)).toThrow(errors.invalidUrl);
   });
 });

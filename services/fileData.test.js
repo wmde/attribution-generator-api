@@ -1,5 +1,6 @@
 const FileData = require('./fileData');
 
+const errors = require('../services/util/errors');
 const imageInfoMock = require('./__fixtures__/imageInfo');
 const imageInfoWithoutArtistMock = require('./__fixtures__/imageInfoWithoutArtist');
 
@@ -48,7 +49,7 @@ describe('FileData', () => {
 
         const service = new FileData({ client });
 
-        await expect(service.getFileData(url)).rejects.toThrow('empty-response');
+        await expect(service.getFileData(url)).rejects.toThrow(errors.emptyResponse);
       });
     });
 
@@ -68,11 +69,10 @@ describe('FileData', () => {
       });
 
       it('throws an exception when the title has the wrong format', async () => {
-        const message = 'invalid-url';
         const service = new FileData({ client });
         const badTitle = 'Apple_Lisa2-IMG_1517.jpg';
 
-        await expect(service.getFileData(badTitle)).rejects.toThrow(message);
+        await expect(service.getFileData(badTitle)).rejects.toThrow(errors.invalidUrl);
       });
     });
   });

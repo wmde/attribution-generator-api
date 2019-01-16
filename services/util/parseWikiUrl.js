@@ -1,3 +1,5 @@
+const errors = require('./errors');
+
 const wikipediaRegExp = /([-a-z]{2,})(\.m)?\.wikipedia\.org\//i;
 const uploadRegExp = /upload.wikimedia\.org\/wikipedia\/([-a-z]{2,})\//i;
 
@@ -47,7 +49,7 @@ function splitUrl(url) {
   if (wikipediaRegExp.test(url)) {
     return splitWikipediaUrl(url);
   }
-  throw new Error('invalid-url');
+  throw new Error(errors.invalidUrl);
 }
 
 function parse(url) {
@@ -55,7 +57,7 @@ function parse(url) {
     const sanitizedUrl = decodeURI(url);
     return splitUrl(sanitizedUrl);
   } catch (error) {
-    if (error instanceof URIError) throw new Error('invalid-url');
+    if (error instanceof URIError) throw new Error(errors.invalidUrl);
     throw error;
   }
 }

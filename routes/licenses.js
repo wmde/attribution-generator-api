@@ -1,6 +1,8 @@
 const Joi = require('joi');
 const Boom = require('boom');
 
+const errors = require('../services/util/errors');
+
 const routes = [];
 
 const licenseSchema = Joi.object({
@@ -10,11 +12,11 @@ const licenseSchema = Joi.object({
 
 function handleError({ message }) {
   switch (message) {
-    case 'invalid-url':
+    case errors.invalidUrl:
       throw new Boom(message, { statusCode: 422 });
-    case 'empty-response':
+    case errors.emptyResponse:
       throw new Boom(message, { statusCode: 404 });
-    case 'api-unavailable':
+    case errors.apiUnavailabe:
       throw new Boom(message, { statusCode: 503 });
     default:
       throw new Boom(message);

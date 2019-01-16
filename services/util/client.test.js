@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+const errors = require('./errors');
 const Client = require('./client');
 
 jest.mock('axios');
@@ -38,7 +39,7 @@ describe('Client', () => {
       const client = new Client();
 
       await expect(client.getResultsFromApi(titles, 'image', wikiUrl)).rejects.toThrow(
-        'api-unavailable'
+        errors.apiUnavailabe
       );
     });
 

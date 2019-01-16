@@ -1,5 +1,7 @@
 const setup = require('./__helpers__/setup');
 
+const errors = require('../services/util/errors');
+
 describe('license routes', () => {
   let context;
 
@@ -110,7 +112,7 @@ describe('license routes', () => {
 
     it('returns a 404 response when the license cannot be retrieved', async () => {
       fileData.getFileData.mockImplementation(() => {
-        throw new Error('empty-response');
+        throw new Error(errors.emptyResponse);
       });
 
       const response = await subject({});
@@ -124,7 +126,7 @@ describe('license routes', () => {
 
     it('returns a 422 response when the identifier cannot be parsed', async () => {
       fileData.getFileData.mockImplementation(() => {
-        throw new Error('invalid-url');
+        throw new Error(errors.invalidUrl);
       });
 
       const response = await subject({});
@@ -152,7 +154,7 @@ describe('license routes', () => {
 
     it('returns a 503 response when the wiki api is not reachable', async () => {
       fileData.getFileData.mockImplementation(() => {
-        throw new Error('api-unavailable');
+        throw new Error(errors.apiUnavailabe);
       });
 
       const response = await subject({});

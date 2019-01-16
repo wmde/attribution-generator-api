@@ -1,6 +1,7 @@
 const assert = require('assert');
 
 const parseWikiUrl = require('./util/parseWikiUrl');
+const errors = require('./util/errors');
 
 const urlRegex = /^(https|http)?:\/\//;
 const filePrefix = 'File:';
@@ -8,13 +9,13 @@ const defaultWikiUrl = 'https://commons.wikimedia.org/';
 
 function parseImageInfoResponse(response) {
   const { pages } = response;
-  assert.ok(pages, 'empty-response');
+  assert.ok(pages, errors.emptyResponse);
   const { imageinfo } = Object.values(pages)[0];
   return imageinfo[0];
 }
 
 function parseFileTitle(title) {
-  assert.ok(title.startsWith(filePrefix), 'invalid-url');
+  assert.ok(title.startsWith(filePrefix), errors.invalidUrl);
   return { title, wikiUrl: defaultWikiUrl };
 }
 

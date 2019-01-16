@@ -1,5 +1,7 @@
 const setup = require('./__helpers__/setup');
 
+const errors = require('../services/util/errors');
+
 describe('files routes', () => {
   const files = { getPageImages: jest.fn() };
   const services = { files };
@@ -40,7 +42,7 @@ describe('files routes', () => {
     it('returns 422 response if the URL is invalid', async () => {
       const articleUrl = 'something-invalid';
       files.getPageImages.mockImplementation(() => {
-        throw new Error('invalid-url');
+        throw new Error(errors.invalidUrl);
       });
 
       const response = await subject({ url: `/files/${articleUrl}` });
@@ -68,7 +70,7 @@ describe('files routes', () => {
     it('returns a 503 response when the wiki api is not reachable', async () => {
       const articleUrl = 'something-random';
       files.getPageImages.mockImplementation(() => {
-        throw new Error('api-unavailable');
+        throw new Error(errors.apiUnavailabe);
       });
 
       const response = await subject({ url: `/files/${articleUrl}` });

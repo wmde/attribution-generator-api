@@ -1,10 +1,11 @@
 const assert = require('assert');
 
 const parseWikiUrl = require('./util/parseWikiUrl');
+const errors = require('./util/errors');
 
 async function getImageTitles({ client, title, wikiUrl }) {
   const { pages } = await client.getResultsFromApi(title, 'images', wikiUrl);
-  assert.ok(pages, 'empty-response');
+  assert.ok(pages, errors.emptyResponse);
   const { images = [] } = Object.values(pages)[0];
 
   return images.map(image => image.title);
@@ -21,7 +22,7 @@ async function getImageUrls({ client, titles, wikiUrl }) {
   const params = { iiprop: 'url' };
   const title = titles.join('|');
   const { pages } = await client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
-  assert.ok(pages, 'empty-response');
+  assert.ok(pages, errors.emptyResponse);
 
   return Object.values(pages).map(formatImageInfo);
 }

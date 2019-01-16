@@ -1,5 +1,7 @@
 const assert = require('assert');
 
+const errors = require('./util/errors');
+
 function normalizeTemplateTitle(template) {
   const { title } = template;
   return title.replace(/^Template:/, '');
@@ -7,7 +9,7 @@ function normalizeTemplateTitle(template) {
 
 function formatPageTemplateTitles(response) {
   const { pages } = response;
-  assert.ok(pages, 'empty-response');
+  assert.ok(pages, errors.emptyResponse);
   const { templates = [] } = Object.values(pages)[0];
   return templates.map(normalizeTemplateTitle);
 }

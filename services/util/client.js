@@ -1,6 +1,8 @@
 const axios = require('axios');
 const Url = require('url');
 
+const errors = require('./errors');
+
 const defaultParams = { action: 'query', format: 'json' };
 const apiPath = 'w/api.php';
 
@@ -10,7 +12,7 @@ function transform(data) {
 }
 
 function handleError(error) {
-  if (!error.response) throw new Error('api-unavailable');
+  if (!error.response) throw new Error(errors.apiUnavailabe);
   throw error;
 }
 
