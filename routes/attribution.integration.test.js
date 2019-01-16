@@ -39,6 +39,13 @@ describe('attribution routes', () => {
       typeOfUse: 'online',
     };
 
+    const attribution = {
+      license: 'CC BY-SA 3.0',
+      license_url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
+      attribution_plain: 'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
+      attribution_html: 'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
+    };
+
     function options(overrides = {}) {
       const params = { ...defaults, ...overrides };
       const url = `/attribution/${params.language}/${params.file}/${params.typeOfUse}/unmodified`;
@@ -49,15 +56,12 @@ describe('attribution routes', () => {
       return context.inject(options());
     }
 
-    it('returns the license of a file', async () => {
+    it('returns the attribution', async () => {
       const response = await subject({});
 
       expect(response.status).toBe(200);
       expect(response.type).toBe('application/json');
-      expect(response.payload).toMatchObject({
-        code: 'CC BY-SA 2.0 FR',
-        url: 'https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en',
-      });
+      expect(response.payload).toMatchObject(attribution);
     });
   });
 });

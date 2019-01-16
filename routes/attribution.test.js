@@ -3,8 +3,15 @@ const path = require('path');
 
 describe('attribution routes', () => {
   const services = {
-    licenseService: { fetchLicense: jest.fn() },
+    fileData: { getFileData: jest.fn() },
+    licenses: { getLicense: jest.fn() },
     attributionGenerator: { generateAttribution: jest.fn(() => attributionMock) },
+  };
+  const fileInfoMock = {
+    title: 'File:Apple_Lisa2-IMG_1517.jpg',
+    rawUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg',
+    wikiUrl: 'https://commons.wikimedia.org/',
+    artistHtml: '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo'
   };
   const licenseMock = {
     code: 'CC BY-SA 3.0',
@@ -46,11 +53,14 @@ describe('attribution routes', () => {
     }
 
     beforeEach(() => {
-      services.licenseService.fetchLicense.mockResolvedValue(licenseMock);
+      services.fileData.getFileData.mockResolvedValue(fileInfoMock);
+      services.licenses.getLicense.mockResolvedValue(licenseMock);
+      services.attributionGenerator.generateAttribution.mockResolvedValue(attributionMock);
     });
 
     afterEach(() => {
-      services.licenseService.fetchLicense.mockReset();
+      services.fileData.getFileData.mockReset();
+      services.licenses.getLicense.mockReset();
       services.attributionGenerator.generateAttribution.mockReset();
     });
 

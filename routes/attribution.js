@@ -5,16 +5,17 @@ const prefix = require('./__utils__/path')('/attribution');
 
 const routes = [];
 
-const attributionMock = {
-  license: 'CC BY-SA 3.0',
-  attribution_plain:
-    'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-  attribution_text:
-    'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-  attribution_html:
-    'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-  license_url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-};
+function handleError({ message }) {
+  switch (message) {
+    case 'notFound':
+      throw new Boom(message, { statusCode: 404 });
+    case 'badData':
+      throw new Boom(message, { statusCode: 422 });
+    default:
+      throw new Boom(message);
+  }
+}
+
 routes.push({
   path: prefix('/{language}/{file}/{typeOfUse}/unmodified'),
   method: 'GET',
@@ -47,14 +48,13 @@ routes.push({
     const { fileData, licenses, attributionGenerator } = request.server.app.services;
     const { language, file, typeOfUse } = request.params;
     try {
-      const { title, wikiUrl } = await fileData.getFileData(file);
-      const license = await licenses.getLicense({ title, wikiUrl });
-      const attributionParams = { license, language, typeOfUse };
+      const fileInfo = await fileData.getFileData(file);
+      const license = await licenses.getLicense(fileInfo);
+      const attributionParams = { license, language, typeOfUse, ...fileInfo };
       const response = attributionGenerator.generateAttribution(attributionParams);
       return h.response(response);
     } catch (error) {
-      const { message } = error;
-      return h.error(message);
+      return handleError(error);
     }
     return h.response(attributionMock)
   },

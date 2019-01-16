@@ -24,7 +24,7 @@ const services = {
   files: new Files({ client }),
   fileData: new FileData({ client }),
   licenses: new Licenses({ client, licenseStore }),
-  attributions: new AttributionGenerator(),
+  attributionGenerator: new AttributionGenerator(),
 };
 
 // const services = Object.keys(registry).reduce((all, name) => {
