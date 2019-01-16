@@ -16,7 +16,7 @@ const attributionMock = {
   license_url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
 };
 routes.push({
-  path: prefix('/{language}/{file}'),
+  path: prefix('/{language}/{file}/{typeOfUse}/unmodified'),
   method: 'GET',
   options: {
     description: 'Generate attribution',
@@ -25,6 +25,7 @@ routes.push({
       params: {
         language: Joi.string(),
         file: Joi.string(),
+        typeOfUse: Joi.string(),
       },
     },
     response: {
@@ -42,7 +43,21 @@ routes.push({
       },
     },
   },
-  handler: async (request, h) => h.response(attributionMock),
+  handler: async (request, h) => {
+    const { fileData, licenses, attributionGenerator } = request.server.app.services;
+    const { language, file, typeOfUse } = request.params;
+    try {
+      const { title, wikiUrl } = await fileData.getFileData(file);
+      const license = await licenses.getLicense({ title, wikiUrl });
+      const attributionParams = { license, language, typeOfUse };
+      const response = attributionGenerator.generateAttribution(attributionParams);
+      return h.response(response);
+    } catch (error) {
+      const { message } = error;
+      return h.error(message);
+    }
+    return h.response(attributionMock)
+  },
 });
 
 module.exports = routes;

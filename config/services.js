@@ -5,6 +5,7 @@ const Client = require('../services/util/client');
 const Files = require('../services/files');
 const FileData = require('../services/fileData');
 const Licenses = require('../services/licenses');
+const AttributionGenerator = require('../services/attributionGenerator');
 
 const licenses = require('./licenses/licenses');
 const portReferences = require('./licenses/portReferences');
@@ -23,6 +24,7 @@ const services = {
   files: new Files({ client }),
   fileData: new FileData({ client }),
   licenses: new Licenses({ client, licenseStore }),
+  attributions: new AttributionGenerator(),
 };
 
 // const services = Object.keys(registry).reduce((all, name) => {
