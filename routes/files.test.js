@@ -32,14 +32,15 @@ describe('files routes', () => {
   });
 
   describe('GET /files', () => {
+    const articleUrl = 'https://en.wikipedia.org/wiki/Wikimedia_Foundation';
+    const encodedArticleUrl = encodeURIComponent(articleUrl);
+
     async function subject(options = {}) {
       const defaults = { method: 'GET' };
       return context.inject({ ...defaults, ...options });
     }
 
     it('returns a list of all files from the given article', async () => {
-      const articleUrl = 'https://en.wikipedia.org/wiki/Wikimedia_Foundation';
-      const encodedArticleUrl = encodeURIComponent(articleUrl);
       files.getPageImages.mockResolvedValue(filesMock);
 
       const response = await subject({ url: `/files/${encodedArticleUrl}` });
@@ -50,13 +51,21 @@ describe('files routes', () => {
       expect(response.payload).toMatchSnapshot();
     });
 
-    it('returns 422 response if the URL is invalid', async () => {
-      const articleUrl = 'something-invalid';
+    it('returns 400 response if the URL is invalid', async () => {
+      const response = await subject({ url: '/files/something-invalid' });
+
+      expect(files.getPageImages).not.toHaveBeenCalled();
+      expect(response.status).toBe(400);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
+    it('returns a 422 response for non-wiki urls', async () => {
       files.getPageImages.mockImplementation(() => {
         throw new Error(errors.invalidUrl);
       });
 
-      const response = await subject({ url: `/files/${articleUrl}` });
+      const response = await subject({ url: `/files/${encodedArticleUrl}` });
 
       expect(files.getPageImages).toHaveBeenCalledWith(articleUrl);
       expect(response.status).toBe(422);
@@ -65,12 +74,11 @@ describe('files routes', () => {
     });
 
     it('returns a 500 response for a generic error', async () => {
-      const articleUrl = 'something-random';
       files.getPageImages.mockImplementation(() => {
         throw new Error('just some error');
       });
 
-      const response = await subject({ url: `/files/${articleUrl}` });
+      const response = await subject({ url: `/files/${encodedArticleUrl}` });
 
       expect(files.getPageImages).toHaveBeenCalledWith(articleUrl);
       expect(response.status).toBe(500);
@@ -79,12 +87,11 @@ describe('files routes', () => {
     });
 
     it('returns a 503 response when the wiki api is not reachable', async () => {
-      const articleUrl = 'something-random';
       files.getPageImages.mockImplementation(() => {
         throw new Error(errors.apiUnavailabe);
       });
 
-      const response = await subject({ url: `/files/${articleUrl}` });
+      const response = await subject({ url: `/files/${encodedArticleUrl}` });
 
       expect(files.getPageImages).toHaveBeenCalledWith(articleUrl);
       expect(response.status).toBe(503);
@@ -93,9 +100,9 @@ describe('files routes', () => {
     });
 
     it('returns a 404 when called with an unencoded articleUrl', async () => {
-      const articleUrl = 'https://en.wikipedia.org/wiki/Wikimedia_Foundation';
+      const rawArticleUrl = 'https://en.wikipedia.org/wiki/Wikimedia_Foundation';
 
-      const response = await subject({ url: `/files/${articleUrl}` });
+      const response = await subject({ url: `/files/${rawArticleUrl}` });
 
       expect(files.getPageImages).not.toHaveBeenCalled();
       expect(response.status).toBe(404);

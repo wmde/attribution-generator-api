@@ -6,15 +6,29 @@ const definitions = require('./__swagger__/definitions');
 const routes = [];
 
 const fileSchema = Joi.object({
-  title: Joi.string(),
-  descriptionUrl: Joi.string().uri(),
-  rawUrl: Joi.string().uri(),
-  fileSize: Joi.number().integer(),
-  thumbnail: Joi.object().keys({
-    rawUrl: Joi.string().uri(),
-    width: Joi.number().integer(),
-    height: Joi.number().integer(),
-  }),
+  title: Joi.string().required(),
+  descriptionUrl: Joi.string()
+    .uri()
+    .required(),
+  rawUrl: Joi.string()
+    .uri()
+    .required(),
+  fileSize: Joi.number()
+    .integer()
+    .required(),
+  thumbnail: Joi.object()
+    .required()
+    .keys({
+      rawUrl: Joi.string()
+        .uri()
+        .required(),
+      width: Joi.number()
+        .integer()
+        .required(),
+      height: Joi.number()
+        .integer()
+        .required(),
+    }),
 });
 
 function handleError(h, { message }) {
@@ -36,13 +50,16 @@ routes.push({
     notes: 'Retrieve all files for a given article or page url.',
     validate: {
       params: {
-        articleUrl: Joi.string(),
+        articleUrl: Joi.string().uri(),
       },
     },
     response: {
       schema: Joi.array().items(fileSchema),
       status: {
         400: definitions.errors['400'],
+        422: definitions.errors['422'],
+        500: definitions.errors['500'],
+        503: definitions.errors['503'],
       },
     },
     plugins: {
