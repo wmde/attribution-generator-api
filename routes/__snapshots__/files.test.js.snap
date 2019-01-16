@@ -35,8 +35,15 @@ Object {
 exports[`files routes GET /files returns a list of all files from the given article 1`] = `
 Array [
   Object {
-    "file": "File:image.jpg",
-    "url": "https://en.wikipedia.org/wiki/File:image.jpg",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Graphic_01.jpg",
+    "fileSize": 112450,
+    "rawUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Graphic_01.jpg",
+    "thumbnail": Object {
+      "height": 300,
+      "rawUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Graphic_01.jpg/300px-Graphic_01.jpg",
+      "width": 300,
+    },
+    "title": "File:Graphic 01.jpg",
   },
 ]
 `;

@@ -41,7 +41,7 @@ describe('Files', () => {
           'File:Graphic 01.jpg|File:logo.svg',
           'imageinfo',
           wikiUrl,
-          { iiprop: 'url' }
+          { iiprop: 'url|size', iiurlwidth: 300 }
         );
         expect(files).toMatchSnapshot();
       });
@@ -69,7 +69,7 @@ describe('Files', () => {
           'File:Graphic 01.jpg|File:logo.svg',
           'imageinfo',
           wikiUrl,
-          { iiprop: 'url' }
+          { iiprop: 'url|size', iiurlwidth: 300 }
         );
         expect(files).toEqual([]);
       });

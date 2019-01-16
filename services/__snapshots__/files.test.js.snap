@@ -3,12 +3,26 @@
 exports[`Files getPageImages() with a valid wikipedia url returns a list of all images from the given article 1`] = `
 Array [
   Object {
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Graphic_01.jpg",
+    "fileSize": 112450,
+    "rawUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Graphic_01.jpg",
+    "thumbnail": Object {
+      "height": 300,
+      "rawUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Graphic_01.jpg/300px-Graphic_01.jpg",
+      "width": 300,
+    },
     "title": "File:Graphic 01.jpg",
-    "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Graphic_01.jpg",
   },
   Object {
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:logo.svg",
+    "fileSize": 112450,
+    "rawUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/logo.svg",
+    "thumbnail": Object {
+      "height": 300,
+      "rawUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/logo.svg/300px-logo.svg",
+      "width": 300,
+    },
     "title": "File:logo.svg",
-    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/logo.svg",
   },
 ]
 `;

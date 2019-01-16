@@ -18,6 +18,26 @@ definitions:
         type: string
     required:
       - version
+  RawUrlWidthHeightModel:
+    properties:
+      height:
+        type: integer
+      rawUrl:
+        type: string
+      width:
+        type: integer
+  TitleDescriptionUrlRawUrlFileSizeThumbnailModel:
+    properties:
+      descriptionUrl:
+        type: string
+      fileSize:
+        type: integer
+      rawUrl:
+        type: string
+      thumbnail:
+        $ref: '#/definitions/RawUrlWidthHeightModel'
+      title:
+        type: string
   UrlCodeModel:
     properties:
       code:
@@ -63,6 +83,11 @@ paths:
     get:
       description: Retrieve all files for a given article or page url.
       operationId: files.index
+      parameters:
+        - in: path
+          name: articleUrl
+          required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -74,7 +99,7 @@ paths:
           description: ''
           schema:
             items:
-              type: string
+              $ref: '#/definitions/TitleDescriptionUrlRawUrlFileSizeThumbnailModel'
             type: array
       security:
         - default: []

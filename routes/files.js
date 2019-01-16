@@ -5,6 +5,18 @@ const definitions = require('./__swagger__/definitions');
 
 const routes = [];
 
+const fileSchema = Joi.object({
+  title: Joi.string(),
+  descriptionUrl: Joi.string().uri(),
+  rawUrl: Joi.string().uri(),
+  fileSize: Joi.number().integer(),
+  thumbnail: Joi.object().keys({
+    rawUrl: Joi.string().uri(),
+    width: Joi.number().integer(),
+    height: Joi.number().integer(),
+  }),
+});
+
 function handleError(h, { message }) {
   switch (message) {
     case errors.invalidUrl:
@@ -22,9 +34,13 @@ routes.push({
   options: {
     description: 'Get all files for an article',
     notes: 'Retrieve all files for a given article or page url.',
-    validate: {},
+    validate: {
+      params: {
+        articleUrl: Joi.string(),
+      },
+    },
     response: {
-      schema: Joi.array(),
+      schema: Joi.array().items(fileSchema),
       status: {
         400: definitions.errors['400'],
       },

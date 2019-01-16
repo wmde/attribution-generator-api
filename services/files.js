@@ -15,13 +15,21 @@ async function getImageTitles({ client, title, wikiUrl }) {
 
 function formatImageInfo(page) {
   const { title, imageinfo } = page;
-  const { url } = imageinfo[0];
+  const {
+    url: rawUrl,
+    descriptionurl: descriptionUrl,
+    size: fileSize,
+    thumburl,
+    thumbwidth,
+    thumbheight,
+  } = imageinfo[0];
+  const thumbnail = { rawUrl: thumburl, width: thumbwidth, height: thumbheight };
 
-  return { title, url };
+  return { title, descriptionUrl, rawUrl, fileSize, thumbnail };
 }
 
 async function getImageUrls({ client, titles, wikiUrl }) {
-  const params = { iiprop: 'url' };
+  const params = { iiprop: 'url|size', iiurlwidth: 300 };
   const title = titles.join('|');
   const { pages } = await client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
   assert.ok(pages, errors.emptyResponse);

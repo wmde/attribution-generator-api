@@ -6,7 +6,18 @@ describe('files routes', () => {
   const files = { getPageImages: jest.fn() };
   const services = { files };
   const filesMock = [
-    { file: 'File:image.jpg', url: 'https://en.wikipedia.org/wiki/File:image.jpg' },
+    {
+      descriptionUrl: 'https://commons.wikimedia.org/wiki/File:Graphic_01.jpg',
+      fileSize: 112450,
+      rawUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ef/Graphic_01.jpg',
+      thumbnail: {
+        height: 300,
+        rawUrl:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Graphic_01.jpg/300px-Graphic_01.jpg',
+        width: 300,
+      },
+      title: 'File:Graphic 01.jpg',
+    },
   ];
 
   let context;
