@@ -12,6 +12,7 @@ describe('FileData', () => {
     const wikiUrl = 'https://commons.wikimedia.org/';
     const artistHtml =
       '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo';
+    const rawUrl = 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg';
 
     describe('when passing a valid url', () => {
       const url = 'https://en.wikipedia.org/wiki/Apple_Lisa#/media/File:Apple_Lisa.jpg';
@@ -32,7 +33,7 @@ describe('FileData', () => {
             iiurlheight: 300,
           }
         );
-        expect(fileData).toEqual({ title, wikiUrl, artistHtml });
+        expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml });
       });
 
       it('skips the artist information if not available for the file', async () => {
@@ -41,7 +42,7 @@ describe('FileData', () => {
         const service = new FileData({ client });
         const fileData = await service.getFileData(url);
 
-        expect(fileData).toEqual({ title, wikiUrl, artistHtml: null });
+        expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml: null });
       });
 
       it('throws an error when the imageinfo response is empty', async () => {
@@ -65,7 +66,7 @@ describe('FileData', () => {
           iilimit: 1,
           iiurlheight: 300,
         });
-        expect(fileData).toEqual({ title, wikiUrl, artistHtml });
+        expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml });
       });
 
       it('throws an exception when the title has the wrong format', async () => {
