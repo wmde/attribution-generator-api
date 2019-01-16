@@ -1,4 +1,5 @@
 const assert = require('assert');
+const Attribution = require('../models/attribution');
 
 class AttributionGenerator {
   constructor() {
@@ -21,6 +22,8 @@ class AttributionGenerator {
       attribution_html:
       'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
     };
+
+    const attribution = new Attribution(params);
 
     return attributionMock;
   }
