@@ -62,11 +62,12 @@ function isStringPresent(string) {
   return typeof string === 'string'   && string.length > 0
 }
 
-function validateParams({ fileUrl, fileTitle, typeOfUse, languageCode, artistHtml, attributionHtml, license, modification, modificationAuthor }) {
+function validateParams({ fileUrl, fileTitle, typeOfUse, languageCode, artistHtml, attributionHtml, license, modification, modificationAuthor, isEdited }) {
   assert(isStringPresent(fileUrl),                                   validationError('fileUrl'));
   assert(isStringPresent(fileTitle),                                 validationError('fileTitle'));
   assert(KNOWN_TYPES_OF_USE.includes(typeOfUse),                     validationError('typeOfUse'));
   assert(KNOWN_LANGUAGES.includes(languageCode),                     validationError('languageCode'));
+  assert([true, false].includes(isEdited),                           validationError('isEdited'));
   assert(!artistHtml         || isStringPresent(artistHtml),         validationError('artistHtml'));
   assert(!attributionHtml    || isStringPresent(attributionHtml),    validationError('attributionHtml'));
   assert(!modification       || isStringPresent(modification),       validationError('modification'));
@@ -86,31 +87,33 @@ function fileNameFromIdentifier(identifier) {
   return name;
 }
 
-function isEdited(self) {
-  return isStringPresent(self.modification) ||
-         isStringPresent(self.modificationAuthor);
-}
-
 function getEditingAttribution(self) {
-  if( !isEdited(self) ) {
-    return '';
-  }
+  if( !self.isEdited ) { return ''; }
 
   const change = self.modification || t(self.languageCode, 'edited');
 
-  if( isStringPresent(modificationAuthor) ) {
-    const creator = ` ${t(self.languageCode, 'by')} ${self.modificationAuthor}`;
+  if( isStringPresent(self.modificationAuthor) ) {
+    const creator = `${t(self.languageCode, 'by')} ${self.modificationAuthor}`;
     return `${change} ${creator}`;
   }
 
   return change;
 }
 
-function getAuthorAttribution(self) {
-  return getAttributionTextOrHtml(self) || getArtistText(self);
+function getAuthorAttributionText(self) {
+  return getAttributionText(self) || getArtistText(self);
 }
 
-function getAttributionTextOrHtml(self) {
+function getAuthorAttributionHtml(self) {
+  return getAttributionHtml(self) || getArtistHtml(self);
+}
+
+function getAttributionText(self) {
+  if (!isStringPresent(self.attributionHtml)) { return; }
+  return extractTextFromHtml(self.attributionHtml).trim();
+}
+
+function getAttributionHtml(self) {
   const attributionText = self.attributionHtml && extractTextFromHtml(self.attributionHtml).trim();
 
   if (!isStringPresent(attributionText)) { return; }
@@ -145,9 +148,9 @@ function sanitizeHtml( html ) {
 }
 
 function getPrintAttribution(self) {
-  var attribution = `${getAuthorAttribution(self)} (${self.fileUrl})`;
+  var attribution = `${getAuthorAttributionText(self)} (${self.fileUrl})`;
 
-  if (!self.license.isInGroup( 'cc4' )) {
+  if (!self.license.isInGroup('cc4')) {
     attribution += `, „${fileNameFromIdentifier(self.fileTitle)}“`;
   }
   var editingAttribution = getEditingAttribution(self);
@@ -175,9 +178,9 @@ function getHtmlAttribution(self) {
   var editingAttribution = getEditingAttribution(self);
 
   if (!editingAttribution && self.license.isInGroup('pd')) {
-    attributionLink = ', ' + t(self.languageCode, 'dialogue.pd-attribution-hint' );
+    attributionLink = ', ' + t(self.languageCode, 'pd-attribution-hint' );
     if ( self.license.url) {
-      attributionLink += `, ${t(self.languageCode, 'dialogue.check-details')} <a href="${self.license.url}">Wikimedia Commons</a>`;
+      attributionLink += `, ${t(self.languageCode, 'check-details')} <a href="${self.license.url}" rel="license">Wikimedia Commons</a>`;
     }
   } else {
     attributionLink = ', ' + getHtmlLicense(self);
@@ -187,7 +190,7 @@ function getHtmlAttribution(self) {
     editingAttribution = ', ' + editingAttribution;
   }
 
-  return ( getAttributionTextOrHtml(self) || getArtistHtml(self) ) + ', '
+  return getAuthorAttributionHtml(self) + ', '
     + `<a href="${self.fileUrl}">${fileNameFromIdentifier(self.fileTitle)}</a>`
     + editingAttribution
     + attributionLink;
@@ -211,7 +214,7 @@ function getAttributionAsTextWithLinks(self) {
   if (editingAttribution) { editingAttribution = ', ' + editingAttribution; }
 
 
-  return getAuthorAttribution(self)
+  return getAuthorAttributionText(self)
          + ` (${self.fileUrl}), „${fileNameFromIdentifier(self.fileTitle)}“`
          + editingAttribution
          + urlSnippet;
