@@ -31,26 +31,20 @@ async function getImageInfo({ client, title, wikiUrl }) {
   return parseImageInfoResponse(response);
 }
 
-async function getOriginalFileData({ client, ...params }) {
-  const imageInfo = await getImageInfo({ client, ...params });
-  const { url, extmetadata } = imageInfo;
-  const { title, wikiUrl } = parseWikiUrl(url);
-  const { value: artistHtml = null } = extmetadata.Artist || {};
-
-  return { title, wikiUrl, artistHtml };
-}
-
 class FileData {
   constructor({ client }) {
     this.client = client;
   }
 
   async getFileData(titleOrUrl) {
+    const { client } = this;
     const identifier = decodeURIComponent(titleOrUrl);
     const { title, wikiUrl } = parseIdentifier(identifier);
-    const { client } = this;
+    const { url, extmetadata } = await getImageInfo({ client, title, wikiUrl });
+    const { title: originalTitle, wikiUrl: originalWikiUrl } = parseWikiUrl(url);
+    const { value: artistHtml = null } = extmetadata.Artist || {};
 
-    return getOriginalFileData({ client, title, wikiUrl });
+    return { title: originalTitle, wikiUrl: originalWikiUrl, artistHtml };
   }
 }
 
