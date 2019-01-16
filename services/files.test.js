@@ -1,6 +1,7 @@
 const Files = require('./files');
 
 const parseWikiUrl = require('./util/parseWikiUrl');
+const errors = require('./util/errors');
 
 const imageTitles = require('./__fixtures__/imageTitles');
 const imageTitlesMissing = require('./__fixtures__/imageTitlesMissing');
@@ -18,10 +19,10 @@ describe('Files', () => {
 
     it('passes on the error if the url cannot be parsed', async () => {
       parseWikiUrl.mockImplementation(() => {
-        throw new Error('badData');
+        throw new Error(errors.invalidUrl);
       });
       const service = new Files({ client });
-      await expect(service.getPageImages(url)).rejects.toThrow('badData');
+      await expect(service.getPageImages(url)).rejects.toThrow(errors.invalidUrl);
     });
 
     describe('with a valid wikipedia url', () => {

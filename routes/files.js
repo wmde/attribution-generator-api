@@ -1,20 +1,18 @@
 const Joi = require('joi');
-const Boom = require('boom');
 
 const errors = require('../services/util/errors');
-
 const definitions = require('./__swagger__/definitions');
 
 const routes = [];
 
-function handleError({ message }) {
+function handleError(h, { message }) {
   switch (message) {
     case errors.invalidUrl:
-      throw new Boom(message, { statusCode: 422 });
+      return h.error(message, { statusCode: 422 });
     case errors.apiUnavailabe:
-      throw new Boom(message, { statusCode: 503 });
+      return h.error(message, { statusCode: 503 });
     default:
-      throw new Boom(message);
+      return h.error(message);
   }
 }
 
@@ -45,7 +43,7 @@ routes.push({
       const response = await files.getPageImages(articleUrl);
       return h.response(response);
     } catch (error) {
-      return handleError(error);
+      return handleError(h, error);
     }
   },
 });

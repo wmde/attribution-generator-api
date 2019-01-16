@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const Boom = require('boom');
 
 const errors = require('../services/util/errors');
 
@@ -10,16 +9,16 @@ const licenseSchema = Joi.object({
   code: Joi.string(),
 });
 
-function handleError({ message }) {
+function handleError(h, { message }) {
   switch (message) {
     case errors.invalidUrl:
-      throw new Boom(message, { statusCode: 422 });
+      return h.error(message, { statusCode: 422 });
     case errors.emptyResponse:
-      throw new Boom(message, { statusCode: 404 });
+      return h.error(message, { statusCode: 404 });
     case errors.apiUnavailabe:
-      throw new Boom(message, { statusCode: 503 });
+      return h.error(message, { statusCode: 503 });
     default:
-      throw new Boom(message);
+      return h.error(message);
   }
 }
 
@@ -93,7 +92,7 @@ routes.push({
       const response = { url: encodeURI(license.url), code: license.name };
       return h.response(response);
     } catch (error) {
-      return handleError(error);
+      return handleError(h, error);
     }
   },
 });
