@@ -1,3 +1,9 @@
+/* eslint-disable no-param-reassign */
+/* We allow param-reassigning in helper functions in this file, as eslint
+ * fails to detect we clone each input-node and only work on the cloned node.
+ * So, we're already doing what eslint intends us to do.
+ */
+
 const jsdom = require('jsdom');
 
 const { JSDOM } = jsdom;

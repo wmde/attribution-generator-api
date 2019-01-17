@@ -118,31 +118,11 @@ function getEditingAttribution(self) {
   return change;
 }
 
-function getAuthorAttributionText(self) {
-  return getAttributionText(self) || getArtistText(self);
-}
-
-function getAuthorAttributionHtml(self) {
-  return getAttributionHtml(self) || getArtistHtml(self);
-}
-
 function getAttributionText(self) {
   if (!isStringPresent(self.attributionHtml)) {
-    return;
+    return '';
   }
   return extractTextFromHtml(self.attributionHtml).trim();
-}
-
-function getAttributionHtml(self) {
-  const attributionText = self.attributionHtml && extractTextFromHtml(self.attributionHtml).trim();
-
-  if (!isStringPresent(attributionText)) {
-    return;
-  }
-  if (self.typeOfUse == 'offline') {
-    return attributionText;
-  }
-  return self.attributionHtml;
 }
 
 function getArtistText(self) {
@@ -158,6 +138,22 @@ function getArtistText(self) {
   return text;
 }
 
+function getAuthorAttributionText(self) {
+  return getAttributionText(self) || getArtistText(self);
+}
+
+function getAttributionHtml(self) {
+  const attributionText = self.attributionHtml && extractTextFromHtml(self.attributionHtml).trim();
+
+  if (!isStringPresent(attributionText)) {
+    return '';
+  }
+  if (self.typeOfUse === 'offline') {
+    return attributionText;
+  }
+  return self.attributionHtml;
+}
+
 function getArtistHtml(self) {
   // note: Lizenzgenerator supports the case that artistHtml is empty
   // by asking the user for input. This should be implemented here,
@@ -168,6 +164,10 @@ function getArtistHtml(self) {
     return t(self.languageCode, 'anonymous');
   }
   return html;
+}
+
+function getAuthorAttributionHtml(self) {
+  return getAttributionHtml(self) || getArtistHtml(self);
 }
 
 function sanitizeHtml(html) {
@@ -186,7 +186,7 @@ function getPrintAttribution(self) {
     attribution += `, ${editingAttribution}`;
   }
 
-  const url = self.license.url;
+  const { url } = self.license;
   if (url) {
     attribution += ', ';
     if (!editingAttribution && self.license.isInGroup('pd')) {
@@ -199,6 +199,15 @@ function getPrintAttribution(self) {
   }
 
   return attribution;
+}
+
+function getHtmlLicense(self) {
+  const { url } = self.license;
+  if (url) {
+    return `<a href="${url}" rel="license">${self.license.name}</a>`;
+  }
+
+  return self.license.name;
 }
 
 function getHtmlAttribution(self) {
@@ -228,18 +237,9 @@ function getHtmlAttribution(self) {
   );
 }
 
-function getHtmlLicense(self) {
-  const url = self.license.url;
-  if (url) {
-    return `<a href="${url}" rel="license">${self.license.name}</a>`;
-  }
-
-  return self.license.name;
-}
-
 function getAttributionAsTextWithLinks(self) {
   let urlSnippet = '';
-  const url = self.license.url;
+  const { url } = self.license;
   if (url) {
     urlSnippet = `, ${url}`;
   }
@@ -257,26 +257,25 @@ function getAttributionAsTextWithLinks(self) {
 class Attribution {
   constructor(params) {
     validateParams(params);
-
-    if (isStringPresent(params.artistHtml)) {
-      params.artistHtml = sanitizeHtml(params.artistHtml);
-    }
-    if (isStringPresent(params.attributionHtml)) {
-      params.attributionHtml = sanitizeHtml(params.attributionHtml);
-    }
-
     Object.assign(this, params);
+
+    if (isStringPresent(this.artistHtml)) {
+      this.artistHtml = sanitizeHtml(this.artistHtml);
+    }
+    if (isStringPresent(this.attributionHtml)) {
+      this.attributionHtml = sanitizeHtml(this.attributionHtml);
+    }
   }
 
   html() {
-    if (this.typeOfUse == 'offline') {
+    if (this.typeOfUse === 'offline') {
       return getPrintAttribution(this);
     }
     return getHtmlAttribution(this);
   }
 
   plainText() {
-    if (this.typeOfUse == 'offline' || !this.license.isInGroup('cc4')) {
+    if (this.typeOfUse === 'offline' || !this.license.isInGroup('cc4')) {
       return getPrintAttribution(this);
     }
     return getAttributionAsTextWithLinks(this);
