@@ -6,10 +6,11 @@
 
 const assert = require('assert');
 const jsdom = require('jsdom');
-const License = require('./license');
-const HtmlSaniziter = require('../services/htmlSanitizer');
 
 const { JSDOM } = jsdom;
+
+const License = require('./license');
+const HtmlSaniziter = require('../services/htmlSanitizer');
 
 const KNOWN_LANGUAGES = ['en', 'es', 'pt', 'de', 'uk'];
 const KNOWN_TYPES_OF_USE = ['online', 'offline'];
