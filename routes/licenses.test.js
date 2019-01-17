@@ -11,12 +11,20 @@ describe('license routes', () => {
   const services = { licenseStore, fileData, licenses };
   const licensesMock = [
     {
-      url: 'https://foo.bar/path with spaces',
-      name: 'bar',
+      id: 'cc-by-sa-4.0',
+      name: 'CC BY-SA 4.0',
+      groups: ['cc', 'cc4'],
+      compatibility: [],
+      regexp: /^(Bild-)?CC-BY-SA(-|\/)4.0(([^-]+.+|-migrated)*)?$/i,
+      url: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode',
     },
     {
-      url: 'https://foo.bar/just-a-regular-path',
-      name: 'foo',
+      id: 'cc-by-sa-3.0',
+      name: 'CC BY-SA 3.0',
+      groups: ['cc', 'cc4'],
+      compatibility: [],
+      regexp: /^(Bild-)?CC-BY-SA(-|\/)4.0(([^-]+.+|-migrated)*)?$/i,
+      url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
     },
   ];
 
@@ -89,9 +97,12 @@ describe('license routes', () => {
     const title = 'File:Apple_Lisa2-IMG_1517.jpg';
     const wikiUrl = 'https://en.wikipedia.org';
     const license = {
-      id: 'cc-by-sa-3.0',
-      name: 'CC BY-SA 3.0',
-      url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
+      id: 'cc-by-sa-4.0',
+      name: 'CC BY-SA 4.0',
+      groups: ['cc', 'cc4'],
+      compatibility: [],
+      regexp: /^(Bild-)?CC-BY-SA(-|\/)4.0(([^-]+.+|-migrated)*)?$/i,
+      url: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode',
     };
 
     function options() {

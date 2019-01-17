@@ -4,12 +4,23 @@ definitions:
   BadRequestErrorResponse:
     description: Bad Request
     properties: {}
-  CodeUrlModel:
+  CodeNameUrlGroupsModel:
     properties:
       code:
         type: string
+      groups:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
       url:
         type: string
+    required:
+      - code
+      - name
+      - url
+      - groups
   InfoShowResponse:
     properties:
       version:
@@ -57,15 +68,6 @@ definitions:
   UnprocessableEntityErrorResponse:
     description: Unprocessable Entity
     properties: {}
-  UrlCodeModel:
-    properties:
-      code:
-        type: string
-      url:
-        type: string
-    required:
-      - url
-      - code
 host: TODO
 info:
   description: Create attribution hints for images from Wikipedia and Wikimedia Commons.
@@ -168,7 +170,7 @@ paths:
         default:
           description: ''
           schema:
-            $ref: '#/definitions/CodeUrlModel'
+            $ref: '#/definitions/CodeNameUrlGroupsModel'
       summary: Image license
       tags:
         - license
@@ -182,7 +184,7 @@ paths:
           description: ''
           schema:
             items:
-              $ref: '#/definitions/UrlCodeModel'
+              $ref: '#/definitions/CodeNameUrlGroupsModel'
             type: array
       summary: Licenses index
       tags:
@@ -202,7 +204,7 @@ paths:
           description: ''
           schema:
             items:
-              $ref: '#/definitions/UrlCodeModel'
+              $ref: '#/definitions/CodeNameUrlGroupsModel'
             type: array
       summary: Compatible licenses
       tags:
