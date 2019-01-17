@@ -33,12 +33,12 @@ describe('attribution', () => {
     fileInfo: {
       rawUrl: 'https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg',
       title: 'File:Eisklettern kl engstligenfall.jpg',
+      artistHtml:
+        '<a href="//commons.wikimedia.org/w/index.php?title=User:Bernhard&amp;action=edit&amp;redlink=1" class="new" title="User:Bernhard (page does not exist)">Bernhard</a>',
+      attributionHtml: null,
     },
     typeOfUse: 'online',
     languageCode: 'de',
-    artistHtml:
-      '<a href="//commons.wikimedia.org/w/index.php?title=User:Bernhard&amp;action=edit&amp;redlink=1" class="new" title="User:Bernhard (page does not exist)">Bernhard</a>',
-    attributionHtml: null,
     license: exampleCC2License,
     modification: null,
     modificationAuthor: null,
@@ -70,12 +70,12 @@ describe('attribution', () => {
       expect(() => newAttribution({ languageCode: 'yo' })).toThrow();
     });
 
-    it('asserts valid artistHtml', () => {
-      expect(() => newAttribution({ artistHtml: 123 })).toThrow();
+    it('asserts valid fileInfo.artistHtml', () => {
+      expect(() => newAttribution({ fileInfo: { artistHtml: 123 } })).toThrow();
     });
 
-    it('asserts valid attributionHtml', () => {
-      expect(() => newAttribution({ attributionHtml: 123 })).toThrow();
+    it('asserts valid fileInfo.attributionHtml', () => {
+      expect(() => newAttribution({ fileInfo: { attributionHtml: 123 } })).toThrow();
     });
 
     it('asserts valid license', () => {
@@ -171,8 +171,13 @@ describe('attribution', () => {
 
   describe('when attributionHtml is present', () => {
     const subject = newAttribution({
-      attributionHtml:
-        '<a href="https://en.wikipedia.org/wiki/User:Rhorn" class="extiw" title="en:User:Rhorn">Rhorn</a> at the <a href="https://en.wikipedia.org/wiki/" class="extiw" title="w:">English language Wikipedia</a>',
+      fileInfo: {
+        rawUrl: 'https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg',
+        title: 'File:Eisklettern kl engstligenfall.jpg',
+        artistHtml: 'artistHtml',
+        attributionHtml:
+          '<a href="https://en.wikipedia.org/wiki/User:Rhorn" class="extiw" title="en:User:Rhorn">Rhorn</a> at the <a href="https://en.wikipedia.org/wiki/" class="extiw" title="w:">English language Wikipedia</a>',
+      },
     });
 
     it('generates an html attribution', () => {
@@ -189,7 +194,12 @@ describe('attribution', () => {
   });
 
   describe('when neither, attributionHtml nor artistHtml is present', () => {
-    const subject = newAttribution({ artistHtml: null });
+    const subject = newAttribution({
+      fileInfo: {
+        rawUrl: 'https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg',
+        title: 'File:Eisklettern kl engstligenfall.jpg',
+      },
+    });
 
     it('generates an html attribution', () => {
       expect(subject.html()).toEqual(

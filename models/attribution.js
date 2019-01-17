@@ -66,8 +66,6 @@ function validateParams({
   fileInfo,
   typeOfUse,
   languageCode,
-  artistHtml,
-  attributionHtml,
   license,
   modification,
   modificationAuthor,
@@ -78,8 +76,14 @@ function validateParams({
   assert(KNOWN_TYPES_OF_USE.includes(typeOfUse), validationError('typeOfUse'));
   assert(KNOWN_LANGUAGES.includes(languageCode), validationError('languageCode'));
   assert([true, false].includes(isEdited), validationError('isEdited'));
-  assert(!artistHtml || isStringPresent(artistHtml), validationError('artistHtml'));
-  assert(!attributionHtml || isStringPresent(attributionHtml), validationError('attributionHtml'));
+  assert(
+    !fileInfo.artistHtml || isStringPresent(fileInfo.artistHtml),
+    validationError('fileInfo.artistHtml')
+  );
+  assert(
+    !fileInfo.attributionHtml || isStringPresent(fileInfo.attributionHtml),
+    validationError('fileInfo.attributionHtml')
+  );
   assert(!modification || isStringPresent(modification), validationError('modification'));
   assert(
     !modificationAuthor || isStringPresent(modificationAuthor),
@@ -260,6 +264,9 @@ class Attribution {
 
     this.fileTitle = params.fileInfo.title;
     this.fileUrl = params.fileInfo.rawUrl;
+    this.artistHtml = params.fileInfo.artistHtml;
+    this.attributionHtml = params.fileInfo.attributionHtml;
+
     if (isStringPresent(this.artistHtml)) {
       this.artistHtml = sanitizeHtml(this.artistHtml);
     }
