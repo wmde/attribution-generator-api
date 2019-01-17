@@ -130,24 +130,29 @@ describe('licenseStore', () => {
     const expectedKeys = ['id', 'name', 'groups', 'compatibility', 'regexp', 'url'];
 
     it('returns an array of licenses', () => {
-      const compatible = subject.compatible('CC BY-SA 3.0');
+      const compatible = subject.compatible('cc-by-sa-3.0');
       compatible.forEach(license => {
         expect(Object.keys(license)).toEqual(expectedKeys);
       });
     });
 
-    it('finds compatible licenses for "CC BY-SA 3.0"', () => {
-      const compatible = subject.compatible('CC BY-SA 3.0');
+    it('finds compatible licenses for "cc-by-sa-3.0"', () => {
+      const compatible = subject.compatible('cc-by-sa-3.0');
       expect(compatible.map(license => license.id)).toEqual(['cc-by-sa-3.0-de', 'cc-by-sa-4.0']);
     });
 
-    it('finds no compatible licences for "CC BY-SA 4.0"', () => {
-      const compatible = subject.compatible('CC BY-SA 4.0');
+    it('finds compatible licenses for "cc-by-sa-4.0"', () => {
+      const compatible = subject.compatible('cc-by-sa-4.0');
       expect(compatible).toEqual([]);
     });
 
-    it('finds no compatible license for invalid license name', () => {
-      const compatible = subject.compatible('XX BY-SA 3.0');
+    it('finds no compatible license for an invalid license id', () => {
+      const compatible = subject.compatible('xx-by-sa-3.0');
+      expect(compatible).toEqual([]);
+    });
+
+    it('finds no compatible license for ported licenes', () => {
+      const compatible = subject.compatible('cc-by-sa-3.0-ported');
       expect(compatible).toEqual([]);
     });
 
@@ -155,8 +160,8 @@ describe('licenseStore', () => {
       const expected = compatibleCases[id];
       const license = subject.getLicenseById(id);
 
-      it(`finds compatible licenses for "${license.name}"`, () => {
-        const compatible = subject.compatible(license.name);
+      it(`finds compatible licenses for "${license.id}"`, () => {
+        const compatible = subject.compatible(license.id);
         expect(compatible).toHaveLength(expected.length);
         const ids = compatible.map(l => l.id);
         expect(ids).toEqual(expect.arrayContaining(expected));

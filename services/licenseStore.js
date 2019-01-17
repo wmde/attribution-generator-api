@@ -79,9 +79,9 @@ class LicenseStore {
     return this.licenses.filter(({ name, url }) => !!name && !!url);
   }
 
-  // Returns all compatible licenses for the passed license name.
-  compatible(name) {
-    const license = this.getLicenseByName(name);
+  // Returns all compatible licenses for the passed license id.
+  compatible(id) {
+    const license = this.getLicenseById(id);
     if (license) {
       const { compatibility } = license;
       return compatibility.map(cid => this.getLicenseById(cid));

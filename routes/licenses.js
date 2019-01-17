@@ -5,8 +5,10 @@ const errors = require('../services/util/errors');
 const routes = [];
 
 const licenseSchema = Joi.object({
-  url: Joi.string().uri(),
-  code: Joi.string(),
+  url: Joi.string()
+    .uri()
+    .required(),
+  code: Joi.string().required(),
 });
 
 function handleError(h, { message }) {
@@ -23,14 +25,14 @@ function handleError(h, { message }) {
 }
 
 routes.push({
-  path: '/licenses/compatible/{license}',
+  path: '/licenses/compatible/{licenseId}',
   method: 'GET',
   options: {
     description: 'Compatible licenses',
-    notes: 'Returns a list of licenses that are compatible to the passed license',
+    notes: 'Returns a list of licenses that are compatible to the passed license ID',
     validate: {
       params: {
-        license: Joi.string(),
+        licenseId: Joi.string(),
       },
     },
     response: {
@@ -39,8 +41,8 @@ routes.push({
   },
   handler: async (request, h) => {
     const { licenseStore } = request.server.app.services;
-    const param = decodeURIComponent(request.params.license).replace(/\+/g, ' ');
-    const licenses = licenseStore.compatible(param);
+    const { licenseId } = request.params;
+    const licenses = licenseStore.compatible(licenseId);
     const response = licenses.map(({ url, name }) => ({ url: encodeURI(url), code: name }));
     return h.response(response);
   },
