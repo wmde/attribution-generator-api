@@ -23,7 +23,7 @@ describe('FileData', () => {
         const fileData = await service.getFileData(url);
 
         expect(client.getResultsFromApi).toHaveBeenCalledWith(
-          'File:Apple_Lisa.jpg',
+          ['File:Apple_Lisa.jpg'],
           'imageinfo',
           'https://en.wikipedia.org/',
           {
@@ -60,7 +60,7 @@ describe('FileData', () => {
         const service = new FileData({ client });
         const fileData = await service.getFileData(title);
 
-        expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'imageinfo', wikiUrl, {
+        expect(client.getResultsFromApi).toHaveBeenCalledWith([title], 'imageinfo', wikiUrl, {
           iiprop: 'url|extmetadata',
           iilimit: 1,
           iiurlheight: 300,

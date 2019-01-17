@@ -31,7 +31,7 @@ describe('Client', () => {
     const mockedResponse = { data: { query: { foo: 'bar' } } };
 
     it('returns an error if the API cannot be reached', async () => {
-      const titles = 'Def_Leppard';
+      const titles = ['Def_Leppard'];
       const error = { request: {} };
       axiosClient.get.mockImplementation(() => {
         throw error;
@@ -44,7 +44,7 @@ describe('Client', () => {
     });
 
     it('passes on any errors from doing the request', async () => {
-      const titles = 'Def_Leppard';
+      const titles = ['Def_Leppard'];
       axiosClient.get.mockImplementation(() => {
         throw new Error();
       });
@@ -54,9 +54,10 @@ describe('Client', () => {
     });
 
     it('allows querying for images of a page', async () => {
-      const titles = 'Def_Leppard';
+      const titleString = 'Def_Leppard';
+      const titles = [titleString];
       const prop = 'image';
-      const params = { ...defaultParams, prop, titles };
+      const params = { ...defaultParams, prop, titles: titleString };
 
       axiosClient.get.mockResolvedValue(mockedResponse);
 
@@ -68,9 +69,10 @@ describe('Client', () => {
     });
 
     it('allows querying for multiple titles with additional params', async () => {
-      const titles = 'File:Steve_Clark.jpeg|File:RickAllen.JPG';
+      const titles = ['File:Steve_Clark.jpeg', 'File:RickAllen.JPG'];
+      const titleString = 'File:Steve_Clark.jpeg|File:RickAllen.JPG';
       const prop = 'imageInfo';
-      const params = { ...defaultParams, prop, titles, iiprop: 'url' };
+      const params = { ...defaultParams, prop, titles: titleString, iiprop: 'url' };
 
       axiosClient.get.mockResolvedValue(mockedResponse);
 

@@ -41,10 +41,11 @@ class Client {
 
   getResultsFromApi(titles, prop, wikiUrl, params = {}) {
     const { client } = this;
+    const titleString = titles.join('|');
     const queryParams = {
       ...defaultParams,
       ...params,
-      titles,
+      titles: titleString,
       prop,
     };
     return queryApi({ client, wikiUrl, params: queryParams });
