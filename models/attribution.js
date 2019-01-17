@@ -12,9 +12,9 @@ const { JSDOM } = jsdom;
 const License = require('./license');
 const HtmlSaniziter = require('../services/htmlSanitizer');
 
-const KNOWN_LANGUAGES = ['en', 'es', 'pt', 'de', 'uk'];
-const KNOWN_TYPES_OF_USE = ['online', 'offline'];
-const ATTRIBUTION_TRANSLATIONS = {
+const knownLanguages = ['en', 'es', 'pt', 'de', 'uk'];
+const knowntypesOfUse = ['online', 'offline'];
+const attributionTranslations = {
   en: {
     'pd-attribution-hint': 'marked as public domain',
     'check-details': 'more details on',
@@ -57,7 +57,7 @@ function validationError(attribute) {
 }
 
 function t(lang, key) {
-  return ATTRIBUTION_TRANSLATIONS[lang][key];
+  return attributionTranslations[lang][key];
 }
 function isStringPresent(string) {
   return typeof string === 'string' && string.length > 0;
@@ -74,8 +74,8 @@ function validateParams({
 }) {
   assert(isStringPresent(fileInfo.rawUrl), validationError('fileInfo.rawUrl'));
   assert(isStringPresent(fileInfo.title), validationError('fileInfo.title'));
-  assert(KNOWN_TYPES_OF_USE.includes(typeOfUse), validationError('typeOfUse'));
-  assert(KNOWN_LANGUAGES.includes(languageCode), validationError('languageCode'));
+  assert(knowntypesOfUse.includes(typeOfUse), validationError('typeOfUse'));
+  assert(knownLanguages.includes(languageCode), validationError('languageCode'));
   assert([true, false].includes(isEdited), validationError('isEdited'));
   assert(
     !fileInfo.artistHtml || isStringPresent(fileInfo.artistHtml),
