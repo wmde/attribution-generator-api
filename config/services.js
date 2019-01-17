@@ -5,7 +5,6 @@ const Client = require('../services/util/client');
 const Files = require('../services/files');
 const FileData = require('../services/fileData');
 const Licenses = require('../services/licenses');
-const AttributionGenerator = require('../services/attributionGenerator');
 
 const licenses = require('./licenses/licenses');
 const portReferences = require('./licenses/portReferences');
@@ -24,19 +23,6 @@ const services = {
   files: new Files({ client }),
   fileData: new FileData({ client }),
   licenses: new Licenses({ client, licenseStore }),
-  attributionGenerator: new AttributionGenerator(),
 };
-
-// const services = Object.keys(registry).reduce((all, name) => {
-//   const Service = registry[name]
-//   const options = config[name]
-//
-//   assert.ok(typeof Service === 'function', `Did not find a valid service constructor for "${name}" service`)
-//   assert.ok(typeof options === 'object', `Invalid "options" option provided for "${name}" service`)
-//
-//   const service = new Service(options)
-//
-//   return { ...all, [name]: service }
-// }, {})
 
 module.exports = services;

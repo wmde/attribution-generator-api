@@ -1,16 +1,10 @@
 const setup = require('./__helpers__/setup');
+const License = require('../models/license');
 
 describe('attribution routes', () => {
-  const attributionMock = {
-    license: 'CC BY-SA 3.0',
-    attribution_plain: 'fake plain text attribution',
-    attribution_html: 'fake html attribution',
-    license_url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-  };
   const services = {
     fileData: { getFileData: jest.fn() },
     licenses: { getLicense: jest.fn() },
-    attributionGenerator: { generateAttribution: jest.fn(() => attributionMock) },
   };
   const fileInfoMock = {
     title: 'File:Apple_Lisa2-IMG_1517.jpg',
@@ -18,11 +12,17 @@ describe('attribution routes', () => {
     wikiUrl: 'https://commons.wikimedia.org/',
     artistHtml:
       '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo',
+    attributionHtml:
+      'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr',
   };
-  const licenseMock = {
-    code: 'CC BY-SA 3.0',
-    url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-  };
+  const license = new License({
+    id: 'cc-by-sa-2.5',
+    name: 'CC BY-SA 2.5',
+    groups: ['cc', 'cc2.5', 'ccby'],
+    compatibility: [],
+    regexp: /^CC-BY-2.5-\w+$/i,
+    url: 'https://creativecommons.org/licenses/by-sa/2.5/legalcode',
+  });
 
   let context;
 
@@ -59,31 +59,45 @@ describe('attribution routes', () => {
 
     beforeEach(() => {
       services.fileData.getFileData.mockResolvedValue(fileInfoMock);
-      services.licenses.getLicense.mockResolvedValue(licenseMock);
-      services.attributionGenerator.generateAttribution.mockReturnValue(attributionMock);
+      services.licenses.getLicense.mockResolvedValue(license);
     });
 
     afterEach(() => {
       services.fileData.getFileData.mockReset();
       services.licenses.getLicense.mockReset();
-      services.attributionGenerator.generateAttribution.mockReset();
     });
 
     it('returns attribution information for the given file', async () => {
-      const response = await subject({});
-      const isEdited = false;
+      const response = await subject();
 
       expect(services.fileData.getFileData).toHaveBeenCalledWith(file);
       expect(services.licenses.getLicense).toHaveBeenCalledWith(fileInfoMock);
-      expect(services.attributionGenerator.generateAttribution).toHaveBeenCalledWith({
-        license: licenseMock,
-        languageCode,
-        typeOfUse,
-        isEdited,
-        fileInfo: fileInfoMock,
-      });
 
       expect(response.status).toBe(200);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
+    it('returns 500 for any generic error', async () => {
+      services.fileData.getFileData.mockImplementation(() => {
+        throw new Error('some error');
+      });
+      const response = await subject();
+
+      expect(services.fileData.getFileData).toHaveBeenCalledWith(file);
+      expect(services.licenses.getLicense).not.toHaveBeenCalled();
+      expect(response.status).toBe(500);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
+    it('returns an error when the file responds with a license we do not know', async () => {
+      services.licenses.getLicense.mockImplementation(() => undefined);
+      const response = await subject();
+
+      expect(services.fileData.getFileData).toHaveBeenCalledWith(file);
+      expect(services.licenses.getLicense).toHaveBeenCalledWith(fileInfoMock);
+      expect(response.status).toBe(422);
       expect(response.type).toBe('application/json');
       expect(response.payload).toMatchSnapshot();
     });

@@ -1,20 +1,23 @@
 const Joi = require('joi');
 
+const { knownLanguages, knownTypesOfUse, Attribution } = require('../models/attribution');
+const errors = require('../services/util/errors');
 const definitions = require('./__swagger__/definitions');
 const prefix = require('./__utils__/path')('/attribution');
 
 const routes = [];
 
-// function handleError({ message }) {
-//   switch (message) {
-//     case 'notFound':
-//       throw new Boom(message, { statusCode: 404 });
-//     case 'badData':
-//       throw new Boom(message, { statusCode: 422 });
-//     default:
-//       throw new Boom(message);
-//   }
-// }
+function handleError(h, { message }) {
+  switch (message) {
+    case errors.invalidUrl:
+    case errors.validationError:
+      return h.error(message, { statusCode: 422 });
+    case errors.apiUnavailabe:
+      return h.error(message, { statusCode: 503 });
+    default:
+      return h.error(message);
+  }
+}
 
 routes.push({
   path: prefix('/{languageCode}/{file}/{typeOfUse}/unmodified'),
@@ -24,9 +27,9 @@ routes.push({
     notes: 'Generate attribution hints for the given file.',
     validate: {
       params: {
-        languageCode: Joi.string(),
+        languageCode: Joi.string().valid(knownLanguages),
         file: Joi.string(),
-        typeOfUse: Joi.string(),
+        typeOfUse: Joi.string().valid(knownTypesOfUse),
       },
     },
     response: {
@@ -35,6 +38,9 @@ routes.push({
         .meta({ className: 'AttributionShowResponse' }),
       status: {
         400: definitions.errors['400'],
+        422: definitions.errors['422'],
+        500: definitions.errors['500'],
+        503: definitions.errors['503'],
       },
     },
     plugins: {
@@ -45,26 +51,26 @@ routes.push({
     },
   },
   handler: async (request, h) => {
-    const { fileData, licenses, attributionGenerator } = request.server.app.services;
+    const { fileData, licenses } = request.server.app.services;
     const { languageCode, file, typeOfUse } = request.params;
     try {
       const fileInfo = await fileData.getFileData(file);
-      // TODO: get rid of this step by either specifying wrapper objects or just a common interface
-      // We probably want to do all of this in the attributionGeerator service at least
-      const isEdited = false;
-
       const license = await licenses.getLicense(fileInfo);
-      const attributionParams = {
-        isEdited,
+      const attribution = new Attribution({
+        isEdited: false,
         license,
         languageCode,
         typeOfUse,
         fileInfo,
-      };
-      const response = attributionGenerator.generateAttribution(attributionParams);
-      return h.response(response);
+      });
+      return h.response({
+        licenseId: license.id,
+        licenseUrl: license.url,
+        attributionHtml: attribution.html(),
+        attributionPlain: attribution.plainText(),
+      });
     } catch (error) {
-      // return handleError(error);
+      return handleError(h, error);
     }
   },
 });

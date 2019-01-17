@@ -4,7 +4,6 @@ const LicenseStore = require('../services/licenseStore');
 const Client = require('../services/util/client');
 const FileData = require('../services/fileData');
 const Licenses = require('../services/licenses');
-const AttributionGenerator = require('../services/attributionGenerator');
 
 const licenseData = require('../config/licenses/licenses');
 const portReferences = require('../config/licenses/portReferences');
@@ -21,8 +20,7 @@ describe('attribution routes', () => {
 
   const fileData = new FileData({ client });
   const licenses = new Licenses({ client, licenseStore });
-  const attributionGenerator = new AttributionGenerator();
-  const services = { licenseStore, fileData, licenses, attributionGenerator };
+  const services = { licenseStore, fileData, licenses };
 
   beforeEach(async () => {
     context = await setup({ services });
@@ -56,8 +54,8 @@ describe('attribution routes', () => {
       return { url, method: 'GET' };
     }
 
-    async function subject() {
-      return context.inject(options());
+    async function subject(overrides) {
+      return context.inject(options(overrides));
     }
 
     it('returns the attribution', async () => {
@@ -66,6 +64,30 @@ describe('attribution routes', () => {
       expect(response.status).toBe(200);
       expect(response.type).toBe('application/json');
       expect(response.payload).toMatchObject(attribution);
+    });
+
+    it('returns a proper error for unknown typeOfUse', async () => {
+      const response = await subject({ typeOfUse: 'does-not-exist' });
+
+      expect(response.status).toBe(400);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchObject({
+        error: 'Bad Request',
+        message: 'Invalid request params input',
+        statusCode: 400,
+      });
+    });
+
+    it('returns a proper error for weird file urls', async () => {
+      const response = await subject({ file: 'does-not-exist' });
+
+      expect(response.status).toBe(422);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchObject({
+        error: 'Unprocessable Entity',
+        message: 'invalid-url',
+        statusCode: 422,
+      });
     });
   });
 });
