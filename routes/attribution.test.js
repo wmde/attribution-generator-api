@@ -72,7 +72,6 @@ describe('attribution routes', () => {
     it('returns attribution information for the given file', async () => {
       const response = await subject({});
       const isEdited = false;
-      const { rawUrl: fileUrl, title: fileTitle } = fileInfoMock;
 
       expect(services.fileData.getFileData).toHaveBeenCalledWith(file);
       expect(services.licenses.getLicense).toHaveBeenCalledWith(fileInfoMock);

@@ -47,9 +47,14 @@ class FileData {
     const { value: artistHtml = null } = extmetadata.Artist || {};
     const { value: attributionHtml = null } = extmetadata.Attribution || {};
 
-    return { title: originalTitle, wikiUrl: originalWikiUrl, rawUrl: url, artistHtml, attributionHtml };
+    return {
+      title: originalTitle,
+      wikiUrl: originalWikiUrl,
+      rawUrl: url,
+      artistHtml,
+      attributionHtml,
+    };
   }
 }
 
 module.exports = FileData;
-

@@ -51,7 +51,6 @@ routes.push({
       const fileInfo = await fileData.getFileData(file);
       // TODO: get rid of this step by either specifying wrapper objects or just a common interface
       // We probably want to do all of this in the attributionGeerator service at least
-      const { rawUrl: fileUrl, title: fileTitle } = fileInfo;
       const isEdited = false;
 
       const license = await licenses.getLicense(fileInfo);

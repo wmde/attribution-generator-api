@@ -3,6 +3,7 @@ const FileData = require('./fileData');
 const errors = require('../services/util/errors');
 const imageInfoMock = require('./__fixtures__/imageInfo');
 const imageInfoWithoutArtistMock = require('./__fixtures__/imageInfoWithoutArtist');
+const imageInfoWithoutAttributionMock = require('./__fixtures__/imageInfoWithoutAttribution');
 
 describe('FileData', () => {
   const client = { getResultsFromApi: jest.fn() };
@@ -12,6 +13,8 @@ describe('FileData', () => {
     const wikiUrl = 'https://commons.wikimedia.org/';
     const artistHtml =
       '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo';
+    const attributionHtml =
+      'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr';
     const rawUrl = 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg';
 
     describe('when passing a valid url', () => {
@@ -33,7 +36,7 @@ describe('FileData', () => {
             iiurlheight: 300,
           }
         );
-        expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml });
+        expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml, attributionHtml });
       });
 
       it('skips the artist information if not available for the file', async () => {
@@ -42,7 +45,16 @@ describe('FileData', () => {
         const service = new FileData({ client });
         const fileData = await service.getFileData(url);
 
-        expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml: null });
+        expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml: null, attributionHtml });
+      });
+
+      it('skips the attribution information if not available for the file', async () => {
+        client.getResultsFromApi.mockResolvedValueOnce(imageInfoWithoutAttributionMock);
+
+        const service = new FileData({ client });
+        const fileData = await service.getFileData(url);
+
+        expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml, attributionHtml: null });
       });
 
       it('throws an error when the imageinfo response is empty', async () => {
@@ -66,7 +78,7 @@ describe('FileData', () => {
           iilimit: 1,
           iiurlheight: 300,
         });
-        expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml });
+        expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml, attributionHtml });
       });
 
       it('throws an exception when the title has the wrong format', async () => {
