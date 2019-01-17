@@ -75,4 +75,12 @@ It can be useful to run tests with the `DEBUG` flag enabled in order to get more
 DEBUG=true yarn test
 ```
 
+## Resources
+
+The app communicates with the Wikimedia and Wikipedia APIs:
+
+- https://commons.wikimedia.org/w/api.php
+- https://de.wikipedia.org/w/api.php
+- https://en.wikipedia.org/w/api.php
+
 <!-- TODO: Add sections on contribution guidelines…? -->
