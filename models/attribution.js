@@ -9,54 +9,15 @@ const { JSDOM: JSDom } = require('jsdom');
 
 const License = require('./license');
 const HtmlSaniziter = require('../services/htmlSanitizer');
+const t = require('../services/util/translate');
 
 const knownLanguages = ['en', 'es', 'pt', 'de', 'uk'];
 const knowntypesOfUse = ['online', 'offline'];
-const attributionTranslations = {
-  en: {
-    'pd-attribution-hint': 'marked as public domain',
-    'check-details': 'more details on',
-    anonymous: 'anonymous',
-    by: 'by',
-    edited: 'modified',
-  },
-  es: {
-    'pd-attribution-hint': 'marcado como dominio público',
-    'check-details': 'para más detalles véase',
-    anonymous: 'anónimo',
-    by: 'por',
-    edited: 'modificado',
-  },
-  pt: {
-    'pd-attribution-hint': 'marcado como domínio público',
-    'check-details': 'para mais detalhes, veja',
-    anonymous: 'anónimo',
-    by: 'por',
-    edited: 'modificado',
-  },
-  de: {
-    'pd-attribution-hint': 'als gemeinfrei gekennzeichnet',
-    'check-details': 'Details auf',
-    anonymous: 'anonym',
-    by: 'von',
-    edited: 'bearbeitet',
-  },
-  uk: {
-    'pd-attribution-hint': 'позначено як суспільне надбання',
-    'check-details': 'більше деталей на',
-    anonymous: 'анонім',
-    by: 'автор',
-    edited: 'модифіковано',
-  },
-};
 
 function validationError(attribute) {
   return `Attribution: Invalid "${attribute}" provided`;
 }
 
-function t(lang, key) {
-  return attributionTranslations[lang][key];
-}
 function isStringPresent(string) {
   return typeof string === 'string' && string.length > 0;
 }
