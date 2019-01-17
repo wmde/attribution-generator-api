@@ -30,8 +30,10 @@ describe('attribution', () => {
   });
 
   const options = {
-    fileUrl: 'https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg',
-    fileTitle: 'File:Eisklettern kl engstligenfall.jpg',
+    fileInfo: {
+      rawUrl: 'https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg',
+      title: 'File:Eisklettern kl engstligenfall.jpg',
+    },
     typeOfUse: 'online',
     languageCode: 'de',
     artistHtml:
@@ -52,12 +54,12 @@ describe('attribution', () => {
   });
 
   describe('validations', () => {
-    it('asserts valid fileUrl', () => {
-      expect(() => newAttribution({ fileUrl: 123 })).toThrow();
+    it('asserts valid fileInfo.rawUrl', () => {
+      expect(() => newAttribution({ fileInfo: { rawUrl: 123, title: 'title' } })).toThrow();
     });
 
-    it('asserts valid fileTitle', () => {
-      expect(() => newAttribution({ fileTitle: '' })).toThrow();
+    it('asserts valid fileInfo.title', () => {
+      expect(() => newAttribution({ fileInfo: { rawUrl: 'url', title: '' } })).toThrow();
     });
 
     it('asserts valid typeOfUse', () => {

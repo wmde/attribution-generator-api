@@ -63,8 +63,7 @@ function isStringPresent(string) {
 }
 
 function validateParams({
-  fileUrl,
-  fileTitle,
+  fileInfo,
   typeOfUse,
   languageCode,
   artistHtml,
@@ -74,8 +73,8 @@ function validateParams({
   modificationAuthor,
   isEdited,
 }) {
-  assert(isStringPresent(fileUrl), validationError('fileUrl'));
-  assert(isStringPresent(fileTitle), validationError('fileTitle'));
+  assert(isStringPresent(fileInfo.rawUrl), validationError('fileInfo.rawUrl'));
+  assert(isStringPresent(fileInfo.title), validationError('fileInfo.title'));
   assert(KNOWN_TYPES_OF_USE.includes(typeOfUse), validationError('typeOfUse'));
   assert(KNOWN_LANGUAGES.includes(languageCode), validationError('languageCode'));
   assert([true, false].includes(isEdited), validationError('isEdited'));
@@ -259,6 +258,8 @@ class Attribution {
     validateParams(params);
     Object.assign(this, params);
 
+    this.fileTitle = params.fileInfo.title;
+    this.fileUrl = params.fileInfo.rawUrl;
     if (isStringPresent(this.artistHtml)) {
       this.artistHtml = sanitizeHtml(this.artistHtml);
     }
