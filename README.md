@@ -46,7 +46,9 @@ To simply start the server without restarts:
 yarn start
 ```
 
-or, to bind to a different port:
+then connect to [localhost:8080](http://localhost:8080) (and any API endpoint in there) to use the app.
+
+To bind to a different port start the app with
 
 ```shell
 PORT=9000 yarn start

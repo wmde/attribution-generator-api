@@ -18,7 +18,7 @@ describe('license', () => {
     newLicense();
   });
 
-  describe('id validation', () => {
+  describe('validations', () => {
     it('asserts valid id', () => {
       expect(() => newLicense({ id: 123 })).toThrow();
     });
