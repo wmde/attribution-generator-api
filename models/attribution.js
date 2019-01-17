@@ -93,7 +93,6 @@ function getArtistText(self) {
   // by asking the user for input. This should be implemented here,
   // but we don't get the necessary info in the /attribution endpoint.
   // example image: https://en.wikipedia.org/wiki/File:Sodexo.svg
-
   const text = extractTextFromHtml(self.artistHtml || '');
   if (text.length === 0) {
     return t(self.languageCode, 'anonymous');
@@ -232,14 +231,13 @@ class Attribution {
   }
 
   html() {
-    if (this.typeOfUse === 'offline') {
-      return getPrintAttribution(this);
-    }
-    return getHtmlAttribution(this);
+    const { typeOfUse } = this;
+    return typeOfUse === 'offline' ? getPrintAttribution(this) : getHtmlAttribution(this);
   }
 
   plainText() {
-    if (this.typeOfUse === 'offline' || !this.license.isInGroup('cc4')) {
+    const { typeOfUse, license } = this;
+    if (typeOfUse === 'offline' || !license.isInGroup('cc4')) {
       return getPrintAttribution(this);
     }
     return getAttributionAsTextWithLinks(this);
