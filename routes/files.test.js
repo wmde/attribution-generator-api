@@ -51,6 +51,17 @@ describe('files routes', () => {
       expect(response.payload).toMatchSnapshot();
     });
 
+    it('returns a 400 response for non http(s) urls', async () => {
+      const sftpUrl = 'sftp://en.wikipedia.org/wiki/Wikimedia_Foundation';
+      const encodedSftpUrl = encodeURIComponent(sftpUrl);
+      const response = await subject({ url: `/files/${encodedSftpUrl}` });
+
+      expect(files.getPageImages).not.toHaveBeenCalled();
+      expect(response.status).toBe(400);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
     it('returns 400 response if the URL is invalid', async () => {
       const response = await subject({ url: '/files/something-invalid' });
 

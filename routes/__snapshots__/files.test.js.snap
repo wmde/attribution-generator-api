@@ -8,6 +8,14 @@ Object {
 }
 `;
 
+exports[`files routes GET /files returns a 400 response for non http(s) urls 1`] = `
+Object {
+  "error": "Bad Request",
+  "message": "Invalid request params input",
+  "statusCode": 400,
+}
+`;
+
 exports[`files routes GET /files returns a 404 when called with an unencoded articleUrl 1`] = `
 Object {
   "error": "Not Found",

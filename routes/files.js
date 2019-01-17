@@ -50,7 +50,7 @@ routes.push({
     notes: 'Retrieve all files for a given article or page url.',
     validate: {
       params: {
-        articleUrl: Joi.string().uri(),
+        articleUrl: Joi.string().uri({ scheme: ['http', 'https'] }),
       },
     },
     response: {
