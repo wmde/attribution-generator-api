@@ -4,7 +4,7 @@ const parseWikiUrl = require('./util/parseWikiUrl');
 const errors = require('./util/errors');
 
 async function getImageTitles({ client, title, wikiUrl }) {
-  const response = await client.getResultsFromApi(title, 'images', wikiUrl);
+  const response = await client.getResultsFromApi([title], 'images', wikiUrl);
   assert.ok(response.pages, errors.emptyResponse);
   const pages = Object.values(response.pages);
   assert.ok(pages.length === 1);
@@ -15,15 +15,22 @@ async function getImageTitles({ client, title, wikiUrl }) {
 
 function formatImageInfo(page) {
   const { title, imageinfo } = page;
-  const { url } = imageinfo[0];
+  const {
+    url: rawUrl,
+    descriptionurl: descriptionUrl,
+    size: fileSize,
+    thumburl,
+    thumbwidth,
+    thumbheight,
+  } = imageinfo[0];
+  const thumbnail = { rawUrl: thumburl, width: thumbwidth, height: thumbheight };
 
-  return { title, url };
+  return { title, descriptionUrl, rawUrl, fileSize, thumbnail };
 }
 
 async function getImageUrls({ client, titles, wikiUrl }) {
-  const params = { iiprop: 'url' };
-  const title = titles.join('|');
-  const { pages } = await client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
+  const params = { iiprop: 'url|size', iiurlwidth: 300 };
+  const { pages } = await client.getResultsFromApi(titles, 'imageinfo', wikiUrl, params);
   assert.ok(pages, errors.emptyResponse);
 
   return Object.values(pages).map(formatImageInfo);

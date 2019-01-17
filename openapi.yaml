@@ -18,6 +18,45 @@ definitions:
         type: string
     required:
       - version
+  InternalServerError:
+    description: Internal Server Error
+    properties: {}
+  RawUrlWidthHeightModel:
+    properties:
+      height:
+        type: integer
+      rawUrl:
+        type: string
+      width:
+        type: integer
+    required:
+      - rawUrl
+      - width
+      - height
+  ServiceUnavailableErrorResponse:
+    description: Service Unavailable
+    properties: {}
+  TitleDescriptionUrlRawUrlFileSizeThumbnailModel:
+    properties:
+      descriptionUrl:
+        type: string
+      fileSize:
+        type: integer
+      rawUrl:
+        type: string
+      thumbnail:
+        $ref: '#/definitions/RawUrlWidthHeightModel'
+      title:
+        type: string
+    required:
+      - title
+      - descriptionUrl
+      - rawUrl
+      - fileSize
+      - thumbnail
+  UnprocessableEntityErrorResponse:
+    description: Unprocessable Entity
+    properties: {}
   UrlCodeModel:
     properties:
       code:
@@ -63,6 +102,11 @@ paths:
     get:
       description: Retrieve all files for a given article or page url.
       operationId: files.index
+      parameters:
+        - in: path
+          name: articleUrl
+          required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -70,11 +114,23 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/BadRequestErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableEntityErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/ServiceUnavailableErrorResponse'
         default:
           description: ''
           schema:
             items:
-              type: string
+              $ref: '#/definitions/TitleDescriptionUrlRawUrlFileSizeThumbnailModel'
             type: array
       security:
         - default: []

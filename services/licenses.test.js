@@ -35,7 +35,7 @@ describe('Licenses', () => {
 
       const license = await service.getLicense({ title, wikiUrl });
 
-      expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'templates', wikiUrl, {
+      expect(client.getResultsFromApi).toHaveBeenCalledWith([title], 'templates', wikiUrl, {
         tlnamespace: 10,
         tllimit: 100,
       });

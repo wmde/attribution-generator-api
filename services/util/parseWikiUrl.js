@@ -42,7 +42,7 @@ function splitWikipediaUrl(url) {
   return { title, wikiUrl };
 }
 
-function splitUrl(url) {
+function parse(url) {
   if (uploadRegExp.test(url)) {
     return splitUploadUrl(url);
   }
@@ -50,16 +50,6 @@ function splitUrl(url) {
     return splitWikipediaUrl(url);
   }
   throw new Error(errors.invalidUrl);
-}
-
-function parse(url) {
-  try {
-    const sanitizedUrl = decodeURI(url);
-    return splitUrl(sanitizedUrl);
-  } catch (error) {
-    if (error instanceof URIError) throw new Error(errors.invalidUrl);
-    throw error;
-  }
 }
 
 module.exports = parse;

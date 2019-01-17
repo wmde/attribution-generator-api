@@ -1,10 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`files routes GET /files returns 422 response if the URL is invalid 1`] = `
+exports[`files routes GET /files returns 400 response if the URL is invalid 1`] = `
 Object {
-  "error": "Unprocessable Entity",
-  "message": "invalid-url",
-  "statusCode": 422,
+  "error": "Bad Request",
+  "message": "Invalid request params input",
+  "statusCode": 400,
+}
+`;
+
+exports[`files routes GET /files returns a 400 response for non http(s) urls 1`] = `
+Object {
+  "error": "Bad Request",
+  "message": "Invalid request params input",
+  "statusCode": 400,
 }
 `;
 
@@ -13,6 +21,14 @@ Object {
   "error": "Not Found",
   "message": "Not Found",
   "statusCode": 404,
+}
+`;
+
+exports[`files routes GET /files returns a 422 response for non-wiki urls 1`] = `
+Object {
+  "error": "Unprocessable Entity",
+  "message": "invalid-url",
+  "statusCode": 422,
 }
 `;
 
@@ -35,8 +51,15 @@ Object {
 exports[`files routes GET /files returns a list of all files from the given article 1`] = `
 Array [
   Object {
-    "file": "File:image.jpg",
-    "url": "https://en.wikipedia.org/wiki/File:image.jpg",
+    "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Graphic_01.jpg",
+    "fileSize": 112450,
+    "rawUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Graphic_01.jpg",
+    "thumbnail": Object {
+      "height": 300,
+      "rawUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Graphic_01.jpg/300px-Graphic_01.jpg",
+      "width": 300,
+    },
+    "title": "File:Graphic 01.jpg",
   },
 ]
 `;

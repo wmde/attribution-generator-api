@@ -36,12 +36,12 @@ describe('Files', () => {
         const service = new Files({ client });
         const files = await service.getPageImages(url);
 
-        expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'images', wikiUrl);
+        expect(client.getResultsFromApi).toHaveBeenCalledWith([title], 'images', wikiUrl);
         expect(client.getResultsFromApi).toHaveBeenCalledWith(
-          'File:Graphic 01.jpg|File:logo.svg',
+          ['File:Graphic 01.jpg', 'File:logo.svg'],
           'imageinfo',
           wikiUrl,
-          { iiprop: 'url' }
+          { iiprop: 'url|size', iiurlwidth: 300 }
         );
         expect(files).toMatchSnapshot();
       });
@@ -52,7 +52,7 @@ describe('Files', () => {
         const service = new Files({ client });
         const files = await service.getPageImages(url);
 
-        expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'images', wikiUrl);
+        expect(client.getResultsFromApi).toHaveBeenCalledWith([title], 'images', wikiUrl);
         expect(files).toEqual([]);
       });
 
@@ -64,12 +64,12 @@ describe('Files', () => {
         const service = new Files({ client });
         const files = await service.getPageImages(url);
 
-        expect(client.getResultsFromApi).toHaveBeenCalledWith(title, 'images', wikiUrl);
+        expect(client.getResultsFromApi).toHaveBeenCalledWith([title], 'images', wikiUrl);
         expect(client.getResultsFromApi).toHaveBeenCalledWith(
-          'File:Graphic 01.jpg|File:logo.svg',
+          ['File:Graphic 01.jpg', 'File:logo.svg'],
           'imageinfo',
           wikiUrl,
-          { iiprop: 'url' }
+          { iiprop: 'url|size', iiurlwidth: 300 }
         );
         expect(files).toEqual([]);
       });

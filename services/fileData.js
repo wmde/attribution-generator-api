@@ -29,7 +29,7 @@ function parseIdentifier(identifier) {
 
 async function getImageInfo({ client, title, wikiUrl }) {
   const params = { iiprop: 'url|extmetadata', iilimit: 1, iiurlheight: 300 };
-  const response = await client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
+  const response = await client.getResultsFromApi([title], 'imageinfo', wikiUrl, params);
   return parseImageInfoResponse(response);
 }
 
