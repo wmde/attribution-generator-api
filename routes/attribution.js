@@ -55,7 +55,13 @@ routes.push({
       const isEdited = false;
 
       const license = await licenses.getLicense(fileInfo);
-      const attributionParams = { isEdited, license, languageCode, typeOfUse, fileUrl, fileTitle, ...fileInfo };
+      const attributionParams = {
+        isEdited,
+        license,
+        languageCode,
+        typeOfUse,
+        fileInfo,
+      };
       const response = attributionGenerator.generateAttribution(attributionParams);
       return h.response(response);
     } catch (error) {

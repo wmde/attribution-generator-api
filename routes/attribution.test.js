@@ -1,7 +1,12 @@
 const setup = require('./__helpers__/setup');
-const path = require('path');
 
 describe('attribution routes', () => {
+  const attributionMock = {
+    license: 'CC BY-SA 3.0',
+    attribution_plain: 'fake plain text attribution',
+    attribution_html: 'fake html attribution',
+    license_url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
+  };
   const services = {
     fileData: { getFileData: jest.fn() },
     licenses: { getLicense: jest.fn() },
@@ -11,18 +16,12 @@ describe('attribution routes', () => {
     title: 'File:Apple_Lisa2-IMG_1517.jpg',
     rawUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg',
     wikiUrl: 'https://commons.wikimedia.org/',
-    artistHtml: '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo'
+    artistHtml:
+      '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo',
   };
   const licenseMock = {
     code: 'CC BY-SA 3.0',
     url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-  };
-  const attributionMock = {
-    license: 'CC BY-SA 3.0',
-    attribution_plain: 'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-    attribution_text: 'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-    attribution_html: 'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-    license_url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
   };
 
   let context;
@@ -48,7 +47,9 @@ describe('attribution routes', () => {
 
     function options(overrides = {}) {
       const params = { ...defaults, ...overrides };
-      const url = `/attribution/${params.languageCode}/${params.file}/${params.typeOfUse}/unmodified`;
+      const url = `/attribution/${params.languageCode}/${params.file}/${
+        params.typeOfUse
+      }/unmodified`;
       return { method: 'GET', url };
     }
 
@@ -76,8 +77,11 @@ describe('attribution routes', () => {
       expect(services.fileData.getFileData).toHaveBeenCalledWith(file);
       expect(services.licenses.getLicense).toHaveBeenCalledWith(fileInfoMock);
       expect(services.attributionGenerator.generateAttribution).toHaveBeenCalledWith({
-        license: licenseMock, languageCode, typeOfUse, isEdited, fileUrl, fileTitle,...fileInfoMock
-
+        license: licenseMock,
+        languageCode,
+        typeOfUse,
+        isEdited,
+        fileInfo: fileInfoMock,
       });
 
       expect(response.status).toBe(200);

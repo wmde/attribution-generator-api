@@ -3,16 +3,19 @@ const assert = require('assert');
 const Attribution = require('../models/attribution');
 
 class AttributionGenerator {
-  // TODO: think about doing some validations and data wrangling here
-  generateAttribution(params) {
-    const attribution = new Attribution(params);
+  constructor(attributionParams) {
+    this.attributionParams = attributionParams;
+  }
+
+  generateAttribution() {
+    const attribution = new Attribution(this.attributionParams);
     assert.ok(attribution);
-    const { license } = attribution;
-    const { id: licenseId, url: licenseUrl } = license;
+
+    const { id: licenseId, url: licenseUrl } = attribution.license;
     const attributionHtml = attribution.html();
     const attributionPlain = attribution.plainText();
 
-    return { licenseId, licenseUrl, attributionHtml, attributionPlain }
+    return { licenseId, licenseUrl, attributionHtml, attributionPlain };
   }
 }
 

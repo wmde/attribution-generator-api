@@ -19,7 +19,7 @@ describe('AttributionGenerator', () => {
     licenseId: license.id,
     licenseUrl: license.url,
     attributionHtml,
-    attributionPlain
+    attributionPlain,
   };
 
   beforeEach(() => {
