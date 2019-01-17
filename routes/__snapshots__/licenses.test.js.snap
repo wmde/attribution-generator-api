@@ -64,3 +64,5 @@ Array [
   },
 ]
 `;
+
+exports[`license routes GET /licenses/compatible/{license} returns an empty response if no compatible licences could be found 1`] = `Array []`;

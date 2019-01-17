@@ -63,6 +63,9 @@ definitions:
         type: string
       url:
         type: string
+    required:
+      - url
+      - code
 host: TODO
 info:
   description: Create attribution hints for images from Wikipedia and Wikimedia Commons.
@@ -184,12 +187,12 @@ paths:
       summary: Licenses index
       tags:
         - licenses
-  '/licenses/compatible/{license}':
+  '/licenses/compatible/{licenseId}':
     get:
-      description: Returns a list of licenses that are compatible to the passed license
+      description: Returns a list of licenses that are compatible to the passed license ID
       parameters:
         - in: path
-          name: license
+          name: licenseId
           required: true
           type: string
       produces:

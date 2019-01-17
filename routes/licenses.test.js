@@ -23,6 +23,8 @@ describe('license routes', () => {
   beforeEach(async () => {
     fileData.getFileData.mockReset();
     licenses.getLicense.mockReset();
+    licenseStore.all.mockReset();
+    licenseStore.compatible.mockReset();
     context = await setup({ services });
   });
 
@@ -53,30 +55,33 @@ describe('license routes', () => {
   });
 
   describe('GET /licenses/compatible/{license}', () => {
+    const licenseId = 'cc-by-sa-3.0-de';
     function options() {
-      return { url: `/licenses/compatible/CC+BY-SA+3.0`, method: 'GET' };
+      return { url: `/licenses/compatible/${licenseId}`, method: 'GET' };
     }
 
     async function subject() {
       return context.inject(options());
     }
 
-    beforeEach(() => {
-      licenseStore.compatible.mockReturnValue(licensesMock);
-    });
-
     it('returns a list of licenses', async () => {
+      licenseStore.compatible.mockReturnValue(licensesMock);
       const response = await subject();
 
+      expect(licenseStore.compatible).toHaveBeenCalledWith(licenseId);
       expect(response.status).toBe(200);
       expect(response.type).toBe('application/json');
       expect(response.payload).toMatchSnapshot();
     });
 
-    it('calls service with decoded license parameter string', async () => {
-      await subject();
+    it('returns an empty response if no compatible licences could be found', async () => {
+      licenseStore.compatible.mockReturnValue([]);
+      const response = await subject();
 
-      expect(licenseStore.compatible).toHaveBeenCalledWith('CC BY-SA 3.0');
+      expect(licenseStore.compatible).toHaveBeenCalledWith(licenseId);
+      expect(response.status).toBe(200);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
     });
   });
 
