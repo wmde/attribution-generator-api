@@ -1,17 +1,32 @@
 const assert = require('assert');
 
-const parse = require('./util/parseWikiUrl');
+const parseWikiUrl = require('./util/parseWikiUrl');
+const errors = require('./util/errors');
 
-function formatImagesInfoResponse(response) {
-  const { pages } = response;
-  assert.ok(!!pages, 'Wikimedia: No "url" option provided');
+async function getImageTitles({ client, title, wikiUrl }) {
+  const response = await client.getResultsFromApi(title, 'images', wikiUrl);
+  assert.ok(response.pages, errors.emptyResponse);
+  const pages = Object.values(response.pages);
+  assert.ok(pages.length === 1);
+  const { images = [] } = pages[0];
 
-  // TODO: use response wrapper to extract data (ImageInfo)
-  return Object.values(pages).map(page => {
-    const { title, imageinfo } = page;
-    const { url } = imageinfo[0];
-    return { title, url };
-  });
+  return images.map(image => image.title);
+}
+
+function formatImageInfo(page) {
+  const { title, imageinfo } = page;
+  const { url } = imageinfo[0];
+
+  return { title, url };
+}
+
+async function getImageUrls({ client, titles, wikiUrl }) {
+  const params = { iiprop: 'url' };
+  const title = titles.join('|');
+  const { pages } = await client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
+  assert.ok(pages, errors.emptyResponse);
+
+  return Object.values(pages).map(formatImageInfo);
 }
 
 class Files {
@@ -20,25 +35,12 @@ class Files {
   }
 
   async getPageImages(url) {
-    const { title, wikiUrl } = parse(url);
-    const imageTitles = await this.getImageTitles(title, wikiUrl);
+    const { title, wikiUrl } = parseWikiUrl(url);
+    const { client } = this;
+    const titles = await getImageTitles({ client, title, wikiUrl });
+    if (titles.length === 0) return [];
 
-    return this.getImagesInfo(imageTitles, wikiUrl);
-  }
-
-  // TODO: handle no images found
-  async getImageTitles(pageTitle, wikiUrl) {
-    const response = await this.client.getResultsFromApi(pageTitle, 'images', wikiUrl);
-    const page = Object.values(response.pages)[0];
-    return page.images.map(image => image.title);
-  }
-
-  // TODO: what happens with too long titles (too many images)
-  async getImagesInfo(images, wikiUrl) {
-    const params = { iiprop: 'url' };
-    const titles = images.join('|');
-    const response = await this.client.getResultsFromApi(titles, 'imageinfo', wikiUrl, params);
-    return formatImagesInfoResponse(response);
+    return getImageUrls({ client, titles, wikiUrl });
   }
 }
 

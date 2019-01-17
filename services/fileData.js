@@ -1,20 +1,22 @@
 const assert = require('assert');
 
 const parseWikiUrl = require('./util/parseWikiUrl');
+const errors = require('./util/errors');
 
 const urlRegex = /^(https|http)?:\/\//;
 const filePrefix = 'File:';
 const defaultWikiUrl = 'https://commons.wikimedia.org/';
 
 function parseImageInfoResponse(response) {
-  const { pages } = response;
-  assert.ok(pages, 'notFound');
-  const { imageinfo } = Object.values(pages)[0];
+  assert.ok(response.pages, errors.emptyResponse);
+  const pages = Object.values(response.pages);
+  assert.ok(pages.length === 1);
+  const { imageinfo } = pages[0];
   return imageinfo[0];
 }
 
 function parseFileTitle(title) {
-  assert.ok(title.startsWith(filePrefix), 'badData');
+  assert.ok(title.startsWith(filePrefix), errors.invalidUrl);
   return { title, wikiUrl: defaultWikiUrl };
 }
 
@@ -25,31 +27,26 @@ function parseIdentifier(identifier) {
   return parseFileTitle(identifier);
 }
 
+async function getImageInfo({ client, title, wikiUrl }) {
+  const params = { iiprop: 'url|extmetadata', iilimit: 1, iiurlheight: 300 };
+  const response = await client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
+  return parseImageInfoResponse(response);
+}
+
 class FileData {
   constructor({ client }) {
     this.client = client;
   }
 
   async getFileData(titleOrUrl) {
+    const { client } = this;
     const identifier = decodeURIComponent(titleOrUrl);
     const { title, wikiUrl } = parseIdentifier(identifier);
-    return this.getOriginalFileData({ title, wikiUrl });
-  }
-
-  // TODO: add separate tests for this or indicated the method as private
-  async getOriginalFileData(params) {
-    const imageInfo = await this.getImageInfo(params);
-    const { url, extmetadata } = imageInfo;
-    const { title, wikiUrl } = parseWikiUrl(url);
+    const { url, extmetadata } = await getImageInfo({ client, title, wikiUrl });
+    const { title: originalTitle, wikiUrl: originalWikiUrl } = parseWikiUrl(url);
     const { value: artistHtml = null } = extmetadata.Artist || {};
-    return { title, wikiUrl, artistHtml };
-  }
 
-  // TODO: add separate tests for this or indicated the method as private
-  async getImageInfo({ title, wikiUrl }) {
-    const params = { iiprop: 'url|extmetadata', iilimit: 1, iiurlheight: 300 };
-    const response = await this.client.getResultsFromApi(title, 'imageinfo', wikiUrl, params);
-    return parseImageInfoResponse(response);
+    return { title: originalTitle, wikiUrl: originalWikiUrl, artistHtml };
   }
 }
 

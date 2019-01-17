@@ -1,5 +1,6 @@
 const Licenses = require('./licenses');
 
+const errors = require('./util/errors');
 const templatesMock = require('./__fixtures__/templates');
 const templatesMissingMock = require('./__fixtures__/templatesMissing');
 
@@ -52,9 +53,9 @@ describe('Licenses', () => {
       expect(license).toBe(null);
     });
 
-    it('throws a notFound error if the response is fully empty', async () => {
+    it('throws an error if the response is fully empty', async () => {
       client.getResultsFromApi.mockResolvedValueOnce({});
-      await expect(service.getLicense({ title, wikiUrl })).rejects.toThrow('notFound');
+      await expect(service.getLicense({ title, wikiUrl })).rejects.toThrow(errors.emptyResponse);
     });
   });
 });

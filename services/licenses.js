@@ -1,15 +1,24 @@
 const assert = require('assert');
 
+const errors = require('./util/errors');
+
 function normalizeTemplateTitle(template) {
   const { title } = template;
   return title.replace(/^Template:/, '');
 }
 
 function formatPageTemplateTitles(response) {
-  const { pages } = response;
-  assert.ok(pages, 'notFound');
-  const { templates = [] } = Object.values(pages)[0];
+  assert.ok(response.pages, errors.emptyResponse);
+  const pages = Object.values(response.pages);
+  assert.ok(pages.length === 1);
+  const { templates = [] } = pages[0];
   return templates.map(normalizeTemplateTitle);
+}
+
+async function getPageTemplates({ client, title, wikiUrl }) {
+  const params = { tlnamespace: 10, tllimit: 100 };
+  const response = await client.getResultsFromApi(title, 'templates', wikiUrl, params);
+  return formatPageTemplateTitles(response);
 }
 
 class Licences {
@@ -19,15 +28,9 @@ class Licences {
   }
 
   async getLicense({ title, wikiUrl }) {
-    const templates = await this.getPageTemplates({ title, wikiUrl });
+    const { client } = this;
+    const templates = await getPageTemplates({ client, title, wikiUrl });
     return this.licenseStore.match(templates);
-  }
-
-  // TODO: add separate tests for this or indicated the method as private
-  async getPageTemplates({ title, wikiUrl }) {
-    const params = { tlnamespace: 10, tllimit: 100 };
-    const response = await this.client.getResultsFromApi(title, 'templates', wikiUrl, params);
-    return formatPageTemplateTitles(response);
   }
 }
 

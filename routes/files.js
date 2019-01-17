@@ -1,11 +1,23 @@
 const Joi = require('joi');
 
+const errors = require('../services/util/errors');
 const definitions = require('./__swagger__/definitions');
 
 const routes = [];
 
+function handleError(h, { message }) {
+  switch (message) {
+    case errors.invalidUrl:
+      return h.error(message, { statusCode: 422 });
+    case errors.apiUnavailabe:
+      return h.error(message, { statusCode: 503 });
+    default:
+      return h.error(message);
+  }
+}
+
 routes.push({
-  path: '/files/{pageUrl}',
+  path: '/files/{articleUrl}',
   method: 'GET',
   options: {
     description: 'Get all files for an article',
@@ -26,8 +38,13 @@ routes.push({
   },
   handler: async (request, h) => {
     const { files } = request.server.app.services;
-    const response = await files.getPageImages(request.params.pageUrl);
-    return h.response(response);
+    const { articleUrl } = request.params;
+    try {
+      const response = await files.getPageImages(articleUrl);
+      return h.response(response);
+    } catch (error) {
+      return handleError(h, error);
+    }
   },
 });
 

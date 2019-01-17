@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+const errors = require('./errors');
 const Client = require('./client');
 
 jest.mock('axios');
@@ -7,9 +8,7 @@ jest.mock('axios');
 describe('Client', () => {
   const axiosClient = { get: jest.fn() };
 
-  beforeEach(() => {
-    axios.create.mockReturnValue(axiosClient);
-  });
+  beforeEach(() => axios.create.mockReturnValue(axiosClient));
 
   it('initializes a new axios client with defaults for header and timeout', () => {
     const headers = {
@@ -19,7 +18,6 @@ describe('Client', () => {
       },
     };
     const timeout = 5000;
-
     const subject = new Client();
 
     expect(axios.create).toHaveBeenCalledWith({ headers, timeout });
@@ -30,41 +28,60 @@ describe('Client', () => {
     const wikiUrl = 'https://en.wikipedia.org';
     const apiUrl = 'https://en.wikipedia.org/w/api.php';
     const defaultParams = { action: 'query', format: 'json' };
-    const response = { data: { query: { foo: 'bar' } } };
+    const mockedResponse = { data: { query: { foo: 'bar' } } };
 
-    beforeEach(() => {
-      axiosClient.get.mockResolvedValue(response);
+    it('returns an error if the API cannot be reached', async () => {
+      const titles = 'Def_Leppard';
+      const error = { request: {} };
+      axiosClient.get.mockImplementation(() => {
+        throw error;
+      });
+      const client = new Client();
+
+      await expect(client.getResultsFromApi(titles, 'image', wikiUrl)).rejects.toThrow(
+        errors.apiUnavailabe
+      );
     });
 
-    describe('when querying for images of a page', () => {
+    it('passes on any errors from doing the request', async () => {
+      const titles = 'Def_Leppard';
+      axiosClient.get.mockImplementation(() => {
+        throw new Error();
+      });
+      const client = new Client();
+
+      await expect(client.getResultsFromApi(titles, 'image', wikiUrl)).rejects.toThrow();
+    });
+
+    it('allows querying for images of a page', async () => {
       const titles = 'Def_Leppard';
       const prop = 'image';
       const params = { ...defaultParams, prop, titles };
 
-      it('calls the respective api and returns the query result', async () => {
-        const client = new Client();
-        const subject = await client.getResultsFromApi(titles, 'image', wikiUrl);
+      axiosClient.get.mockResolvedValue(mockedResponse);
 
-        expect(axiosClient.get).toHaveBeenCalledWith(apiUrl, { params });
-        expect(subject).toEqual({ foo: 'bar' });
-      });
+      const client = new Client();
+      const subject = await client.getResultsFromApi(titles, 'image', wikiUrl);
+
+      expect(axiosClient.get).toHaveBeenCalledWith(apiUrl, { params });
+      expect(subject).toEqual({ foo: 'bar' });
     });
 
-    describe('when querying for imageInfo for a collection of images', () => {
+    it('allows querying for multiple titles with additional params', async () => {
       const titles = 'File:Steve_Clark.jpeg|File:RickAllen.JPG';
       const prop = 'imageInfo';
       const params = { ...defaultParams, prop, titles, iiprop: 'url' };
 
-      it('calls the respective api and returns the query result', async () => {
-        const client = new Client();
-        const subject = await client.getResultsFromApi(titles, prop, wikiUrl, {
-          titles,
-          iiprop: 'url',
-        });
+      axiosClient.get.mockResolvedValue(mockedResponse);
 
-        expect(axiosClient.get).toHaveBeenCalledWith(apiUrl, { params });
-        expect(subject).toEqual({ foo: 'bar' });
+      const client = new Client();
+      const subject = await client.getResultsFromApi(titles, prop, wikiUrl, {
+        titles,
+        iiprop: 'url',
       });
+
+      expect(axiosClient.get).toHaveBeenCalledWith(apiUrl, { params });
+      expect(subject).toEqual({ foo: 'bar' });
     });
   });
 });

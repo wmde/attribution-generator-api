@@ -1,5 +1,7 @@
 const setup = require('./__helpers__/setup');
 
+const errors = require('../services/util/errors');
+
 describe('license routes', () => {
   let context;
 
@@ -19,6 +21,8 @@ describe('license routes', () => {
   ];
 
   beforeEach(async () => {
+    fileData.getFileData.mockReset();
+    licenses.getLicense.mockReset();
     context = await setup({ services });
   });
 
@@ -93,34 +97,73 @@ describe('license routes', () => {
       return context.inject(options());
     }
 
-    describe('when the license can be retrieved', () => {
-      beforeEach(() => {
-        fileData.getFileData.mockReturnValue({ title, wikiUrl });
-        licenses.getLicense.mockReturnValue(license);
-      });
+    it('returns the license of a file', async () => {
+      fileData.getFileData.mockReturnValue({ title, wikiUrl });
+      licenses.getLicense.mockReturnValue(license);
 
-      it('returns the license of a file', async () => {
-        const response = await subject({});
+      const response = await subject({});
 
-        expect(response.status).toBe(200);
-        expect(response.type).toBe('application/json');
-        expect(response.payload).toMatchSnapshot();
-      });
+      expect(fileData.getFileData).toHaveBeenCalledWith(title);
+      expect(licenses.getLicense).toHaveBeenCalledWith({ title, wikiUrl });
+      expect(response.status).toBe(200);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
     });
 
-    describe('when there is a problem retrieving the file data', () => {
-      beforeEach(() => {
-        fileData.getFileData.mockImplementation(() => {
-          throw new Error('notFound');
-        });
+    it('returns a 404 response when the license cannot be retrieved', async () => {
+      fileData.getFileData.mockImplementation(() => {
+        throw new Error(errors.emptyResponse);
       });
 
-      it('returns a 404', async () => {
-        const response = await subject({});
+      const response = await subject({});
 
-        expect(response.status).toBe(404);
-        expect(response.type).toBe('application/json');
+      expect(fileData.getFileData).toHaveBeenCalledWith(title);
+      expect(licenses.getLicense).not.toHaveBeenCalled();
+      expect(response.status).toBe(404);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
+    it('returns a 422 response when the identifier cannot be parsed', async () => {
+      fileData.getFileData.mockImplementation(() => {
+        throw new Error(errors.invalidUrl);
       });
+
+      const response = await subject({});
+
+      expect(fileData.getFileData).toHaveBeenCalledWith(title);
+      expect(licenses.getLicense).not.toHaveBeenCalled();
+      expect(response.status).toBe(422);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
+    it('returns a 500 response for any generic error', async () => {
+      fileData.getFileData.mockImplementation(() => {
+        throw new Error('some error');
+      });
+
+      const response = await subject({});
+
+      expect(fileData.getFileData).toHaveBeenCalledWith(title);
+      expect(licenses.getLicense).not.toHaveBeenCalled();
+      expect(response.status).toBe(500);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
+    it('returns a 503 response when the wiki api is not reachable', async () => {
+      fileData.getFileData.mockImplementation(() => {
+        throw new Error(errors.apiUnavailabe);
+      });
+
+      const response = await subject({});
+
+      expect(fileData.getFileData).toHaveBeenCalledWith(title);
+      expect(licenses.getLicense).not.toHaveBeenCalled();
+      expect(response.status).toBe(503);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
     });
   });
 });

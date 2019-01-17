@@ -3,8 +3,8 @@ const Hapi = require('hapi');
 const HapiRouter = require('hapi-router');
 const HapiSwagger = require('hapi-swaggered');
 
-const Boom = require('boom');
 const Good = require('good');
+const Boom = require('boom');
 
 async function init(environment) {
   const { logging, secret, server: options, services, swagger } = environment;
@@ -17,9 +17,8 @@ async function init(environment) {
   server.app.services = services;
 
   // Extend Hapi response toolkit and request interfaces.
-  // eslint-disable-next-line prefer-arrow-callback
-  server.decorate('toolkit', 'error', function error(name, ...args) {
-    throw Boom[name](...args);
+  server.decorate('toolkit', 'error', (message, ...args) => {
+    throw new Boom(message, ...args);
   });
 
   server.decorate('toolkit', 'assert', function assert(value, err, ...args) {

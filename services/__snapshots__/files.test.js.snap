@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Files getPageImages() parses the url and retrieves all images for the article 1`] = `
+exports[`Files getPageImages() with a valid wikipedia url returns a list of all images from the given article 1`] = `
 Array [
   Object {
     "title": "File:Graphic 01.jpg",

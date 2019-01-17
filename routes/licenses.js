@@ -1,11 +1,26 @@
 const Joi = require('joi');
 
+const errors = require('../services/util/errors');
+
 const routes = [];
 
 const licenseSchema = Joi.object({
   url: Joi.string().uri(),
   code: Joi.string(),
 });
+
+function handleError(h, { message }) {
+  switch (message) {
+    case errors.invalidUrl:
+      return h.error(message, { statusCode: 422 });
+    case errors.emptyResponse:
+      return h.error(message, { statusCode: 404 });
+    case errors.apiUnavailabe:
+      return h.error(message, { statusCode: 503 });
+    default:
+      return h.error(message);
+  }
+}
 
 routes.push({
   path: '/licenses/compatible/{license}',
@@ -77,8 +92,7 @@ routes.push({
       const response = { url: encodeURI(license.url), code: license.name };
       return h.response(response);
     } catch (error) {
-      const { message } = error;
-      return h.error(message);
+      return handleError(h, error);
     }
   },
 });
