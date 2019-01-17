@@ -1,6 +1,19 @@
 definitions:
   AttributionShowResponse:
-    properties: {}
+    properties:
+      attributionHtml:
+        type: string
+      attributionPlain:
+        type: string
+      licenseId:
+        type: string
+      licenseUrl:
+        type: string
+    required:
+      - attributionHtml
+      - attributionPlain
+      - licenseId
+      - licenseUrl
   BadRequestErrorResponse:
     description: Bad Request
     properties: {}

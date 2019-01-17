@@ -7,6 +7,18 @@ const prefix = require('./__utils__/path')('/attribution');
 
 const routes = [];
 
+const attributionSchema = Joi.object()
+  .required()
+  .keys({
+    attributionHtml: Joi.string().required(),
+    attributionPlain: Joi.string().required(),
+    licenseId: Joi.string().required(),
+    licenseUrl: Joi.string()
+      .uri()
+      .required(),
+  })
+  .meta({ className: 'AttributionShowResponse' });
+
 function handleError(h, { message }) {
   switch (message) {
     case errors.invalidUrl:
@@ -33,9 +45,7 @@ routes.push({
       },
     },
     response: {
-      schema: Joi.object()
-        .required()
-        .meta({ className: 'AttributionShowResponse' }),
+      schema: attributionSchema,
       status: {
         400: definitions.errors['400'],
         422: definitions.errors['422'],
