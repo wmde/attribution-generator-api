@@ -220,19 +220,15 @@ function getAttributionAsTextWithLinks(self) {
 class Attribution {
   constructor(params) {
     validateParams(params);
-    Object.assign(this, params);
+    const { title: fileTitle, rawUrl: fileUrl, artistHtml, attributionHtml } = params.fileInfo;
 
-    this.fileTitle = params.fileInfo.title;
-    this.fileUrl = params.fileInfo.rawUrl;
-    this.artistHtml = params.fileInfo.artistHtml;
-    this.attributionHtml = params.fileInfo.attributionHtml;
-
-    if (isStringPresent(this.artistHtml)) {
-      this.artistHtml = sanitizeHtml(this.artistHtml);
-    }
-    if (isStringPresent(this.attributionHtml)) {
-      this.attributionHtml = sanitizeHtml(this.attributionHtml);
-    }
+    Object.assign(this, {
+      ...params,
+      fileTitle,
+      fileUrl,
+      artistHtml: sanitizeHtml(artistHtml || ''),
+      attributionHtml: sanitizeHtml(attributionHtml || ''),
+    });
   }
 
   html() {
