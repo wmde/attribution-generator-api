@@ -4,12 +4,10 @@
  * So, we're already doing what eslint intends us to do.
  */
 
-const jsdom = require('jsdom');
-
-const { JSDOM } = jsdom;
+const { JSDOM: JSDom } = require('jsdom');
 
 function convertToNode(html) {
-  const dom = new JSDOM(`<div>${html.trim()}</div>`);
+  const dom = new JSDom(`<div>${html.trim()}</div>`);
   return dom.window.document.body.children[0];
 }
 

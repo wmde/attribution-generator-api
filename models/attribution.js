@@ -5,9 +5,7 @@
  */
 
 const assert = require('assert');
-const jsdom = require('jsdom');
-
-const { JSDOM } = jsdom;
+const { JSDOM: JSDom } = require('jsdom');
 
 const License = require('./license');
 const HtmlSaniziter = require('../services/htmlSanitizer');
@@ -94,7 +92,7 @@ function validateParams({
 }
 
 function extractTextFromHtml(html) {
-  const dom = new JSDOM(html);
+  const dom = new JSDom(html);
   return dom.window.document.body.textContent;
 }
 
