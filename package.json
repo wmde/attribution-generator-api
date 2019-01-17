@@ -17,7 +17,8 @@
     "debug": "ndb start.js",
     "console": "node --experimental-repl-await console.js",
     "lint": "eslint --ignore-path .gitignore . scripts/*",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "apidoc": "scripts/gen-apidoc > openapi.yaml"
   },
   "engines": {
     "node": "^10.14.2"

@@ -69,17 +69,21 @@ info:
   title: attribution-generator-api
   version: 0.1.0
 paths:
-  '/attribution/{language}/{file}':
+  '/attribution/{languageCode}/{file}/{typeOfUse}/unmodified':
     get:
       description: Generate attribution hints for the given file.
       operationId: attribution.show
       parameters:
         - in: path
-          name: language
+          name: languageCode
           required: true
           type: string
         - in: path
           name: file
+          required: true
+          type: string
+        - in: path
+          name: typeOfUse
           required: true
           type: string
       produces:
@@ -89,6 +93,18 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/BadRequestErrorResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/UnprocessableEntityErrorResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/ServiceUnavailableErrorResponse'
         default:
           description: ''
           schema:
