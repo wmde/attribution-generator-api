@@ -1,6 +1,7 @@
 const setup = require('./__helpers__/setup');
 
 const errors = require('../services/util/errors');
+const licenseFactory = require('../__helpers__/licenseFactory');
 
 describe('license routes', () => {
   let context;
@@ -10,22 +11,8 @@ describe('license routes', () => {
   const licenses = { getLicense: jest.fn() };
   const services = { licenseStore, fileData, licenses };
   const licensesMock = [
-    {
-      id: 'cc-by-sa-4.0',
-      name: 'CC BY-SA 4.0',
-      groups: ['cc', 'cc4'],
-      compatibility: [],
-      regexp: /^(Bild-)?CC-BY-SA(-|\/)4.0(([^-]+.+|-migrated)*)?$/i,
-      url: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode',
-    },
-    {
-      id: 'cc-by-sa-3.0',
-      name: 'CC BY-SA 3.0',
-      groups: ['cc', 'cc4'],
-      compatibility: [],
-      regexp: /^(Bild-)?CC-BY-SA(-|\/)4.0(([^-]+.+|-migrated)*)?$/i,
-      url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-    },
+    licenseFactory({ id: 'cc-by-sa-4.0', name: 'CC BY-SA 4.0' }),
+    licenseFactory({ id: 'cc-by-sa-3.0', name: 'CC BY-SA 3.0' }),
   ];
 
   beforeEach(async () => {
@@ -96,14 +83,7 @@ describe('license routes', () => {
   describe('GET /license', () => {
     const title = 'File:Apple_Lisa2-IMG_1517.jpg';
     const wikiUrl = 'https://en.wikipedia.org';
-    const license = {
-      id: 'cc-by-sa-4.0',
-      name: 'CC BY-SA 4.0',
-      groups: ['cc', 'cc4'],
-      compatibility: [],
-      regexp: /^(Bild-)?CC-BY-SA(-|\/)4.0(([^-]+.+|-migrated)*)?$/i,
-      url: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode',
-    };
+    const license = licenseFactory({ id: 'cc-by-sa-4.0', name: 'CC BY-SA 4.0' });
 
     function options() {
       return { url: `/license/${title}`, method: 'GET' };

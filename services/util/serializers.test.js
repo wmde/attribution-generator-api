@@ -1,15 +1,14 @@
 const serializers = require('./serializers');
+const licenseFactory = require('../../__helpers__/licenseFactory');
 
 describe('license()', () => {
   const { license: serialize } = serializers;
-  const license = {
+  const license = licenseFactory({
     id: 'cc-by-sa-4.0',
     name: 'CC BY-SA 4.0',
     groups: ['cc', 'cc4'],
-    compatibility: [],
-    regexp: /ab+c/,
     url: 'https://example.org/licenses/by-sa/4.0',
-  };
+  });
 
   it('serializes a license object into the specified format', () => {
     const serialized = serialize(license);
