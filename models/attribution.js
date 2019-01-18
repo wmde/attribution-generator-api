@@ -10,13 +10,10 @@ const { JSDOM: JSDom } = require('jsdom');
 const License = require('./license');
 const HtmlSaniziter = require('../services/htmlSanitizer');
 const t = require('../services/util/translate');
+const errors = require('../services/util/errors');
 
 const knownLanguages = ['en', 'es', 'pt', 'de', 'uk'];
-const knowntypesOfUse = ['online', 'offline'];
-
-function validationError(attribute) {
-  return `Attribution: Invalid "${attribute}" provided`;
-}
+const knownTypesOfUse = ['online', 'offline'];
 
 function isStringPresent(string) {
   return typeof string === 'string' && string.length > 0;
@@ -31,25 +28,19 @@ function validateParams({
   modificationAuthor,
   isEdited,
 }) {
-  assert(isStringPresent(fileInfo.rawUrl), validationError('fileInfo.rawUrl'));
-  assert(isStringPresent(fileInfo.title), validationError('fileInfo.title'));
-  assert(knowntypesOfUse.includes(typeOfUse), validationError('typeOfUse'));
-  assert(knownLanguages.includes(languageCode), validationError('languageCode'));
-  assert([true, false].includes(isEdited), validationError('isEdited'));
-  assert(
-    !fileInfo.artistHtml || isStringPresent(fileInfo.artistHtml),
-    validationError('fileInfo.artistHtml')
-  );
+  assert(isStringPresent(fileInfo.rawUrl), errors.validationError);
+  assert(isStringPresent(fileInfo.title), errors.validationError);
+  assert(knownTypesOfUse.includes(typeOfUse), errors.validationError);
+  assert(knownLanguages.includes(languageCode), errors.validationError);
+  assert([true, false].includes(isEdited), errors.validationError);
+  assert(!fileInfo.artistHtml || isStringPresent(fileInfo.artistHtml), errors.validationError);
   assert(
     !fileInfo.attributionHtml || isStringPresent(fileInfo.attributionHtml),
-    validationError('fileInfo.attributionHtml')
+    errors.validationError
   );
-  assert(!modification || isStringPresent(modification), validationError('modification'));
-  assert(
-    !modificationAuthor || isStringPresent(modificationAuthor),
-    validationError('modificationAuthor')
-  );
-  assert(license instanceof License, validationError('license'));
+  assert(!modification || isStringPresent(modification), errors.validationError);
+  assert(!modificationAuthor || isStringPresent(modificationAuthor), errors.validationError);
+  assert(license instanceof License, errors.validationError);
 }
 
 function extractTextFromHtml(html) {
@@ -244,4 +235,8 @@ class Attribution {
   }
 }
 
-module.exports = Attribution;
+module.exports = {
+  Attribution,
+  knownLanguages,
+  knownTypesOfUse,
+};

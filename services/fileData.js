@@ -45,8 +45,15 @@ class FileData {
     const { url, extmetadata } = await getImageInfo({ client, title, wikiUrl });
     const { title: originalTitle, wikiUrl: originalWikiUrl } = parseWikiUrl(url);
     const { value: artistHtml = null } = extmetadata.Artist || {};
+    const { value: attributionHtml = null } = extmetadata.Attribution || {};
 
-    return { title: originalTitle, wikiUrl: originalWikiUrl, artistHtml };
+    return {
+      title: originalTitle,
+      wikiUrl: originalWikiUrl,
+      rawUrl: url,
+      artistHtml,
+      attributionHtml,
+    };
   }
 }
 

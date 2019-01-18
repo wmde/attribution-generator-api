@@ -1,4 +1,4 @@
-const Attribution = require('./attribution');
+const { Attribution } = require('./attribution');
 const License = require('./license');
 
 describe('attribution', () => {

@@ -1,38 +1,56 @@
 const Joi = require('joi');
 
+const { knownLanguages, knownTypesOfUse, Attribution } = require('../models/attribution');
+const errors = require('../services/util/errors');
 const definitions = require('./__swagger__/definitions');
 const prefix = require('./__utils__/path')('/attribution');
 
 const routes = [];
 
-const attributionMock = {
-  license: 'CC BY-SA 3.0',
-  attribution_plain:
-    'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-  attribution_text:
-    'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-  attribution_html:
-    'Pierre Dalous (https://commons.wikimedia.org/wiki/File:Pair_of_Merops_apiaster_feeding.jpg), "Pair of Merops apiaster feeding", https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-  license_url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
-};
+const attributionSchema = Joi.object()
+  .required()
+  .keys({
+    attributionHtml: Joi.string().required(),
+    attributionPlain: Joi.string().required(),
+    licenseId: Joi.string().required(),
+    licenseUrl: Joi.string()
+      .uri()
+      .required(),
+  })
+  .meta({ className: 'AttributionShowResponse' });
+
+function handleError(h, { message }) {
+  switch (message) {
+    case errors.invalidUrl:
+    case errors.validationError:
+      return h.error(message, { statusCode: 422 });
+    case errors.apiUnavailabe:
+      return h.error(message, { statusCode: 503 });
+    default:
+      return h.error(message);
+  }
+}
+
 routes.push({
-  path: prefix('/{language}/{file}'),
+  path: prefix('/{languageCode}/{file}/{typeOfUse}/unmodified'),
   method: 'GET',
   options: {
     description: 'Generate attribution',
     notes: 'Generate attribution hints for the given file.',
     validate: {
       params: {
-        language: Joi.string(),
+        languageCode: Joi.string().valid(knownLanguages),
         file: Joi.string(),
+        typeOfUse: Joi.string().valid(knownTypesOfUse),
       },
     },
     response: {
-      schema: Joi.object()
-        .required()
-        .meta({ className: 'AttributionShowResponse' }),
+      schema: attributionSchema,
       status: {
         400: definitions.errors['400'],
+        422: definitions.errors['422'],
+        500: definitions.errors['500'],
+        503: definitions.errors['503'],
       },
     },
     plugins: {
@@ -42,7 +60,29 @@ routes.push({
       },
     },
   },
-  handler: async (request, h) => h.response(attributionMock),
+  handler: async (request, h) => {
+    const { fileData, licenses } = request.server.app.services;
+    const { languageCode, file, typeOfUse } = request.params;
+    try {
+      const fileInfo = await fileData.getFileData(file);
+      const license = await licenses.getLicense(fileInfo);
+      const attribution = new Attribution({
+        isEdited: false,
+        license,
+        languageCode,
+        typeOfUse,
+        fileInfo,
+      });
+      return h.response({
+        licenseId: license.id,
+        licenseUrl: license.url,
+        attributionHtml: attribution.html(),
+        attributionPlain: attribution.plainText(),
+      });
+    } catch (error) {
+      return handleError(h, error);
+    }
+  },
 });
 
 module.exports = routes;

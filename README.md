@@ -60,12 +60,7 @@ We use npm scripts for development-related tasks:
 
   * Run linting: `yarn lint`, to autocorrect issues `yarn lint --fix`
   * Run tests: `yarn test`, to start in watch mode `yarn test --watch`
-
-Generate / update the API documentation:
-
-```shell
-scripts/gen-apidoc > openapi.yaml
-```
+  * Generate / update the API documentation: `yarn run apidoc`
 
 ## Debugging
 
