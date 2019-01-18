@@ -1,13 +1,9 @@
 const Joi = require('joi');
 
 const errors = require('../services/util/errors');
+const { license: serialize } = require('../services/util/serializers');
 
 const routes = [];
-
-function serialize(license) {
-  const { id: code, name, url, groups } = license;
-  return { code, name, url, groups };
-}
 
 const licenseSchema = Joi.object({
   code: Joi.string().required(),
