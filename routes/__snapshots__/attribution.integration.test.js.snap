@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`attribution routes GET /attribution/... (unmodified) returns the attribution 1`] = `
+Object {
+  "attributionHtml": "<a href=\\"https://commons.wikimedia.org/wiki/User:Kaldari\\">Kaldari</a>, <a href=\\"https://upload.wikimedia.org/wikipedia/commons/3/3a/Foobar.jpg\\">Foobar</a>, <a href=\\"https://creativecommons.org/publicdomain/zero/1.0/legalcode\\" rel=\\"license\\">CC0 1.0</a>",
+  "attributionPlain": "Kaldari (https://upload.wikimedia.org/wikipedia/commons/3/3a/Foobar.jpg), „Foobar“, https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+  "licenseId": "cc-zero",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+}
+`;

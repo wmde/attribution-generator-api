@@ -37,20 +37,9 @@ describe('attribution routes', () => {
       typeOfUse: 'online',
     };
 
-    const attribution = {
-      licenseId: 'cc-zero',
-      licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/legalcode',
-      attributionHtml:
-        '<a href="https://commons.wikimedia.org/wiki/User:Kaldari">Kaldari</a>, <a href="https://upload.wikimedia.org/wikipedia/commons/3/3a/Foobar.jpg">Foobar</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode" rel="license">CC0 1.0</a>',
-      attributionPlain:
-        'Kaldari (https://upload.wikimedia.org/wikipedia/commons/3/3a/Foobar.jpg), „Foobar“, https://creativecommons.org/publicdomain/zero/1.0/legalcode',
-    };
-
     function options(overrides = {}) {
-      const params = { ...defaults, ...overrides };
-      const url = `/attribution/${params.languageCode}/${params.file}/${
-        params.typeOfUse
-      }/unmodified`;
+      const { languageCode, file, typeOfUse } = { ...defaults, ...overrides };
+      const url = `/attribution/${languageCode}/${file}/${typeOfUse}/unmodified`;
       return { url, method: 'GET' };
     }
 
@@ -63,7 +52,7 @@ describe('attribution routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.type).toBe('application/json');
-      expect(response.payload).toMatchObject(attribution);
+      expect(response.payload).toMatchSnapshot();
     });
 
     it('returns a proper error for unknown typeOfUse', async () => {
