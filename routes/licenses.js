@@ -4,6 +4,11 @@ const errors = require('../services/util/errors');
 
 const routes = [];
 
+function serialize(license) {
+  const { id: code, name, url, groups } = license;
+  return { code, name, url, groups };
+}
+
 const licenseSchema = Joi.object({
   code: Joi.string().required(),
   name: Joi.string().required(),
@@ -47,12 +52,7 @@ routes.push({
     const { licenseStore } = request.server.app.services;
     const { licenseId } = request.params;
     const licenses = licenseStore.compatible(licenseId);
-    const response = licenses.map(({ id: code, url, name, groups }) => ({
-      code,
-      name,
-      url,
-      groups,
-    }));
+    const response = licenses.map(serialize);
     return h.response(response);
   },
 });
@@ -71,12 +71,7 @@ routes.push({
   handler: async (request, h) => {
     const { licenseStore } = request.server.app.services;
     const licenses = licenseStore.all();
-    const response = licenses.map(({ id: code, url, name, groups }) => ({
-      code,
-      name,
-      url,
-      groups,
-    }));
+    const response = licenses.map(serialize);
     return h.response(response);
   },
 });
@@ -102,8 +97,7 @@ routes.push({
     try {
       const { title, wikiUrl } = await fileData.getFileData(fileUrlOrTitle);
       const license = await licenses.getLicense({ title, wikiUrl });
-      const { id: code, name, url, groups } = license;
-      const response = { code, name, url, groups };
+      const response = serialize(license);
       return h.response(response);
     } catch (error) {
       return handleError(h, error);
