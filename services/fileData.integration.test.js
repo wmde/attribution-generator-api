@@ -125,6 +125,43 @@ describe('FileData', () => {
         'de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg?foo=bar',
       ],
     ],
+    [
+      {
+        title: 'File:K%C3%B6nigsberg_in_Bayern',
+        normalizedTitle: 'Datei:Königsberg_in_Bayern',
+        wikiUrl: 'https://de.wikipedia.org/',
+        rawUrl: 'https://upload.wikimedia.org/wikipedia/de/f/fb/K%C3%B6nigsberg_in_Bayern.jpg',
+        artistHtml: '<p>unbekannt\n</p>',
+        attributionHtml: null,
+      },
+      [
+        'https://de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern',
+        'http://de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern',
+        '//de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern',
+        'de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern',
+        'https://de.m.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern',
+
+        // parameters other than title are ignored
+        'https://de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern?uselang=en',
+        'http://de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern?uselang=en',
+        '//de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern?uselang=en',
+        'de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern?uselang=en',
+        'https://de.m.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern?uselang=en',
+
+        'https://de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern',
+        'http://de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern',
+        '//de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern',
+        'de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern',
+        'https://de.m.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern',
+
+        // parameters other than title are ignored
+        'https://de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern&uselang=de',
+        'http://de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern&uselang=de',
+        '//de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern&uselang=de',
+        'de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern&uselang=de',
+        'https://de.m.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern&uselang=de',
+      ],
+    ],
   ];
 
   inputs.forEach(normalizeExpectation => {
