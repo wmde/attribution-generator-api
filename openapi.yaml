@@ -141,7 +141,7 @@ paths:
             $ref: '#/definitions/AttributionShowResponse'
       security:
         - default: []
-      summary: Generate attribution for a modifile work
+      summary: Generate attribution for a modified work
       tags:
         - attribution
   '/attribution/{languageCode}/{file}/{typeOfUse}/unmodified':
