@@ -3,8 +3,7 @@ const assert = require('assert');
 const parseWikiUrl = require('./util/parseWikiUrl');
 const errors = require('./util/errors');
 
-const urlRegex = /^(https|http)?:\/\//;
-const filePrefix = 'File:';
+const fileRegex = /^\w+:([^\/]+\.\w+)$/;
 const defaultWikiUrl = 'https://commons.wikimedia.org/';
 
 function parseImageInfoResponse(response) {
@@ -20,15 +19,18 @@ function parseImageInfoResponse(response) {
 }
 
 function parseFileTitle(title) {
-  assert.ok(title.startsWith(filePrefix), errors.invalidUrl);
-  return { title, wikiUrl: defaultWikiUrl };
+  const matches = title.match(fileRegex);
+  return {
+    title: `File:${matches[1]}`,
+    wikiUrl: defaultWikiUrl
+  };
 }
 
 function parseIdentifier(identifier) {
-  if (urlRegex.test(identifier)) {
-    return parseWikiUrl(identifier);
+  if (fileRegex.test(identifier)) {
+    return parseFileTitle(identifier);
   }
-  return parseFileTitle(identifier);
+  return parseWikiUrl(identifier);
 }
 
 async function getImageInfo({ client, title, wikiUrl }) {
