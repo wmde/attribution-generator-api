@@ -28,7 +28,7 @@ describe('Client', () => {
     const wikiUrl = 'https://en.wikipedia.org';
     const apiUrl = 'https://en.wikipedia.org/w/api.php';
     const defaultParams = { action: 'query', format: 'json' };
-    const mockedResponse = { data: { query: { foo: 'bar' } } };
+    const mockedResponse = { data: { batchcomplete: '', query: { foo: 'bar' } } };
 
     it('returns an error if the API cannot be reached', async () => {
       const titles = ['Def_Leppard'];

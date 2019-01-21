@@ -16,11 +16,17 @@ function handleError(error) {
   throw error;
 }
 
+function dataIsComplete(data) {
+  return data.hasOwnProperty('batchcomplete');
+}
+
 async function queryApi({ client, wikiUrl, params }) {
   const apiUrl = Url.resolve(wikiUrl, apiPath);
   try {
     const { data } = await client.get(apiUrl, { params });
-    return transform(data);
+    // TODO: we may want to accumulate data here...
+    // "data" may contain 'batchcomplete' flag
+    if(dataIsComplete(data)) return transform(data);
   } catch (error) {
     return handleError(error);
   }
