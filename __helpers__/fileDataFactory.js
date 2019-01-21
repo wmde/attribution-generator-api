@@ -1,5 +1,3 @@
-const { Attribution } = require('../models/attribution');
-
 function fileDataFactory({
   artistHtml = '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo',
   attributionHtml = 'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr',

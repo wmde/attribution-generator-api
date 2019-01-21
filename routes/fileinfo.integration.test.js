@@ -53,8 +53,10 @@ describe('fileinfo routes', () => {
           url: 'https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en',
           groups: ['cc', 'cc2', 'ported', 'knownPorted'],
         },
-        author_html:  '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo',
-        attribution_html: 'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr',
+        author_html:
+          '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo',
+        attribution_html:
+          'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr',
         media_type: 'BITMAP',
       });
     });
