@@ -10,9 +10,13 @@ const defaultWikiUrl = 'https://commons.wikimedia.org/';
 function parseImageInfoResponse(response) {
   assert.ok(response.pages, errors.emptyResponse);
   const pages = Object.values(response.pages);
+  const { to: normalizedTitle } = response.normalized ? response.normalized[0] : {};
   assert.ok(pages.length === 1);
   const { imageinfo } = pages[0];
-  return imageinfo[0];
+  return {
+    normalizedTitle,
+    ...imageinfo[0],
+  };
 }
 
 function parseFileTitle(title) {
@@ -42,13 +46,18 @@ class FileData {
     const { client } = this;
     const identifier = decodeURIComponent(titleOrUrl);
     const { title, wikiUrl } = parseIdentifier(identifier);
-    const { url, extmetadata, mediatype } = await getImageInfo({ client, title, wikiUrl });
+    const { normalizedTitle, url, extmetadata, mediatype } = await getImageInfo({
+      client,
+      title,
+      wikiUrl,
+    });
     const { title: originalTitle, wikiUrl: originalWikiUrl } = parseWikiUrl(url);
     const { value: artistHtml = null } = extmetadata.Artist || {};
     const { value: attributionHtml = null } = extmetadata.Attribution || {};
 
     return {
       title: originalTitle,
+      normalizedTitle: normalizedTitle || originalTitle,
       wikiUrl: originalWikiUrl,
       rawUrl: url,
       artistHtml,

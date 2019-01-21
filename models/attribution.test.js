@@ -24,6 +24,7 @@ describe('attribution', () => {
     fileInfo: {
       rawUrl: 'https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg',
       title: 'File:Eisklettern kl engstligenfall.jpg',
+      normalizedTitle: 'File:Eisklettern kl engstligenfall.jpg',
       artistHtml:
         '<a href="//commons.wikimedia.org/w/index.php?title=User:Bernhard&amp;action=edit&amp;redlink=1" class="new" title="User:Bernhard (page does not exist)">Bernhard</a>',
       attributionHtml: null,
@@ -46,11 +47,13 @@ describe('attribution', () => {
 
   describe('validations', () => {
     it('asserts valid fileInfo.rawUrl', () => {
-      expect(() => newAttribution({ fileInfo: { rawUrl: 123, title: 'title' } })).toThrow();
+      expect(() =>
+        newAttribution({ fileInfo: { rawUrl: 123, normalizedTtle: 'title' } })
+      ).toThrow();
     });
 
     it('asserts valid fileInfo.title', () => {
-      expect(() => newAttribution({ fileInfo: { rawUrl: 'url', title: '' } })).toThrow();
+      expect(() => newAttribution({ fileInfo: { rawUrl: 'url', normalizedTitle: '' } })).toThrow();
     });
 
     it('asserts valid typeOfUse', () => {
@@ -164,7 +167,7 @@ describe('attribution', () => {
     const subject = newAttribution({
       fileInfo: {
         rawUrl: 'https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg',
-        title: 'File:Eisklettern kl engstligenfall.jpg',
+        normalizedTitle: 'File:Eisklettern kl engstligenfall.jpg',
         artistHtml: 'artistHtml',
         attributionHtml:
           '<a href="https://en.wikipedia.org/wiki/User:Rhorn" class="extiw" title="en:User:Rhorn">Rhorn</a> at the <a href="https://en.wikipedia.org/wiki/" class="extiw" title="w:">English language Wikipedia</a>',
@@ -188,7 +191,7 @@ describe('attribution', () => {
     const subject = newAttribution({
       fileInfo: {
         rawUrl: 'https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg',
-        title: 'File:Eisklettern kl engstligenfall.jpg',
+        normalizedTitle: 'File:Eisklettern kl engstligenfall.jpg',
       },
     });
 

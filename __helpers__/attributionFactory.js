@@ -5,6 +5,7 @@ function attributionFactory({
   fileInfo = {
     rawUrl: 'https://commons.wikimedia.org/wiki/File:Eisklettern_kl_engstligenfall.jpg',
     title: 'File:Eisklettern kl engstligenfall.jpg',
+    normalizedTitle: 'File:Eisklettern kl engstligenfall.jpg',
     artistHtml:
       '<a href="//commons.wikimedia.org/w/index.php?title=User:Bernhard&amp;action=edit&amp;redlink=1" class="new" title="User:Bernhard (page does not exist)">Bernhard</a>',
     attributionHtml: null,

@@ -43,7 +43,7 @@ describe('attribution()', () => {
     license,
     fileInfo: {
       rawUrl: 'file_url',
-      title: 'file_title',
+      normalizedTitle: 'file_title',
       artistHtml: 'artist',
     },
   });

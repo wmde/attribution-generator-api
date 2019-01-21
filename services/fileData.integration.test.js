@@ -13,11 +13,13 @@ describe('FileData', () => {
     [
       {
         title: 'File:Helene_Fischer_2010.jpg',
+        normalizedTitle: 'File:Helene Fischer 2010.jpg',
         wikiUrl: 'https://commons.wikimedia.org/',
         rawUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Helene_Fischer_2010.jpg',
         artistHtml:
           '<a href="//commons.wikimedia.org/w/index.php?title=User:Fleyx24&amp;action=edit&amp;redlink=1" class="new" title="User:Fleyx24 (page does not exist)">Fleyx24</a>',
         attributionHtml: null,
+        mediaType: 'BITMAP'
       },
       [
         'File:Helene_Fischer_2010.jpg',
@@ -60,12 +62,14 @@ describe('FileData', () => {
     // the following are expected to be “normalized” to https://de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg
     [
       {
-        title: '1 FC Bamberg - 1 FC Nürnberg 1901.jpg',
+        title: 'File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
+        normalizedTitle: 'Datei:1 FC Bamberg - 1 FC Nürnberg 1901.jpg',
         wikiUrl: 'https://de.wikipedia.org/',
         rawUrl:
           'https://upload.wikimedia.org/wikipedia/de/f/fb/1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         artistHtml: '<p>unbekannt\n</p>',
         attributionHtml: null,
+        mediaType: 'BITMAP'
       },
       [
         'https://de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
