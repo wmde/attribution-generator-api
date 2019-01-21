@@ -1,14 +1,19 @@
 const Joi = require('joi');
 
 const errors = require('../services/util/errors');
+const { license: serialize } = require('../services/util/serializers');
 
 const routes = [];
 
 const licenseSchema = Joi.object({
+  code: Joi.string().required(),
+  name: Joi.string().required(),
   url: Joi.string()
     .uri()
     .required(),
-  code: Joi.string().required(),
+  groups: Joi.array()
+    .required()
+    .items(Joi.string()),
 });
 
 function handleError(h, { message }) {
@@ -43,7 +48,7 @@ routes.push({
     const { licenseStore } = request.server.app.services;
     const { licenseId } = request.params;
     const licenses = licenseStore.compatible(licenseId);
-    const response = licenses.map(({ url, name }) => ({ url: encodeURI(url), code: name }));
+    const response = licenses.map(serialize);
     return h.response(response);
   },
 });
@@ -62,7 +67,7 @@ routes.push({
   handler: async (request, h) => {
     const { licenseStore } = request.server.app.services;
     const licenses = licenseStore.all();
-    const response = licenses.map(({ url, name }) => ({ url: encodeURI(url), code: name }));
+    const response = licenses.map(serialize);
     return h.response(response);
   },
 });
@@ -79,10 +84,7 @@ routes.push({
       },
     },
     response: {
-      schema: Joi.object().keys({
-        code: Joi.string(),
-        url: Joi.string(),
-      }),
+      schema: licenseSchema,
     },
   },
   handler: async (request, h) => {
@@ -91,7 +93,7 @@ routes.push({
     try {
       const { title, wikiUrl } = await fileData.getFileData(fileUrlOrTitle);
       const license = await licenses.getLicense({ title, wikiUrl });
-      const response = { url: encodeURI(license.url), code: license.name };
+      const response = serialize(license);
       return h.response(response);
     } catch (error) {
       return handleError(h, error);

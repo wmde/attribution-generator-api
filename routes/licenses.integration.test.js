@@ -47,8 +47,10 @@ describe('license routes', () => {
       expect(response.status).toBe(200);
       expect(response.type).toBe('application/json');
       expect(response.payload).toMatchObject({
-        code: 'CC BY-SA 2.0 FR',
+        code: 'cc-by-sa-2.0-ported',
+        name: 'CC BY-SA 2.0 FR',
         url: 'https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en',
+        groups: ['cc', 'cc2', 'ported', 'knownPorted'],
       });
     });
   });

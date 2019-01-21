@@ -34,7 +34,12 @@ Object {
 
 exports[`license routes GET /license returns the license of a file 1`] = `
 Object {
-  "code": "CC BY-SA 3.0",
+  "code": "cc-by-sa-4.0",
+  "groups": Array [
+    "cc",
+    "cc4",
+  ],
+  "name": "CC BY-SA 4.0",
   "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
 }
 `;
@@ -42,12 +47,22 @@ Object {
 exports[`license routes GET /licenses returns a list of licenses 1`] = `
 Array [
   Object {
-    "code": "bar",
-    "url": "https://foo.bar/path%20with%20spaces",
+    "code": "cc-by-sa-4.0",
+    "groups": Array [
+      "cc",
+      "cc4",
+    ],
+    "name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
   },
   Object {
-    "code": "foo",
-    "url": "https://foo.bar/just-a-regular-path",
+    "code": "cc-by-sa-3.0",
+    "groups": Array [
+      "cc",
+      "cc4",
+    ],
+    "name": "CC BY-SA 3.0",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
   },
 ]
 `;
@@ -55,12 +70,22 @@ Array [
 exports[`license routes GET /licenses/compatible/{license} returns a list of licenses 1`] = `
 Array [
   Object {
-    "code": "bar",
-    "url": "https://foo.bar/path%20with%20spaces",
+    "code": "cc-by-sa-4.0",
+    "groups": Array [
+      "cc",
+      "cc4",
+    ],
+    "name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
   },
   Object {
-    "code": "foo",
-    "url": "https://foo.bar/just-a-regular-path",
+    "code": "cc-by-sa-3.0",
+    "groups": Array [
+      "cc",
+      "cc4",
+    ],
+    "name": "CC BY-SA 3.0",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
   },
 ]
 `;
