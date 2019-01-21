@@ -89,7 +89,7 @@ routes.push({
   ),
   method: 'GET',
   options: {
-    description: 'Generate attribution for a modifile work',
+    description: 'Generate attribution for a modified work',
     notes: 'Generate attribution hints for the given file if that file was modified.',
     validate: {
       params: {

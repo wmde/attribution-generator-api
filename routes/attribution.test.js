@@ -179,8 +179,8 @@ describe('attribution routes', () => {
     it('returns an error when the requested a typeOfUse we do not know', async () => {
       const response = await subject({ typeOfUse: 'for the lulz' });
 
-      expect(services.fileData.getFileData).not.toHaveBeenCalledWith;
-      expect(services.licenseStore.getLicenseById).not.toHaveBeenCalledWith;
+      expect(services.fileData.getFileData).not.toHaveBeenCalledWith();
+      expect(services.licenseStore.getLicenseById).not.toHaveBeenCalledWith();
       expect(response.status).toBe(400);
       expect(response.type).toBe('application/json');
       expect(response.payload).toMatchSnapshot();
