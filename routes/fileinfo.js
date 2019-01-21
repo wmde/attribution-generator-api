@@ -1,19 +1,24 @@
 const Joi = require('joi');
 
 const errors = require('../services/util/errors');
-const { license: serialize } = require('../services/util/serializers');
+const { fileinfo: serialize } = require('../services/util/serializers');
 
 const routes = [];
 
-const licenseSchema = Joi.object({
-  code: Joi.string().required(),
-  name: Joi.string().required(),
-  url: Joi.string()
-    .uri()
-    .required(),
-  groups: Joi.array()
-    .required()
-    .items(Joi.string()),
+const responseSchema = Joi.object({
+  license: Joi.object({
+    code: Joi.string().required(),
+    name: Joi.string().required(),
+    url: Joi.string()
+      .uri()
+      .required(),
+    groups: Joi.array()
+      .required()
+      .items(Joi.string()),
+  }),
+  author_html: Joi.string().required(),
+  attribution_html: Joi.string().required(),
+  media_type: Joi.string().required(),
 });
 
 function handleError(h, { message }) {
@@ -41,16 +46,16 @@ routes.push({
       },
     },
     response: {
-      schema: licenseSchema,
+      schema: responseSchema,
     },
   },
   handler: async (request, h) => {
     const { fileData, licenses } = request.server.app.services;
     const { fileUrlOrTitle } = request.params;
     try {
-      const { title, wikiUrl } = await fileData.getFileData(fileUrlOrTitle);
-      const license = await licenses.getLicense({ title, wikiUrl });
-      const response = serialize(license);
+      const fileInfo = await fileData.getFileData(fileUrlOrTitle);
+      const license = await licenses.getLicense(fileInfo);
+      const response = serialize(fileInfo, license);
       return h.response(response);
     } catch (error) {
       return handleError(h, error);

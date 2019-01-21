@@ -13,7 +13,17 @@ function attribution(attributionObject) {
   };
 }
 
+function fileinfo({ artistHtml, attributionHtml }, licenseParam) {
+  return {
+    license: license(licenseParam),
+    author_html: artistHtml,
+    attribution_html: attributionHtml,
+    media_type: 'foo',
+  };
+}
+
 module.exports = {
   license,
   attribution,
+  fileinfo,
 };
