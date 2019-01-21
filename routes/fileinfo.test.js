@@ -2,6 +2,7 @@ const setup = require('./__helpers__/setup');
 
 const errors = require('../services/util/errors');
 const licenseFactory = require('../__helpers__/licenseFactory');
+const fileDataFactory = require('../__helpers__/fileDataFactory');
 
 describe('fileinfo routes', () => {
   let context;
@@ -26,6 +27,8 @@ describe('fileinfo routes', () => {
   describe('GET /fileinfo', () => {
     const title = 'File:Apple_Lisa2-IMG_1517.jpg';
     const wikiUrl = 'https://en.wikipedia.org';
+    const mediaType = 'BITMAP';
+    const mockFileData = fileDataFactory({ title, wikiUrl, mediaType });
     const license = licenseFactory({ id: 'cc-by-sa-4.0', name: 'CC BY-SA 4.0' });
 
     function options() {
@@ -37,7 +40,7 @@ describe('fileinfo routes', () => {
     }
 
     it('returns the license of a file', async () => {
-      fileData.getFileData.mockReturnValue({ title, wikiUrl });
+      fileData.getFileData.mockReturnValue(mockFileData);
       licenses.getLicense.mockReturnValue(license);
 
       const response = await subject({});

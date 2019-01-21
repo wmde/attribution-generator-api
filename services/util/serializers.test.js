@@ -84,7 +84,7 @@ describe('fileinfo()', () => {
       },
       attribution_html: 'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr',
       author_html: '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo',
-      media_type: 'image'
+      media_type: 'BITMAP'
     });
   });
 
@@ -114,7 +114,7 @@ describe('fileinfo()', () => {
       },
       attribution_html: 'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr',
       author_html: '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo',
-      media_type: 'image'
+      media_type: 'BITMAP'
     });
   });
 });

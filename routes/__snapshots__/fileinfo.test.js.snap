@@ -34,12 +34,17 @@ Object {
 
 exports[`fileinfo routes GET /fileinfo returns the license of a file 1`] = `
 Object {
-  "code": "cc-by-sa-4.0",
-  "groups": Array [
-    "cc",
-    "cc4",
-  ],
-  "name": "CC BY-SA 4.0",
-  "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+  "attribution_html": "Photograph by <a href=\\"//commons.wikimedia.org/wiki/User:Rama\\" title=\\"User:Rama\\">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr",
+  "author_html": "<a href=\\"//commons.wikimedia.org/wiki/User:Rama\\" title=\\"User:Rama\\">Rama</a> &amp; Musée Bolo",
+  "license": Object {
+    "code": "cc-by-sa-4.0",
+    "groups": Array [
+      "cc",
+      "cc4",
+    ],
+    "name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+  },
+  "media_type": "BITMAP",
 }
 `;

@@ -54,7 +54,8 @@ routes.push({
     const { fileUrlOrTitle } = request.params;
     try {
       const fileInfo = await fileData.getFileData(fileUrlOrTitle);
-      const license = await licenses.getLicense(fileInfo);
+      const getLicenseParams = { title: fileInfo.title, wikiUrl: fileInfo.wikiUrl };
+      const license = await licenses.getLicense(getLicenseParams);
       const response = serialize(fileInfo, license);
       return h.response(response);
     } catch (error) {

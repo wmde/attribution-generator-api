@@ -13,12 +13,12 @@ function attribution(attributionObject) {
   };
 }
 
-function fileinfo({ artistHtml, attributionHtml }, licenseParam) {
+function fileinfo({ artistHtml, attributionHtml, mediaType }, licenseParam) {
   return {
     license: license(licenseParam),
     author_html: artistHtml,
     attribution_html: attributionHtml,
-    media_type: 'foo',
+    media_type: mediaType,
   };
 }
 
