@@ -1,5 +1,5 @@
 const setup = require('./__helpers__/setup');
-const License = require('../models/license');
+const licenseFactory = require('../__helpers__/licenseFactory');
 
 describe('attribution routes', () => {
   const services = {
@@ -15,12 +15,10 @@ describe('attribution routes', () => {
     attributionHtml:
       'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr',
   };
-  const license = new License({
+  const license = licenseFactory({
     id: 'cc-by-sa-2.5',
     name: 'CC BY-SA 2.5',
     groups: ['cc', 'cc2.5', 'ccby'],
-    compatibility: [],
-    regexp: /^CC-BY-2.5-\w+$/i,
     url: 'https://creativecommons.org/licenses/by-sa/2.5/legalcode',
   });
 
