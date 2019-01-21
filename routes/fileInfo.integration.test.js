@@ -12,7 +12,7 @@ const portReferences = require('../config/licenses/portReferences');
 // We probably do not always want to run this as part of the normal test suite
 // since this is hitting actual Wikipedia and Wikimedia APIs.
 // We could consider running it only on CI or introduce a JS-equivalent to VCR
-describe('license routes', () => {
+describe('fileinfo routes', () => {
   let context;
 
   const client = new Client();
@@ -34,7 +34,7 @@ describe('license routes', () => {
     const title = 'File:Apple_Lisa2-IMG_1517.jpg';
 
     function options() {
-      return { url: `/license/${title}`, method: 'GET' };
+      return { url: `/fileinfo/${title}`, method: 'GET' };
     }
 
     async function subject() {

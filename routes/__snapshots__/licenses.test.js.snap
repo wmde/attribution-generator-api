@@ -1,49 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`license routes GET /license returns a 404 response when the license cannot be retrieved 1`] = `
-Object {
-  "error": "Not Found",
-  "message": "empty-response",
-  "statusCode": 404,
-}
-`;
-
-exports[`license routes GET /license returns a 422 response when the identifier cannot be parsed 1`] = `
-Object {
-  "error": "Unprocessable Entity",
-  "message": "invalid-url",
-  "statusCode": 422,
-}
-`;
-
-exports[`license routes GET /license returns a 500 response for any generic error 1`] = `
-Object {
-  "error": "Internal Server Error",
-  "message": "An internal server error occurred",
-  "statusCode": 500,
-}
-`;
-
-exports[`license routes GET /license returns a 503 response when the wiki api is not reachable 1`] = `
-Object {
-  "error": "Service Unavailable",
-  "message": "api-unavailable",
-  "statusCode": 503,
-}
-`;
-
-exports[`license routes GET /license returns the license of a file 1`] = `
-Object {
-  "code": "cc-by-sa-4.0",
-  "groups": Array [
-    "cc",
-    "cc4",
-  ],
-  "name": "CC BY-SA 4.0",
-  "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
-}
-`;
-
 exports[`license routes GET /licenses returns a list of licenses 1`] = `
 Array [
   Object {
