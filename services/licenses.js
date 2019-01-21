@@ -16,7 +16,7 @@ function formatPageTemplateTitles(response) {
 }
 
 async function getPageTemplates({ client, title, wikiUrl }) {
-  const params = { tlnamespace: 10, tllimit: 100 };
+  const params = { tlnamespace: 10, tllimit: 500 };
   const response = await client.getResultsFromApi([title], 'templates', wikiUrl, params);
   return formatPageTemplateTitles(response);
 }
