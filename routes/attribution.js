@@ -3,6 +3,7 @@ const assert = require('assert');
 
 const { knownLanguages, knownTypesOfUse, Attribution } = require('../models/attribution');
 const errors = require('../services/util/errors');
+const { attribution: serialize } = require('../services/util/serializers');
 const definitions = require('./__swagger__/definitions');
 const prefix = require('./__utils__/path')('/attribution');
 
@@ -65,23 +66,17 @@ routes.push({
   },
   handler: async (request, h) => {
     const { fileData, licenses } = request.server.app.services;
-    const { languageCode, file, typeOfUse } = request.params;
+    const { file } = request.params;
     try {
       const fileInfo = await fileData.getFileData(file);
       const license = await licenses.getLicense(fileInfo);
       const attribution = new Attribution({
         isEdited: false,
-        license,
-        languageCode,
-        typeOfUse,
         fileInfo,
+        license,
+        ...request.params,
       });
-      return h.response({
-        licenseId: license.id,
-        licenseUrl: license.url,
-        attributionHtml: attribution.html(),
-        attributionPlain: attribution.plainText(),
-      });
+      return h.response(serialize(attribution));
     } catch (error) {
       return handleError(h, error);
     }
@@ -124,14 +119,7 @@ routes.push({
   },
   handler: async (request, h) => {
     const { fileData, licenseStore } = request.server.app.services;
-    const {
-      languageCode,
-      file,
-      typeOfUse,
-      modification,
-      modificationAuthor,
-      licenseId,
-    } = request.params;
+    const { file, licenseId } = request.params;
     try {
       const fileInfo = await fileData.getFileData(file);
       const license = licenseStore.getLicenseById(licenseId);
@@ -139,19 +127,11 @@ routes.push({
 
       const attribution = new Attribution({
         isEdited: true,
-        license,
-        languageCode,
-        typeOfUse,
         fileInfo,
-        modification,
-        modificationAuthor,
+        license,
+        ...request.params,
       });
-      return h.response({
-        licenseId: license.id,
-        licenseUrl: license.url,
-        attributionHtml: attribution.html(),
-        attributionPlain: attribution.plainText(),
-      });
+      return h.response(serialize(attribution));
     } catch (error) {
       return handleError(h, error);
     }
