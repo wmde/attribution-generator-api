@@ -1,31 +1,22 @@
 const { Attribution } = require('./attribution');
-const License = require('./license');
+const licenseFactory = require('../__helpers__/licenseFactory');
 
 describe('attribution', () => {
-  const exampleCC4License = new License({
-    id: 'cc-by-sa-4.0',
+  const exampleCC4License = licenseFactory({
     name: 'CC BY-SA 4.0',
     groups: ['cc', 'cc4'],
-    compatibility: [],
-    regexp: /^(Bild-)?CC-BY-SA(-|\/)4.0(([^-]+.+|-migrated)*)?$/i,
     url: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode',
   });
 
-  const exampleCC2License = new License({
-    id: 'cc-by-sa-2.5',
+  const exampleCC2License = licenseFactory({
     name: 'CC BY-SA 2.5',
     groups: ['cc', 'cc2.5', 'ccby'],
-    compatibility: [],
-    regexp: /^CC-BY-2.5-\w+$/i,
     url: 'https://creativecommons.org/licenses/by-sa/2.5/legalcode',
   });
 
-  const examplePublicDomainLicense = new License({
-    id: 'PD-1923',
+  const examplePublicDomainLicense = licenseFactory({
     name: 'Public Domain',
     groups: ['pd'],
-    compatibility: ['cc-by-4.0', 'cc-by-sa-4.0'],
-    regexp: /PD-1923/,
     url: 'https://commons.wikimedia.org/wiki/Template:PD-1923',
   });
 

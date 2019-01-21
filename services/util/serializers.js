@@ -3,4 +3,17 @@ function license(licenseObject) {
   return { code, name, url, groups };
 }
 
-module.exports = { license };
+function attribution(attributionObject) {
+  const { id: licenseId, url: licenseUrl } = attributionObject.license || {};
+  return {
+    licenseId,
+    licenseUrl,
+    attributionHtml: attributionObject.html ? attributionObject.html() : undefined,
+    attributionPlain: attributionObject.plainText ? attributionObject.plainText() : undefined,
+  };
+}
+
+module.exports = {
+  license,
+  attribution,
+};
