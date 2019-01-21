@@ -37,7 +37,7 @@ describe('Licenses', () => {
 
       expect(client.getResultsFromApi).toHaveBeenCalledWith([title], 'templates', wikiUrl, {
         tlnamespace: 10,
-        tllimit: 100,
+        tllimit: 500,
       });
       expect(licenseStore.match).toHaveBeenCalledWith(normalizedTemplates);
       expect(license).toEqual(licenseMock);
