@@ -4,7 +4,8 @@ const parseWikiUrl = require('./util/parseWikiUrl');
 const errors = require('./util/errors');
 
 async function getImageTitles({ client, title, wikiUrl }) {
-  const response = await client.getResultsFromApi([title], 'images', wikiUrl);
+  const params = { imlimit: 500 };
+  const response = await client.getResultsFromApi([title], 'images', wikiUrl, params);
   assert.ok(response.pages, errors.emptyResponse);
   const pages = Object.values(response.pages);
   assert.ok(pages.length === 1);
