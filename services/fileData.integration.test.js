@@ -57,6 +57,7 @@ describe('FileData', () => {
         // parameters other than title are ignored
         'https://commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg&uselang=de',
         'https://commons.m.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg&uselang=de',
+        'http//commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg&uselang=de',
         '//commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg&uselang=de',
         'commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg&uselang=de',
 

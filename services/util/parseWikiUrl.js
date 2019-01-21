@@ -1,7 +1,7 @@
 const errors = require('./errors');
 
 const wikipediaRegExp = /([-a-z]{2,})(\.m)?\.wikipedia\.org\//i;
-const commonsRegExp = /commons(\.m)?\.wikimedia\.org\/w(iki)\/?/i;
+const commonsRegExp = /commons(\.m)?\.wikimedia\.org\/w(iki)?\/?/i;
 const uploadRegExp = /upload.wikimedia\.org\/wikipedia\/([-a-z]{2,})\//i;
 
 const namePrefixes = ['#mediaviewer/', '#/media/', 'wiki/'];

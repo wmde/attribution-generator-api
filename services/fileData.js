@@ -3,7 +3,7 @@ const assert = require('assert');
 const parseWikiUrl = require('./util/parseWikiUrl');
 const errors = require('./util/errors');
 
-const fileRegex = /^\w+:([^\/]+\.\w+)$/;
+const fileRegex = /^\w+:([^/]+\.\w+)$/;
 const defaultWikiUrl = 'https://commons.wikimedia.org/';
 
 function parseImageInfoResponse(response) {
@@ -22,7 +22,7 @@ function parseFileTitle(title) {
   const matches = title.match(fileRegex);
   return {
     title: `File:${matches[1]}`,
-    wikiUrl: defaultWikiUrl
+    wikiUrl: defaultWikiUrl,
   };
 }
 
