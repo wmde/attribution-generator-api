@@ -23,39 +23,48 @@ describe('FileData', () => {
       },
       [
         'File:Helene_Fischer_2010.jpg',
+        'Datei:Helene_Fischer_2010.jpg',
+        'Fichier:Helene_Fischer_2010.jpg',
 
         'https://commons.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg',
         'https://commons.m.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg',
         'http://commons.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg',
+        '//commons.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg',
         'commons.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg',
 
         'https://commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg',
         'https://commons.m.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg',
         'http://commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg',
+        '//commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg',
         'commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg',
 
         'https://upload.wikimedia.org/wikipedia/commons/8/84/Helene_Fischer_2010.jpg',
         'http://upload.wikimedia.org/wikipedia/commons/8/84/Helene_Fischer_2010.jpg',
+        '//upload.wikimedia.org/wikipedia/commons/8/84/Helene_Fischer_2010.jpg',
         'upload.wikimedia.org/wikipedia/commons/8/84/Helene_Fischer_2010.jpg',
 
         'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Helene_Fischer_2010.jpg/171px-Helene_Fischer_2010.jpg',
         'http://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Helene_Fischer_2010.jpg/171px-Helene_Fischer_2010.jpg',
+        '//upload.wikimedia.org/wikipedia/commons/thumb/8/84/Helene_Fischer_2010.jpg/171px-Helene_Fischer_2010.jpg',
         'upload.wikimedia.org/wikipedia/commons/thumb/8/84/Helene_Fischer_2010.jpg/171px-Helene_Fischer_2010.jpg',
 
         'https://commons.wikimedia.org/wiki/Helene_Fischer#/media/File:Helene_Fischer_2010.jpg',
         'https://commons.m.wikimedia.org/wiki/Helene_Fischer#/media/File:Helene_Fischer_2010.jpg',
         'http://commons.wikimedia.org/wiki/Helene_Fischer#/media/File:Helene_Fischer_2010.jpg',
+        '//commons.wikimedia.org/wiki/Helene_Fischer#/media/File:Helene_Fischer_2010.jpg',
         'commons.wikimedia.org/wiki/Helene_Fischer#/media/File:Helene_Fischer_2010.jpg',
 
         // parameters other than title are ignored
         'https://commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg&uselang=de',
         'https://commons.m.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg&uselang=de',
+        '//commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg&uselang=de',
         'commons.wikimedia.org/w/index.php?title=File:Helene_Fischer_2010.jpg&uselang=de',
 
         // parameters other than title are ignored
         'https://commons.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg?foo=bar',
         'https://commons.m.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg?foo=bar',
         'http://commons.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg?foo=bar',
+        '//commons.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg?foo=bar',
         'commons.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg?foo=bar',
       ],
     ],
@@ -75,36 +84,43 @@ describe('FileData', () => {
         'https://de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'https://de.m.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'http://de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
+        '//de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
 
         'https://de.wikipedia.org/w/index.php?title=File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'https://de.m.wikipedia.org/w/index.php?title=File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'http://de.wikipedia.org/w/index.php?title=File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
+        '//de.wikipedia.org/w/index.php?title=File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'de.wikipedia.org/w/index.php?title=File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
 
         'https://upload.wikimedia.org/wikipedia/de/f/fb/1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'http://upload.wikimedia.org/wikipedia/de/f/fb/1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
+        '//upload.wikimedia.org/wikipedia/de/f/fb/1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'upload.wikimedia.org/wikipedia/de/f/fb/1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
 
         'https://upload.wikimedia.org/wikipedia/de/thumb/f/fb/1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg/320px-1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'http://upload.wikimedia.org/wikipedia/de/thumb/f/fb/1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg/320px-1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
+        '//upload.wikimedia.org/wikipedia/de/thumb/f/fb/1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg/320px-1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'upload.wikimedia.org/wikipedia/de/thumb/f/fb/1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg/320px-1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
 
         'https://de.wikipedia.org/wiki/S%C3%BCddeutsche_Fu%C3%9Fballmeisterschaft_1901/02#/media/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'https://de.m.wikipedia.org/wiki/S%C3%BCddeutsche_Fu%C3%9Fballmeisterschaft_1901/02#/media/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'http://de.wikipedia.org/wiki/S%C3%BCddeutsche_Fu%C3%9Fballmeisterschaft_1901/02#/media/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
+        '//de.wikipedia.org/wiki/S%C3%BCddeutsche_Fu%C3%9Fballmeisterschaft_1901/02#/media/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'de.wikipedia.org/wiki/S%C3%BCddeutsche_Fu%C3%9Fballmeisterschaft_1901/02#/media/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
 
         // 'parameters other than title are ignored
         'https://de.wikipedia.org/w/index.php?title=File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg&uselang=de',
         'https://de.m.wikipedia.org/w/index.php?title=File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg&uselang=de',
         'http://de.wikipedia.org/w/index.php?title=File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg&uselang=de',
+        '//de.wikipedia.org/w/index.php?title=File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg&uselang=de',
         'de.wikipedia.org/w/index.php?title=File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg&uselang=de',
 
         // parameters other than title are ignored
         'https://de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg?foo=bar',
         'https://de.m.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg?foo=bar',
         'http://de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg?foo=bar',
+        '//de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg?foo=bar',
         'de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg?foo=bar',
       ],
     ],
