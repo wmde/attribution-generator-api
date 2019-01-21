@@ -77,6 +77,14 @@ const cases = [
       wikiUrl: 'https://commons.wikimedia.org/',
     },
   },
+  {
+    name: 'commons thumbnail',
+    url: 'https://commons.m.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg',
+    expected: {
+      title: 'File:Helene_Fischer_2010.jpg',
+      wikiUrl: 'https://commons.wikimedia.org/',
+    },
+  },
 ];
 
 describe('parse()', () => {
