@@ -5,6 +5,7 @@ describe('attribution routes', () => {
   const services = {
     fileData: { getFileData: jest.fn() },
     licenses: { getLicense: jest.fn() },
+    licenseStore: { getLicenseById: jest.fn() },
   };
   const fileInfoMock = {
     title: 'File:Apple_Lisa2-IMG_1517.jpg',
@@ -96,6 +97,91 @@ describe('attribution routes', () => {
       expect(services.fileData.getFileData).toHaveBeenCalledWith(file);
       expect(services.licenses.getLicense).toHaveBeenCalledWith(fileInfoMock);
       expect(response.status).toBe(422);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+  });
+
+  describe('GET /attribution/... (modified)', () => {
+    const file = 'File:Foobar.jpg';
+    const languageCode = 'en';
+    const typeOfUse = 'online';
+    const modification = 'cropped';
+    const modificationAuthor = 'the great modificator';
+    const licenseId = 'cc-by-sa-2.5';
+
+    const defaults = {
+      languageCode,
+      file,
+      typeOfUse,
+      modification,
+      modificationAuthor,
+      licenseId,
+    };
+
+    function options(overrides = {}) {
+      const params = { ...defaults, ...overrides };
+      const url = `/attribution/${params.languageCode}/${params.file}/${
+        params.typeOfUse
+      }/modified/${params.modification}/${params.modificationAuthor}/${params.licenseId}`;
+      return { method: 'GET', url };
+    }
+
+    async function subject(overrides = {}) {
+      return context.inject(options(overrides));
+    }
+
+    beforeEach(() => {
+      services.fileData.getFileData.mockResolvedValue(fileInfoMock);
+      services.licenseStore.getLicenseById.mockImplementation(() => license);
+    });
+
+    afterEach(() => {
+      services.fileData.getFileData.mockReset();
+      services.licenseStore.getLicenseById.mockReset();
+    });
+
+    it('returns attribution information for the given file', async () => {
+      const response = await subject();
+
+      expect(services.fileData.getFileData).toHaveBeenCalledWith(file);
+      expect(services.licenseStore.getLicenseById).toHaveBeenCalledWith(licenseId);
+
+      expect(response.status).toBe(200);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
+    it('returns 500 for any generic error', async () => {
+      services.fileData.getFileData.mockImplementation(() => {
+        throw new Error('some error');
+      });
+      const response = await subject();
+
+      expect(services.fileData.getFileData).toHaveBeenCalledWith(file);
+      expect(services.licenseStore.getLicenseById).not.toHaveBeenCalledWith();
+      expect(response.status).toBe(500);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
+    it('returns an error when the requested a license we do not know', async () => {
+      services.licenseStore.getLicenseById.mockImplementation(() => undefined);
+      const response = await subject();
+
+      expect(services.fileData.getFileData).toHaveBeenCalledWith(file);
+      expect(services.licenseStore.getLicenseById).toHaveBeenCalledWith(licenseId);
+      expect(response.status).toBe(404);
+      expect(response.type).toBe('application/json');
+      expect(response.payload).toMatchSnapshot();
+    });
+
+    it('returns an error when the requested a typeOfUse we do not know', async () => {
+      const response = await subject({ typeOfUse: 'for the lulz' });
+
+      expect(services.fileData.getFileData).not.toHaveBeenCalledWith;
+      expect(services.licenseStore.getLicenseById).not.toHaveBeenCalledWith;
+      expect(response.status).toBe(400);
       expect(response.type).toBe('application/json');
       expect(response.payload).toMatchSnapshot();
     });

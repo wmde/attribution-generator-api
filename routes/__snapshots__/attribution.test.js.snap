@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`attribution routes GET /attribution/... (modified) returns 500 for any generic error 1`] = `
+Object {
+  "error": "Internal Server Error",
+  "message": "An internal server error occurred",
+  "statusCode": 500,
+}
+`;
+
+exports[`attribution routes GET /attribution/... (modified) returns an error when the requested a license we do not know 1`] = `
+Object {
+  "error": "Not Found",
+  "message": "license-not-found",
+  "statusCode": 404,
+}
+`;
+
+exports[`attribution routes GET /attribution/... (modified) returns an error when the requested a typeOfUse we do not know 1`] = `
+Object {
+  "error": "Bad Request",
+  "message": "Invalid request params input",
+  "statusCode": 400,
+}
+`;
+
+exports[`attribution routes GET /attribution/... (modified) returns attribution information for the given file 1`] = `
+Object {
+  "attributionHtml": "Photograph by <a href=\\"https://commons.wikimedia.org/wiki/User:Rama\\">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr, <a href=\\"https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg\\">Apple_Lisa2-IMG_1517</a>, cropped by the great modificator, <a href=\\"https://creativecommons.org/licenses/by-sa/2.5/legalcode\\" rel=\\"license\\">CC BY-SA 2.5</a>",
+  "attributionPlain": "Photograph by Rama, Wikimedia Commons, Cc-by-sa-2.0-fr (https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg), „Apple_Lisa2-IMG_1517“, cropped by the great modificator, https://creativecommons.org/licenses/by-sa/2.5/legalcode",
+  "licenseId": "cc-by-sa-2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5/legalcode",
+}
+`;
+
 exports[`attribution routes GET /attribution/... (unmodified) returns 500 for any generic error 1`] = `
 Object {
   "error": "Internal Server Error",

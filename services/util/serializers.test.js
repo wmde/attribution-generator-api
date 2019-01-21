@@ -51,7 +51,8 @@ describe('attribution()', () => {
     expect(serialize(attribution)).toEqual({
       licenseId: 'licenseId',
       licenseUrl: 'licenseUrl',
-      attributionHtml: 'artist, <a href="file_url">file_title</a>, <a href="licenseUrl" rel="license">licenseName</a>',
+      attributionHtml:
+        'artist, <a href="file_url">file_title</a>, <a href="licenseUrl" rel="license">licenseName</a>',
       attributionPlain: 'artist (file_url), „file_title“, licenseUrl',
     });
   });
