@@ -12,9 +12,15 @@ function parseImageInfoResponse(response) {
   const { to: normalizedTitle } = response.normalized ? response.normalized[0] : {};
   assert.ok(pages.length === 1);
   const { imageinfo } = pages[0];
+
+  // when we gave an invalid URL (e.g. an article URL)
+  if (!imageinfo) {
+    return {};
+  }
+
   return {
     normalizedTitle,
-    ...imageinfo[0],
+    ...(imageinfo[0] || {}),
   };
 }
 
@@ -53,6 +59,12 @@ class FileData {
       title,
       wikiUrl,
     });
+
+    // when no image info could be found
+    if (!url) {
+      return {};
+    }
+
     const { title: originalTitle, wikiUrl: originalWikiUrl } = parseWikiUrl(url);
     const { value: artistHtml = null } = extmetadata.Artist || {};
     const { value: attributionHtml = null } = extmetadata.Attribution || {};

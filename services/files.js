@@ -3,9 +3,15 @@ const assert = require('assert');
 const parseWikiUrl = require('./util/parseWikiUrl');
 const errors = require('./util/errors');
 
+// unescape URL-escaped characters
+function formatTitle(title) {
+  return decodeURI(title.trim());
+}
+
 async function getImageTitles({ client, title, wikiUrl }) {
+  const formattedTitle = formatTitle(title);
   const params = { imlimit: 500 };
-  const response = await client.getResultsFromApi([title], 'images', wikiUrl, params);
+  const response = await client.getResultsFromApi([formattedTitle], 'images', wikiUrl, params);
   assert.ok(response.pages, errors.emptyResponse);
   const pages = Object.values(response.pages);
   assert.ok(pages.length === 1);
@@ -29,7 +35,7 @@ function formatImageInfo(page) {
   return { title, descriptionUrl, rawUrl, fileSize, thumbnail };
 }
 
-async function getImageUrls({ client, titles, wikiUrl }) {
+async function getImageInfos({ client, titles, wikiUrl }) {
   const params = { iiprop: 'url|size', iiurlwidth: 300 };
   const { pages } = await client.getResultsFromApi(titles, 'imageinfo', wikiUrl, params);
   assert.ok(pages, errors.emptyResponse);
@@ -48,7 +54,7 @@ class Files {
     const titles = await getImageTitles({ client, title, wikiUrl });
     if (titles.length === 0) return [];
 
-    return getImageUrls({ client, titles, wikiUrl });
+    return getImageInfos({ client, titles, wikiUrl });
   }
 }
 

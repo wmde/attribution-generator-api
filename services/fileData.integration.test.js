@@ -19,7 +19,7 @@ describe('FileData', () => {
         artistHtml:
           '<a href="//commons.wikimedia.org/w/index.php?title=User:Fleyx24&amp;action=edit&amp;redlink=1" class="new" title="User:Fleyx24 (page does not exist)">Fleyx24</a>',
         attributionHtml: null,
-        mediaType: 'BITMAP'
+        mediaType: 'BITMAP',
       },
       [
         'File:Helene_Fischer_2010.jpg',
@@ -79,9 +79,11 @@ describe('FileData', () => {
           'https://upload.wikimedia.org/wikipedia/de/f/fb/1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         artistHtml: '<p>unbekannt\n</p>',
         attributionHtml: null,
-        mediaType: 'BITMAP'
+        mediaType: 'BITMAP',
       },
       [
+        'https://de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_Nürnberg_1901.jpg',
+
         'https://de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'https://de.m.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
         'http://de.wikipedia.org/wiki/File:1_FC_Bamberg_-_1_FC_N%C3%BCrnberg_1901.jpg',
@@ -126,41 +128,9 @@ describe('FileData', () => {
       ],
     ],
     [
-      {
-        title: 'File:K%C3%B6nigsberg_in_Bayern',
-        normalizedTitle: 'Datei:Königsberg_in_Bayern',
-        wikiUrl: 'https://de.wikipedia.org/',
-        rawUrl: 'https://upload.wikimedia.org/wikipedia/de/f/fb/K%C3%B6nigsberg_in_Bayern.jpg',
-        artistHtml: '<p>unbekannt\n</p>',
-        attributionHtml: null,
-      },
-      [
-        'https://de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern',
-        'http://de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern',
-        '//de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern',
-        'de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern',
-        'https://de.m.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern',
-
-        // parameters other than title are ignored
-        'https://de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern?uselang=en',
-        'http://de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern?uselang=en',
-        '//de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern?uselang=en',
-        'de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern?uselang=en',
-        'https://de.m.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern?uselang=en',
-
-        'https://de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern',
-        'http://de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern',
-        '//de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern',
-        'de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern',
-        'https://de.m.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern',
-
-        // parameters other than title are ignored
-        'https://de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern&uselang=de',
-        'http://de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern&uselang=de',
-        '//de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern&uselang=de',
-        'de.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern&uselang=de',
-        'https://de.m.wikipedia.org/w/index.php?title=K%C3%B6nigsberg_in_Bayern&uselang=de',
-      ],
+      // we give an article-url (not a file URL) and should give "no result" in all cases
+      {},
+      ['https://de.wikipedia.org/wiki/K%C3%B6nigsberg_in_Bayern'],
     ],
   ];
 
@@ -171,7 +141,6 @@ describe('FileData', () => {
       inputUrls.forEach(input => {
         it(`requesting info for ${input}`, async () => {
           const result = await fileData.getFileData(input);
-          // console.log({ result });
           expect(result).toEqual(expectedResult);
         });
       });
