@@ -80,6 +80,10 @@ It can be useful to run tests with the `DEBUG` flag enabled in order to get more
 DEBUG=true yarn debugtest
 ```
 
+## Documentation
+
+You can open http://localhost:8080/docs to browse the API documentation or http://localhost:8080/swagger to see the raw `openapi.json` output to be used in other tools.
+
 ## Resources
 
 The app communicates with the Wikimedia and Wikipedia APIs:

@@ -93,7 +93,7 @@ definitions:
   UnprocessableEntityErrorResponse:
     description: Unprocessable Entity
     properties: {}
-host: TODO
+host: 'localhost:8080'
 info:
   description: Create attribution hints for images from Wikipedia and Wikimedia Commons.
   title: attribution-generator-api
@@ -201,6 +201,33 @@ paths:
       summary: Generate attribution
       tags:
         - attribution
+  /docs:
+    get:
+      produces:
+        - application/json
+      responses:
+        default:
+          description: ''
+      tags:
+        - docs
+  /docs/index.html:
+    get:
+      produces:
+        - application/json
+      responses:
+        default:
+          description: ''
+      tags:
+        - docs
+  '/docs/{path}':
+    get:
+      produces:
+        - application/json
+      responses:
+        default:
+          description: ''
+      tags:
+        - docs
   '/fileinfo/{fileUrlOrTitle}':
     get:
       description: Returns the most liberal license for the given image
@@ -334,8 +361,8 @@ paths:
       tags:
         - swagger
 schemes:
-  - https
   - http
+  - https
 securityDefinitions: []
 swagger: '2.0'
 tags: []

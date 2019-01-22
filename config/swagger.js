@@ -1,7 +1,7 @@
 const pkg = require('../package.json');
 
 const config = {
-  host: 'TODO',
+  host: 'localhost:8080',
 
   // Overall API description
   info: {
@@ -15,7 +15,7 @@ const config = {
   produces: ['application/json'],
 
   // URI schemes
-  schemes: ['https', 'http'],
+  schemes: ['http', 'https'],
 
   // Security definitions
   securityDefinitions: [],
