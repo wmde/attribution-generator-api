@@ -45,20 +45,18 @@ definitions:
   InternalServerError:
     description: Internal Server Error
     properties: {}
-  LicenseAuthor_htmlAttribution_htmlMedia_typeModel:
+  LicenseAuthorHtmlAttributionHtmlMediaTypeModel:
     properties:
-      attribution_html:
+      attributionHtml:
         type: string
-      author_html:
+      authorHtml:
         type: string
       license:
         $ref: '#/definitions/CodeNameUrlGroupsModel'
-      media_type:
+      mediaType:
         type: string
     required:
-      - author_html
-      - attribution_html
-      - media_type
+      - mediaType
   RawUrlWidthHeightModel:
     properties:
       height:
@@ -229,7 +227,7 @@ paths:
         default:
           description: ''
           schema:
-            $ref: '#/definitions/LicenseAuthor_htmlAttribution_htmlMedia_typeModel'
+            $ref: '#/definitions/LicenseAuthorHtmlAttributionHtmlMediaTypeModel'
       summary: Image license
       tags:
         - fileinfo

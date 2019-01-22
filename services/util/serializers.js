@@ -16,9 +16,9 @@ function attribution(attributionObject) {
 function fileinfo({ artistHtml, attributionHtml, mediaType }, licenseParam) {
   return {
     license: license(licenseParam),
-    author_html: artistHtml,
-    attribution_html: attributionHtml,
-    media_type: mediaType,
+    authorHtml: artistHtml,
+    attributionHtml,
+    mediaType,
   };
 }
 
