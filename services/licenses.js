@@ -3,17 +3,15 @@ function normalizeTemplateTitle(template) {
   return title.replace(/^Template:/, '');
 }
 
-function formatPageTemplateTitles(pages) {
-  return Object.values(pages).reduce((acc, page) => {
-    const { templates = [] } = page;
-    return [...acc, ...templates.map(normalizeTemplateTitle)];
-  }, []);
+function formatPageTemplateTitles(titles, page) {
+  const { templates = [] } = page;
+  return [...titles, ...templates.map(normalizeTemplateTitle)];
 }
 
 async function getPageTemplates({ client, title, wikiUrl }) {
   const params = { tlnamespace: 10, tllimit: 500 };
   const { pages } = await client.getResultsFromApi([title], 'templates', wikiUrl, params);
-  return formatPageTemplateTitles(pages);
+  return Object.values(pages).reduce(formatPageTemplateTitles, []);
 }
 
 class Licences {
