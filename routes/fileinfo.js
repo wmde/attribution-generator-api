@@ -17,8 +17,8 @@ const responseSchema = Joi.object({
       .required()
       .items(Joi.string()),
   }),
-  author_html: Joi.string().required(),
-  attribution_html: Joi.string().required(),
+  author_html: Joi.string(),
+  attribution_html: Joi.string(),
   media_type: Joi.string().required(),
 });
 
