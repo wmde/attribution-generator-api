@@ -4,10 +4,6 @@ const LicenseStore = require('../services/licenseStore');
 const licenseData = require('../config/licenses/licenses');
 const portReferences = require('../config/licenses/portReferences');
 
-// NOTE: this is a temporary integration test to easify development
-// We probably do not always want to run this as part of the normal test suite
-// since this is hitting actual Wikipedia and Wikimedia APIs.
-// We could consider running it only on CI or introduce a JS-equivalent to VCR
 describe('licenses routes', () => {
   let context;
 
