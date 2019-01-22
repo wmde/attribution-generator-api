@@ -84,7 +84,7 @@ class LicenseStore {
   // Returns all compatible licenses for the passed license id.
   compatible(id) {
     const license = this.getLicenseById(id);
-    assert.ok(!!license, errors.licenseNotFound);
+    assert.ok(license, errors.licenseNotFound);
     const { compatibility } = license;
     return compatibility.map(cid => this.getLicenseById(cid));
   }
