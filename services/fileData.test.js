@@ -56,14 +56,6 @@ describe('FileData', () => {
 
         expect(fileData).toEqual({ title, rawUrl, wikiUrl, artistHtml, attributionHtml: null });
       });
-
-      it('throws an error when the imageinfo response is empty', async () => {
-        client.getResultsFromApi.mockResolvedValueOnce({});
-
-        const service = new FileData({ client });
-
-        await expect(service.getFileData(url)).rejects.toThrow(errors.emptyResponse);
-      });
     });
 
     describe('when passing only a title', () => {
