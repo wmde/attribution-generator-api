@@ -56,7 +56,6 @@ routes.push({
     response: {
       schema: Joi.array().items(fileSchema),
       status: {
-        400: definitions.errors['400'],
         422: definitions.errors['422'],
         500: definitions.errors['500'],
         503: definitions.errors['503'],

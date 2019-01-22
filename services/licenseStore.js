@@ -1,4 +1,6 @@
+const assert = require('assert');
 const License = require('../models/license');
+const errors = require('../services/util/errors');
 
 function buildLicense(params) {
   const attributes = {
@@ -82,11 +84,9 @@ class LicenseStore {
   // Returns all compatible licenses for the passed license id.
   compatible(id) {
     const license = this.getLicenseById(id);
-    if (license) {
-      const { compatibility } = license;
-      return compatibility.map(cid => this.getLicenseById(cid));
-    }
-    return [];
+    assert.ok(license, errors.licenseNotFound);
+    const { compatibility } = license;
+    return compatibility.map(cid => this.getLicenseById(cid));
   }
 
   // Returns the first license in the list of licenses.js that matches one of the

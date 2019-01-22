@@ -3,6 +3,7 @@ const License = require('../models/license');
 const licenses = require('../config/licenses/licenses');
 const portReferences = require('../config/licenses/portReferences');
 const compatibleCases = require('./__test__/compatibleCases');
+const errors = require('../services/util/errors');
 
 describe('licenseStore', () => {
   const subject = new LicenseStore(licenses, portReferences);
@@ -146,12 +147,11 @@ describe('licenseStore', () => {
       expect(compatible).toEqual([]);
     });
 
-    it('finds no compatible license for an invalid license id', () => {
-      const compatible = subject.compatible('xx-by-sa-3.0');
-      expect(compatible).toEqual([]);
+    it('throws error for an invalid license id', () => {
+      expect(() => subject.compatible('xx-by-sa-3.0')).toThrow(errors.licenseNotFound);
     });
 
-    it('finds no compatible license for ported licenes', () => {
+    it('finds no compatible license for ported license', () => {
       const compatible = subject.compatible('cc-by-sa-3.0-ported');
       expect(compatible).toEqual([]);
     });
