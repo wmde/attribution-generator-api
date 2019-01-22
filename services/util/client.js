@@ -1,10 +1,12 @@
 const axios = require('axios');
+const chunk = require('lodash.chunk');
 const Url = require('url');
 
 const errors = require('./errors');
 
 const defaultParams = { action: 'query', format: 'json' };
 const apiPath = 'w/api.php';
+const maxTitles = 50;
 
 function transform(data) {
   const { query } = data;
@@ -26,6 +28,17 @@ async function queryApi({ client, wikiUrl, params }) {
   }
 }
 
+function batchRequest({ batch, client, wikiUrl, params }) {
+  const titles = batch.join('|');
+  return queryApi({ client, wikiUrl, params: { ...params, titles } });
+}
+
+function mergePages(responses) {
+  return responses
+    .map(response => response.pages)
+    .reduce((pages, page) => Object.assign(pages, page));
+}
+
 class Client {
   constructor() {
     this.client = axios.create({
@@ -39,16 +52,18 @@ class Client {
     });
   }
 
-  getResultsFromApi(titles, prop, wikiUrl, params = {}) {
+  async getResultsFromApi(titles, prop, wikiUrl, params = {}) {
     const { client } = this;
-    const titleString = titles.join('|');
+    const titleBatches = chunk(titles, maxTitles);
     const queryParams = {
       ...defaultParams,
       ...params,
-      titles: titleString,
       prop,
     };
-    return queryApi({ client, wikiUrl, params: queryParams });
+    const responses = await axios.all(
+      titleBatches.map(batch => batchRequest({ batch, client, wikiUrl, params: queryParams }))
+    );
+    return { pages: mergePages(responses) };
   }
 }
 
