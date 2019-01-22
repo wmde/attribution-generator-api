@@ -102,7 +102,7 @@ paths:
   '/attribution/{languageCode}/{file}/{typeOfUse}/modified/{modification}/{modificationAuthor}/{licenseId}':
     get:
       description: Generate attribution hints for the given file if that file was modified.
-      operationId: attribution.show
+      operationId: attribution.modified.show
       parameters:
         - in: path
           name: languageCode
@@ -159,7 +159,7 @@ paths:
   '/attribution/{languageCode}/{file}/{typeOfUse}/unmodified':
     get:
       description: Generate attribution hints for the given file.
-      operationId: attribution.show
+      operationId: attribution.unmodified.show
       parameters:
         - in: path
           name: languageCode
