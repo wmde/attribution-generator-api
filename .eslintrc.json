@@ -3,6 +3,10 @@
     "browser": true,
     "jest": true
   },
+  "globals": {
+    "startRecording": true,
+    "stopRecording": true
+  },
   "extends": [
     "airbnb-base",
     "plugin:prettier/recommended",
@@ -13,6 +17,7 @@
       "error",
       {
         "devDependencies": [
+          "config/jest/*.js",
           "**/*.test.{js,jsx}",
           "**/jest.config.js",
           "**/jest.setup.js",

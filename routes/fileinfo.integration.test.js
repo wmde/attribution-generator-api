@@ -13,6 +13,13 @@ const portReferences = require('../config/licenses/portReferences');
 // since this is hitting actual Wikipedia and Wikimedia APIs.
 // We could consider running it only on CI or introduce a JS-equivalent to VCR
 describe('fileinfo routes', () => {
+  beforeAll(() => {
+    startRecording('routes/fileinfo');
+  });
+
+  afterAll(async () => {
+    await stopRecording();
+  });
   let context;
 
   const client = new Client();

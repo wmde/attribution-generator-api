@@ -5,6 +5,14 @@ describe('FileData', () => {
   const client = new Client();
   const fileData = new FileData({ client });
 
+  beforeAll(() => {
+    startRecording('services/fileData.getFileData()');
+  });
+
+  afterAll(async () => {
+    await stopRecording();
+  });
+
   // We got a list of example url that we need to understand and match.
   // This spec calls all these examples and expects they work against a known
   // good state (snapshop).

@@ -1,4 +1,4 @@
 module.exports = {
   globalSetup: '<rootDir>/jest.setup.js',
-  testEnvironment: 'node',
+  testEnvironment: '<rootDir>/config/jest/vcrNode',
 };
