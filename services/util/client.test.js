@@ -61,6 +61,26 @@ describe('Client', () => {
       await expect(client.getResultsFromApi(titles, 'image', wikiUrl)).rejects.toThrow();
     });
 
+    it('raises an error if the response does not include query object', async () => {
+      const titles = ['Def_Leppard'];
+      axiosClient.get.mockResolvedValue({ data: {} });
+      const client = new Client();
+
+      await expect(client.getResultsFromApi(titles, 'image', wikiUrl)).rejects.toThrow(
+        errors.emptyResponse
+      );
+    });
+
+    it('raises an error if the response does not include pages', async () => {
+      const titles = ['Def_Leppard'];
+      axiosClient.get.mockResolvedValue({ data: { query: { namespace: 'some' } } });
+      const client = new Client();
+
+      await expect(client.getResultsFromApi(titles, 'image', wikiUrl)).rejects.toThrow(
+        errors.emptyResponse
+      );
+    });
+
     it('allows querying for images of a page', async () => {
       const titleString = 'Def_Leppard';
       const titles = [titleString];
