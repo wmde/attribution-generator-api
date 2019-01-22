@@ -1,5 +1,7 @@
 const Joi = require('joi');
+const assert = require('assert');
 
+const errors = require('../services/util/errors');
 const { license: serialize } = require('../services/util/serializers');
 
 const routes = [];
@@ -13,6 +15,15 @@ const licenseSchema = Joi.object({
     .required()
     .items(Joi.string()),
 });
+
+function handleError(h, { message }) {
+  switch (message) {
+    case errors.licenseNotFound:
+      return h.error(message, { statusCode: 404 });
+    default:
+      return h.error(message);
+  }
+}
 
 routes.push({
   path: '/licenses/compatible/{licenseId}',
@@ -32,9 +43,13 @@ routes.push({
   handler: async (request, h) => {
     const { licenseStore } = request.server.app.services;
     const { licenseId } = request.params;
-    const licenses = licenseStore.compatible(licenseId);
-    const response = licenses.map(serialize);
-    return h.response(response);
+    try {
+      const licenses = licenseStore.compatible(licenseId);
+      const response = licenses.map(serialize);
+      return h.response(response);
+    } catch (error) {
+      return handleError(h, error);
+    }
   },
 });
 

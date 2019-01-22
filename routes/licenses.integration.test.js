@@ -85,14 +85,15 @@ describe('licenses routes', () => {
     it('returns a proper error for invalid license ids', async () => {
       const response = await subject({ licenseId: 'flerb-florb' });
 
-      expect(response.status).toBe(422);
+      expect(response.status).toBe(404);
       expect(response.type).toBe('application/json');
 
+      expect(response.status).toBe(404);
+      expect(response.type).toBe('application/json');
       expect(response.payload).toMatchObject({
-        error: 'Unprocessable Entity',
-        message: 'invalid-license',
-        data: 'flerb-florb',
-        statusCode: 422,
+        error: 'Not Found',
+        message: 'license-not-found',
+        statusCode: 404,
       });
     });
   });
