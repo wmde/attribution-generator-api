@@ -34,19 +34,17 @@ describe('fileinfo routes', () => {
     await context.destroy();
   });
 
-  describe('GET /license', () => {
-    const title = 'File:Apple_Lisa2-IMG_1517.jpg';
-
-    function options() {
+  describe('GET /fileinfo', () => {
+    function options({ title }) {
       return { url: `/fileinfo/${title}`, method: 'GET' };
     }
 
-    async function subject() {
-      return context.inject(options());
+    async function subject(opts = {}) {
+      return context.inject(options(opts));
     }
 
     it('returns the license of a file', async () => {
-      const response = await subject({});
+      const response = await subject({ title: 'File:Apple_Lisa2-IMG_1517.jpg' });
 
       expect(response.status).toBe(200);
       expect(response.type).toBe('application/json');
@@ -63,6 +61,12 @@ describe('fileinfo routes', () => {
           'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr',
         mediaType: 'BITMAP',
       });
+    });
+
+    it('when requesting a file where the attribution is missing', async () => {
+      const response = await subject({ title: 'File:Helene_Fischer_2010.jpg' });
+      expect(response.status).toBe(200);
+      expect(response.payload.attributionHtml).toBe(null);
     });
   });
 });
