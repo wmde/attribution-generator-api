@@ -17,9 +17,9 @@ const responseSchema = Joi.object({
       .required()
       .items(Joi.string()),
   }),
-  author_html: Joi.string(),
-  attribution_html: Joi.string(),
-  media_type: Joi.string().required(),
+  authorHtml: Joi.string(),
+  attributionHtml: Joi.string(),
+  mediaType: Joi.string().required(),
 });
 
 function handleError(h, { message }) {

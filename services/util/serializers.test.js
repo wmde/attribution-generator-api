@@ -82,11 +82,11 @@ describe('fileinfo()', () => {
         name: 'CC BY-SA 3.0',
         url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
       },
-      attribution_html:
+      attributionHtml:
         'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr',
-      author_html:
+      authorHtml:
         '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo',
-      media_type: 'BITMAP',
+      mediaType: 'BITMAP',
     });
   });
 
@@ -99,9 +99,9 @@ describe('fileinfo()', () => {
         name: 'CC BY-SA 3.0',
         url: 'https://creativecommons.org/licenses/by-sa/3.0/legalcode',
       },
-      attribution_html: undefined,
-      author_html: undefined,
-      media_type: undefined,
+      attributionHtml: undefined,
+      authorHtml: undefined,
+      mediaType: undefined,
     });
   });
 
@@ -114,11 +114,11 @@ describe('fileinfo()', () => {
         name: undefined,
         url: undefined,
       },
-      attribution_html:
+      attributionHtml:
         'Photograph by <a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr',
-      author_html:
+      authorHtml:
         '<a href="//commons.wikimedia.org/wiki/User:Rama" title="User:Rama">Rama</a> &amp; Musée Bolo',
-      media_type: 'BITMAP',
+      mediaType: 'BITMAP',
     });
   });
 });
