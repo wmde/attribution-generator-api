@@ -1,12 +1,16 @@
-const Files = require('./files');
 const Client = require('./util/client');
-
+const Files = require('./files');
 const expectedFiles = require('./__fixtures__/expectedFiles');
 
-// NOTE: this is a tmp integration test to easify development
-// we probably do not want to run this by default in the future
-// (only on CI maybe)
 describe('getPageImages()', () => {
+  beforeAll(() => {
+    startRecording('services/files.getPageImages()');
+  });
+
+  afterAll(async () => {
+    await stopRecording();
+  });
+
   const client = new Client();
   const service = new Files({ client });
   const urls = [
