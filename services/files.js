@@ -5,13 +5,11 @@ const errors = require('./util/errors');
 
 async function getImageTitles({ client, title, wikiUrl }) {
   const params = { imlimit: 500 };
-  const response = await client.getResultsFromApi([title], 'images', wikiUrl, params);
-  assert.ok(response.pages, errors.emptyResponse);
-  const pages = Object.values(response.pages);
-  assert.ok(pages.length === 1);
-  const { images = [] } = pages[0];
-
-  return images.map(image => image.title);
+  const { pages } = await client.getResultsFromApi([title], 'images', wikiUrl, params);
+  return Object.values(pages).reduce((acc, page) => {
+    const { images = [] } = page;
+    return [...acc, ...images.map(image => image.title)];
+  }, []);
 }
 
 function formatImageInfo(page) {
