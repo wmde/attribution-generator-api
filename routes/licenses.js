@@ -1,6 +1,7 @@
 const Joi = require('joi');
 
 const errors = require('../services/util/errors');
+const definitions = require('./__swagger__/definitions');
 const { license: serialize } = require('../services/util/serializers');
 
 const routes = [];
@@ -36,6 +37,10 @@ routes.push({
     },
     response: {
       schema: Joi.array().items(licenseSchema),
+      status: {
+        404: definitions.errors['404'],
+        500: definitions.errors['500'],
+      },
     },
   },
   handler: async (request, h) => {

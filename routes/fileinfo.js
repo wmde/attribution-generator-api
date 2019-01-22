@@ -1,6 +1,7 @@
 const Joi = require('joi');
 
 const errors = require('../services/util/errors');
+const definitions = require('./__swagger__/definitions');
 const { fileinfo: serialize } = require('../services/util/serializers');
 
 const routes = [];
@@ -47,6 +48,12 @@ routes.push({
     },
     response: {
       schema: responseSchema,
+      status: {
+        404: definitions.errors['404'],
+        422: definitions.errors['422'],
+        500: definitions.errors['500'],
+        503: definitions.errors['503'],
+      },
     },
   },
   handler: async (request, h) => {
