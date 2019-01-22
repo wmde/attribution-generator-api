@@ -5,7 +5,7 @@ install: yarn install
 script:
   # Run linting and execute tests
   - yarn lint
-  - yarn test
+  - yarn sequentialtest
   # Set up environment
   - cp .env.test .env
   # Ensure generated API specification is up-to-date
