@@ -38,10 +38,10 @@ describe('licenses routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.type).toBe('application/json');
-      response.payload.forEach((license) => {
+      response.payload.forEach(license => {
         const keys = Object.keys(license);
         expect(keys).toEqual(expect.arrayContaining(licenseKeys));
-        licenseKeys.forEach((key) => {
+        licenseKeys.forEach(key => {
           expect(license[key]).toBeDefined();
         });
       });
@@ -50,7 +50,7 @@ describe('licenses routes', () => {
 
   describe('GET /licenses/compatible/{licenseId}', () => {
     const defaults = {
-      licenseId: 'cc-by-sa-3.0-de'
+      licenseId: 'cc-by-sa-3.0-de',
     };
 
     const expectedLicenses = ['cc-by-sa-3.0', 'cc-by-sa-4.0'];
@@ -71,12 +71,14 @@ describe('licenses routes', () => {
       expect(response.type).toBe('application/json');
 
       const licenses = response.payload;
-      expect(licenses.map(license => license.code)).toEqual(expect.arrayContaining(expectedLicenses));
+      expect(licenses.map(license => license.code)).toEqual(
+        expect.arrayContaining(expectedLicenses)
+      );
 
-      licenses.forEach((license) => {
+      licenses.forEach(license => {
         const keys = Object.keys(license);
         expect(keys).toEqual(expect.arrayContaining(licenseKeys));
-        licenseKeys.forEach((key) => {
+        licenseKeys.forEach(key => {
           expect(license[key]).toBeDefined();
         });
       });

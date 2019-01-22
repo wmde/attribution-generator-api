@@ -1,6 +1,6 @@
+const assert = require('assert');
 const License = require('../models/license');
 const errors = require('../services/util/errors');
-const assert = require('assert');
 
 function buildLicense(params) {
   const attributes = {

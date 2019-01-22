@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const assert = require('assert');
 
 const errors = require('../services/util/errors');
 const { license: serialize } = require('../services/util/serializers');
@@ -9,8 +8,7 @@ const routes = [];
 const licenseSchema = Joi.object({
   code: Joi.string().required(),
   name: Joi.string().required(),
-  url: Joi.string()
-    .required(),
+  url: Joi.string().required(),
   groups: Joi.array()
     .required()
     .items(Joi.string()),
