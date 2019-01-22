@@ -69,9 +69,25 @@ const cases = [
     },
   },
   {
+    name: 'upload url without protocol prefix',
+    url: 'upload.wikimedia.org/wikipedia/commons/8/84/Helene_Fischer_2010.jpg',
+    expected: {
+      title: 'File:Helene_Fischer_2010.jpg',
+      wikiUrl: 'https://commons.wikimedia.org/',
+    },
+  },
+  {
     name: 'upload url thumbnail',
     url:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Helene_Fischer_2010.jpg/171px-Helene_Fischer_2010.jpg',
+    expected: {
+      title: 'File:Helene_Fischer_2010.jpg',
+      wikiUrl: 'https://commons.wikimedia.org/',
+    },
+  },
+  {
+    name: 'commons thumbnail',
+    url: 'https://commons.m.wikimedia.org/wiki/File:Helene_Fischer_2010.jpg',
     expected: {
       title: 'File:Helene_Fischer_2010.jpg',
       wikiUrl: 'https://commons.wikimedia.org/',

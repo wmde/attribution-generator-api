@@ -1,6 +1,7 @@
 const errors = require('./errors');
 
 const wikipediaRegExp = /([-a-z]{2,})(\.m)?\.wikipedia\.org\//i;
+const commonsRegExp = /commons(\.m)?\.wikimedia\.org\/w(iki)?\/?/i;
 const uploadRegExp = /upload.wikimedia\.org\/wikipedia\/([-a-z]{2,})\//i;
 
 const namePrefixes = ['#mediaviewer/', '#/media/', 'wiki/'];
@@ -25,6 +26,12 @@ function extractName(url) {
   return checks.find(name => !!name);
 }
 
+function splitCommonsUrl(url) {
+  const wikiUrl = 'https://commons.wikimedia.org/';
+  const title = extractName(url);
+  return { title, wikiUrl };
+}
+
 function splitUploadUrl(url) {
   const matches = url.match(uploadRegExp);
   const domain = matches[1] === 'commons' ? 'wikimedia' : 'wikipedia';
@@ -43,6 +50,9 @@ function splitWikipediaUrl(url) {
 }
 
 function parse(url) {
+  if (commonsRegExp.test(url)) {
+    return splitCommonsUrl(url);
+  }
   if (uploadRegExp.test(url)) {
     return splitUploadUrl(url);
   }

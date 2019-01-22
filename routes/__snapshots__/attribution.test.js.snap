@@ -26,8 +26,8 @@ Object {
 
 exports[`attribution routes GET /attribution/... (modified) returns attribution information for the given file 1`] = `
 Object {
-  "attributionHtml": "Photograph by <a href=\\"https://commons.wikimedia.org/wiki/User:Rama\\">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr, <a href=\\"https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg\\">Apple_Lisa2-IMG_1517</a>, cropped by the great modificator, <a href=\\"https://creativecommons.org/licenses/by-sa/2.5/legalcode\\" rel=\\"license\\">CC BY-SA 2.5</a>",
-  "attributionPlain": "Photograph by Rama, Wikimedia Commons, Cc-by-sa-2.0-fr (https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg), „Apple_Lisa2-IMG_1517“, cropped by the great modificator, https://creativecommons.org/licenses/by-sa/2.5/legalcode",
+  "attributionHtml": "Photograph by <a href=\\"https://commons.wikimedia.org/wiki/User:Rama\\">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr, <a href=\\"https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg\\">Apple Lisa2-IMG 1517</a>, cropped by the great modificator, <a href=\\"https://creativecommons.org/licenses/by-sa/2.5/legalcode\\" rel=\\"license\\">CC BY-SA 2.5</a>",
+  "attributionPlain": "Photograph by Rama, Wikimedia Commons, Cc-by-sa-2.0-fr (https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg), „Apple Lisa2-IMG 1517“, cropped by the great modificator, https://creativecommons.org/licenses/by-sa/2.5/legalcode",
   "licenseId": "cc-by-sa-2.5",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5/legalcode",
 }
@@ -51,8 +51,8 @@ Object {
 
 exports[`attribution routes GET /attribution/... (unmodified) returns attribution information for the given file 1`] = `
 Object {
-  "attributionHtml": "Photograph by <a href=\\"https://commons.wikimedia.org/wiki/User:Rama\\">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr, <a href=\\"https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg\\">Apple_Lisa2-IMG_1517</a>, <a href=\\"https://creativecommons.org/licenses/by-sa/2.5/legalcode\\" rel=\\"license\\">CC BY-SA 2.5</a>",
-  "attributionPlain": "Photograph by Rama, Wikimedia Commons, Cc-by-sa-2.0-fr (https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg), „Apple_Lisa2-IMG_1517“, https://creativecommons.org/licenses/by-sa/2.5/legalcode",
+  "attributionHtml": "Photograph by <a href=\\"https://commons.wikimedia.org/wiki/User:Rama\\">Rama</a>, Wikimedia Commons, Cc-by-sa-2.0-fr, <a href=\\"https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg\\">Apple Lisa2-IMG 1517</a>, <a href=\\"https://creativecommons.org/licenses/by-sa/2.5/legalcode\\" rel=\\"license\\">CC BY-SA 2.5</a>",
+  "attributionPlain": "Photograph by Rama, Wikimedia Commons, Cc-by-sa-2.0-fr (https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg), „Apple Lisa2-IMG 1517“, https://creativecommons.org/licenses/by-sa/2.5/legalcode",
   "licenseId": "cc-by-sa-2.5",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5/legalcode",
 }

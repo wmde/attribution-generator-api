@@ -29,7 +29,7 @@ function validateParams({
   isEdited,
 }) {
   assert(isStringPresent(fileInfo.rawUrl), errors.validationError);
-  assert(isStringPresent(fileInfo.title), errors.validationError);
+  assert(isStringPresent(fileInfo.normalizedTitle), errors.validationError);
   assert(knownTypesOfUse.includes(typeOfUse), errors.validationError);
   assert(knownLanguages.includes(languageCode), errors.validationError);
   assert([true, false].includes(isEdited), errors.validationError);
@@ -210,7 +210,12 @@ function getAttributionAsTextWithLinks(self) {
 class Attribution {
   constructor(params) {
     validateParams(params);
-    const { title: fileTitle, rawUrl: fileUrl, artistHtml, attributionHtml } = params.fileInfo;
+    const {
+      normalizedTitle: fileTitle,
+      rawUrl: fileUrl,
+      artistHtml,
+      attributionHtml,
+    } = params.fileInfo;
 
     Object.assign(this, {
       ...params,

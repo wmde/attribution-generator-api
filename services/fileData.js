@@ -3,28 +3,40 @@ const assert = require('assert');
 const parseWikiUrl = require('./util/parseWikiUrl');
 const errors = require('./util/errors');
 
-const urlRegex = /^(https|http)?:\/\//;
-const filePrefix = 'File:';
+const fileRegex = /^\w+:([^/]+\.\w+)$/;
 const defaultWikiUrl = 'https://commons.wikimedia.org/';
 
 function parseImageInfoResponse(response) {
   assert.ok(response.pages, errors.emptyResponse);
   const pages = Object.values(response.pages);
+  const { to: normalizedTitle } = response.normalized ? response.normalized[0] : {};
   assert.ok(pages.length === 1);
   const { imageinfo } = pages[0];
-  return imageinfo[0];
+
+  // when we gave an invalid URL (e.g. an article URL)
+  if (!imageinfo) {
+    return {};
+  }
+
+  return {
+    normalizedTitle,
+    ...(imageinfo[0] || {}),
+  };
 }
 
 function parseFileTitle(title) {
-  assert.ok(title.startsWith(filePrefix), errors.invalidUrl);
-  return { title, wikiUrl: defaultWikiUrl };
+  const matches = title.match(fileRegex);
+  return {
+    title: `File:${matches[1]}`,
+    wikiUrl: defaultWikiUrl,
+  };
 }
 
 function parseIdentifier(identifier) {
-  if (urlRegex.test(identifier)) {
-    return parseWikiUrl(identifier);
+  if (fileRegex.test(identifier)) {
+    return parseFileTitle(identifier);
   }
-  return parseFileTitle(identifier);
+  return parseWikiUrl(identifier);
 }
 
 async function getImageInfo({ client, title, wikiUrl }) {
@@ -42,13 +54,24 @@ class FileData {
     const { client } = this;
     const identifier = decodeURIComponent(titleOrUrl);
     const { title, wikiUrl } = parseIdentifier(identifier);
-    const { url, extmetadata, mediatype } = await getImageInfo({ client, title, wikiUrl });
+    const { normalizedTitle, url, extmetadata, mediatype } = await getImageInfo({
+      client,
+      title,
+      wikiUrl,
+    });
+
+    // when no image info could be found
+    if (!url) {
+      return {};
+    }
+
     const { title: originalTitle, wikiUrl: originalWikiUrl } = parseWikiUrl(url);
     const { value: artistHtml = null } = extmetadata.Artist || {};
     const { value: attributionHtml = null } = extmetadata.Attribution || {};
 
     return {
       title: originalTitle,
+      normalizedTitle: normalizedTitle || originalTitle,
       wikiUrl: originalWikiUrl,
       rawUrl: url,
       artistHtml,

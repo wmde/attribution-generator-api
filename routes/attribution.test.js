@@ -9,6 +9,7 @@ describe('attribution routes', () => {
   };
   const fileInfoMock = {
     title: 'File:Apple_Lisa2-IMG_1517.jpg',
+    normalizedTitle: 'File:Apple Lisa2-IMG 1517.jpg',
     rawUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Apple_Lisa2-IMG_1517.jpg',
     wikiUrl: 'https://commons.wikimedia.org/',
     artistHtml:
