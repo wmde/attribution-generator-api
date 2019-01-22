@@ -59,7 +59,7 @@ routes.push({
     },
     plugins: {
       'hapi-swaggered': {
-        operationId: 'attribution.show',
+        operationId: 'attribution.unmodified.show',
         security: [{ default: [] }],
       },
     },
@@ -112,7 +112,7 @@ routes.push({
     },
     plugins: {
       'hapi-swaggered': {
-        operationId: 'attribution.show',
+        operationId: 'attribution.modified.show',
         security: [{ default: [] }],
       },
     },

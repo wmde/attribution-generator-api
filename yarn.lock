@@ -2250,7 +2250,7 @@ growly@^1.3.0:
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
   integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
 
-handlebars@^4.0.3:
+handlebars@^4.0.11, handlebars@^4.0.3:
   version "4.0.12"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.12.tgz#2c15c8a96d46da5e266700518ba8cb8d919d5bc5"
   integrity sha512-RhmTekP+FZL+XNhwS1Wf+bTTZpdLougwt5pcgA1tuz6Jcx0fpH/7z0qd71RKnZHBCxIRBHfBOnio4gViPemNzA==
@@ -2268,6 +2268,19 @@ hapi-router@^4.0.0:
   dependencies:
     cast-array "^1.0.0"
     glob "^5.0.3"
+
+hapi-swaggered-ui@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/hapi-swaggered-ui/-/hapi-swaggered-ui-3.0.2.tgz#88632144f5d38cad74b6cf825328934a3cedbf0c"
+  integrity sha512-3OZOjCi8FZHa1jECO6DFvGh1F0gQ4qjzH2tU/d7xzVOTFVm4+Fpo72+iNcWZGnloiahBq6ffcPBoOvKkqzvO3A==
+  dependencies:
+    handlebars "^4.0.11"
+    hoek "^5.0.3"
+    inert "^5.1.0"
+    joi "^13.1.2"
+    lodash "^4.17.5"
+    swagger-ui-dist "^3.12.0"
+    vision "^5.3.1"
 
 hapi-swaggered@^3.0.3:
   version "3.0.3"
@@ -2511,6 +2524,18 @@ imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
+
+inert@^5.1.0, inert@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/inert/-/inert-5.1.2.tgz#0c26f15bc22aae7af9c1f1a164bf867c58c5f4a6"
+  integrity sha512-5jSCKrQ7ENfdECnzLatCejXSkJwVzKFXZW30fI6TNHFbDuigT8IilRfydI2H5j9ZTnH7vXKO4WUg2qph9bItow==
+  dependencies:
+    ammo "3.x.x"
+    boom "7.x.x"
+    bounce "1.x.x"
+    hoek "6.x.x"
+    joi "14.x.x"
+    lru-cache "4.1.x"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -2982,6 +3007,11 @@ istanbul-reports@^1.5.1:
   integrity sha512-+cfoZ0UXzWjhAdzosCPP3AN8vvef8XDkWtTfgaN+7L3YTpNYITnCaEkceo5SEYy644VkHka/P1FvkWvrG/rrJw==
   dependencies:
     handlebars "^4.0.3"
+
+items@2.x.x:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/items/-/items-2.1.2.tgz#0849354595805d586dac98e7e6e85556ea838558"
+  integrity sha512-kezcEqgB97BGeZZYtX/MA8AG410ptURstvnz5RAgyFZ8wQFPMxHY8GpTq+/ZHKT3frSlIthUq7EvLt9xn3TvXg==
 
 jest-changed-files@^23.4.2:
   version "23.4.2"
@@ -3574,7 +3604,7 @@ lowercase-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-1.0.1.tgz#6f9e30b47084d971a7c820ff15a6c5167b74c26f"
   integrity sha512-G2Lj61tXDnVFFOi8VZds+SoQjtQC3dgokKdDG2mTm1tx4m50NUHBOZSBwQQHyy0V12A0JTG4icfZQH+xPyh8VA==
 
-lru-cache@^4.0.1:
+lru-cache@4.1.x, lru-cache@^4.0.1:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.5.tgz#8bbe50ea85bed59bc9e33dcab8235ee9bcf443cd"
   integrity sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==
@@ -5328,6 +5358,11 @@ supports-color@^5.2.0, supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
+swagger-ui-dist@^3.12.0:
+  version "3.20.5"
+  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.20.5.tgz#c8785f7a225d27217a497a8807210072d3dd23ff"
+  integrity sha512-DNmJQ1qVkW8xk3wI2VfupOS7IYTHNjYaYX+L4s8B8ksdtoHOx3RsRqJUMIQByojHgb3PwEt+zGdIUwxJ4N5pwg==
+
 symbol-tree@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
@@ -5710,6 +5745,16 @@ vise@3.x.x:
   integrity sha512-X52VtdRQbSBXdjcazRiY3eRgV3vTQ0B+7Wh8uC9cVv7lKfML5m9+9NHlbcgCY0R9EAqD1v/v7o9mhGh2A3ANFg==
   dependencies:
     hoek "6.x.x"
+
+vision@^5.3.1, vision@^5.4.4:
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/vision/-/vision-5.4.4.tgz#981b2d811a6061cc14cf2d5d05ad3bbc3ee59572"
+  integrity sha512-jFeH7pU/ODYmTOpY5jutMKU/fDr+P621WYEnWgqwDikxutBWJ+koxlgGnkZQoKY6JlYdY4Awo+rPN3DNdTeDKg==
+  dependencies:
+    boom "7.x.x"
+    hoek "6.x.x"
+    items "2.x.x"
+    joi "14.x.x"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"

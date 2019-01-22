@@ -2,9 +2,12 @@
 const Hapi = require('hapi');
 const HapiRouter = require('hapi-router');
 const HapiSwagger = require('hapi-swaggered');
+const HapiSwaggerUi = require('hapi-swaggered-ui');
 
 const Good = require('good');
 const Boom = require('boom');
+const Inert = require('inert');
+const Vision = require('vision');
 
 async function init(environment) {
   const { logging, secret, server: options, services, swagger } = environment;
@@ -37,6 +40,15 @@ async function init(environment) {
 
   // Register router & swagger plugins.
   await server.register([
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwaggerUi,
+      options: {
+        title: 'Lizenzgenerator API',
+        path: '/docs',
+      },
+    },
     {
       plugin: HapiRouter,
       options: {
