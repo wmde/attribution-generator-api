@@ -45,6 +45,20 @@ definitions:
   InternalServerError:
     description: Internal Server Error
     properties: {}
+  LicenseAuthor_htmlAttribution_htmlMedia_typeModel:
+    properties:
+      attribution_html:
+        type: string
+      author_html:
+        type: string
+      license:
+        $ref: '#/definitions/CodeNameUrlGroupsModel'
+      media_type:
+        type: string
+    required:
+      - author_html
+      - attribution_html
+      - media_type
   RawUrlWidthHeightModel:
     properties:
       height:
@@ -189,6 +203,24 @@ paths:
       summary: Generate attribution
       tags:
         - attribution
+  '/fileinfo/{fileUrlOrTitle}':
+    get:
+      description: Returns the most liberal license for the given image
+      parameters:
+        - in: path
+          name: fileUrlOrTitle
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        default:
+          description: ''
+          schema:
+            $ref: '#/definitions/LicenseAuthor_htmlAttribution_htmlMedia_typeModel'
+      summary: Image license
+      tags:
+        - fileinfo
   '/files/{articleUrl}':
     get:
       description: Retrieve all files for a given article or page url.
@@ -242,24 +274,6 @@ paths:
       summary: Get information
       tags:
         - info
-  '/license/{fileUrlOrTitle}':
-    get:
-      description: Returns the most liberal license for the given image
-      parameters:
-        - in: path
-          name: fileUrlOrTitle
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        default:
-          description: ''
-          schema:
-            $ref: '#/definitions/CodeNameUrlGroupsModel'
-      summary: Image license
-      tags:
-        - license
   /licenses:
     get:
       description: Returns a list of all licenses

@@ -28,7 +28,7 @@ function parseIdentifier(identifier) {
 }
 
 async function getImageInfo({ client, title, wikiUrl }) {
-  const params = { iiprop: 'url|extmetadata', iilimit: 1, iiurlheight: 300 };
+  const params = { iiprop: 'url|extmetadata|mediatype', iilimit: 1, iiurlheight: 300 };
   const response = await client.getResultsFromApi([title], 'imageinfo', wikiUrl, params);
   return parseImageInfoResponse(response);
 }
@@ -42,7 +42,7 @@ class FileData {
     const { client } = this;
     const identifier = decodeURIComponent(titleOrUrl);
     const { title, wikiUrl } = parseIdentifier(identifier);
-    const { url, extmetadata } = await getImageInfo({ client, title, wikiUrl });
+    const { url, extmetadata, mediatype } = await getImageInfo({ client, title, wikiUrl });
     const { title: originalTitle, wikiUrl: originalWikiUrl } = parseWikiUrl(url);
     const { value: artistHtml = null } = extmetadata.Artist || {};
     const { value: attributionHtml = null } = extmetadata.Attribution || {};
@@ -53,6 +53,7 @@ class FileData {
       rawUrl: url,
       artistHtml,
       attributionHtml,
+      mediaType: mediatype,
     };
   }
 }

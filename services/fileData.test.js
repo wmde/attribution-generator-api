@@ -31,7 +31,7 @@ describe('FileData', () => {
           'imageinfo',
           'https://en.wikipedia.org/',
           {
-            iiprop: 'url|extmetadata',
+            iiprop: 'url|extmetadata|mediatype',
             iilimit: 1,
             iiurlheight: 300,
           }
@@ -74,7 +74,7 @@ describe('FileData', () => {
         const fileData = await service.getFileData(title);
 
         expect(client.getResultsFromApi).toHaveBeenCalledWith([title], 'imageinfo', wikiUrl, {
-          iiprop: 'url|extmetadata',
+          iiprop: 'url|extmetadata|mediatype',
           iilimit: 1,
           iiurlheight: 300,
         });
