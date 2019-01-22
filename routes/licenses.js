@@ -8,7 +8,6 @@ const licenseSchema = Joi.object({
   code: Joi.string().required(),
   name: Joi.string().required(),
   url: Joi.string()
-    .uri()
     .required(),
   groups: Joi.array()
     .required()
