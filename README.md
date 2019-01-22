@@ -66,10 +66,18 @@ We use npm scripts for development-related tasks:
 
 You can debug this application with `ndb` by running `yarn debug`. Set break points in the pop-up window and run the test file in the terminal tab of the pop-up window.
 
+In the debug window, run the tests within the supplied terminal using:
+
+```shell
+yarn debugtest
+```
+
+This lets all test run sequentially to avoid concurrency issues.
+
 It can be useful to run tests with the `DEBUG` flag enabled in order to get more information on errors:
 
 ```shell
-DEBUG=true yarn test
+DEBUG=true yarn debugtest
 ```
 
 ## Resources

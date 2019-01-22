@@ -18,6 +18,7 @@
     "console": "node --experimental-repl-await console.js",
     "lint": "eslint --ignore-path .gitignore . scripts/*",
     "test": "jest",
+    "debugtest": "yarn test --runInBand --detectOpenHandles --forceExit",
     "apidoc": "scripts/gen-apidoc > openapi.yaml"
   },
   "engines": {
