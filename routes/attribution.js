@@ -66,6 +66,7 @@ routes.push({
   },
   handler: async (request, h) => {
     const { fileData, licenses } = request.server.app.services;
+    const { tracker } = request.server.app;
     const { file } = request.params;
     try {
       const fileInfo = await fileData.getFileData(file);
@@ -76,6 +77,7 @@ routes.push({
         license,
         ...request.params,
       });
+      tracker.track(request, 'Attribution');
       return h.response(serialize(attribution));
     } catch (error) {
       return handleError(h, error);
@@ -119,6 +121,7 @@ routes.push({
   },
   handler: async (request, h) => {
     const { fileData, licenseStore } = request.server.app.services;
+    const { tracker } = request.server.app;
     const { file, licenseId } = request.params;
     try {
       const fileInfo = await fileData.getFileData(file);
@@ -131,6 +134,7 @@ routes.push({
         license,
         ...request.params,
       });
+      tracker.track(request, 'Attribution');
       return h.response(serialize(attribution));
     } catch (error) {
       return handleError(h, error);

@@ -45,10 +45,12 @@ routes.push({
   },
   handler: async (request, h) => {
     const { licenseStore } = request.server.app.services;
+    const { tracker } = request.server.app;
     const { licenseId } = request.params;
     try {
       const licenses = licenseStore.compatible(licenseId);
       const response = licenses.map(serialize);
+      tracker.track(request, 'License List, Compatible');
       return h.response(response);
     } catch (error) {
       return handleError(h, error);
@@ -69,8 +71,10 @@ routes.push({
   },
   handler: async (request, h) => {
     const { licenseStore } = request.server.app.services;
+    const { tracker } = request.server.app;
     const licenses = licenseStore.all();
     const response = licenses.map(serialize);
+    tracker.track(request, 'License List');
     return h.response(response);
   },
 });

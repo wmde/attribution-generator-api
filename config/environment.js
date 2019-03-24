@@ -4,6 +4,7 @@ const logging = require('./logging');
 const server = require('./server');
 const services = require('./services');
 const swagger = require('./swagger');
+const tracker = require('./tracker');
 
 module.exports = {
   logging,
@@ -11,4 +12,5 @@ module.exports = {
   server,
   services,
   swagger,
+  tracker,
 };
