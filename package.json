@@ -39,6 +39,7 @@
     "inert": "^5.1.2",
     "joi": "^14.3.0",
     "jsdom": "^13.1.0",
+    "matomo-tracker": "^2.2.0",
     "repl.history": "^0.1.4",
     "vision": "^5.4.4"
   },

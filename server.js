@@ -10,7 +10,7 @@ const Inert = require('inert');
 const Vision = require('vision');
 
 async function init(environment) {
-  const { logging, secret, server: options, services, swagger } = environment;
+  const { logging, secret, server: options, services, swagger, tracker } = environment;
 
   // Create a server instance.
   const server = Hapi.server(options);
@@ -18,6 +18,7 @@ async function init(environment) {
   // Extend app context.
   server.app.secret = secret;
   server.app.services = services;
+  server.app.tracker = tracker;
 
   // Extend Hapi response toolkit and request interfaces.
   server.decorate('toolkit', 'error', (message, ...args) => {

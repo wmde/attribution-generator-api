@@ -30,7 +30,9 @@ routes.push({
     },
   },
   handler: async (request, h) => {
+    const { tracker } = request.server.app;
     const { version } = pkg;
+    tracker.track(request, 'API Info');
     return h.response({ version });
   },
 });

@@ -58,12 +58,14 @@ routes.push({
   },
   handler: async (request, h) => {
     const { fileData, licenses } = request.server.app.services;
+    const { tracker } = request.server.app;
     const { fileUrlOrTitle } = request.params;
     try {
       const fileInfo = await fileData.getFileData(fileUrlOrTitle);
       const getLicenseParams = { title: fileInfo.title, wikiUrl: fileInfo.wikiUrl };
       const license = await licenses.getLicense(getLicenseParams);
       const response = serialize(fileInfo, license);
+      tracker.track(request, 'File Info');
       return h.response(response);
     } catch (error) {
       return handleError(h, error);

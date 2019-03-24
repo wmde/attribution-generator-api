@@ -70,9 +70,11 @@ routes.push({
   },
   handler: async (request, h) => {
     const { files } = request.server.app.services;
+    const { tracker } = request.server.app;
     const { articleUrl } = request.params;
     try {
       const response = await files.getPageImages(articleUrl);
+      tracker.track(request, 'Files For Article');
       return h.response(response);
     } catch (error) {
       return handleError(h, error);
