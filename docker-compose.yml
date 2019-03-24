@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  matomo-db:
+    image: mariadb:latest
+    volumes:
+      - matomo-sql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD
+    networks:
+      - matomo
+
+  matomo:
+    image: matomo:fpm
+    links:
+      - matomo-db
+    volumes:
+      - ./docker/matomo/config:/var/www/html/config:rw
+    networks:
+      - matomo
+
+  matomo-web:
+    image: nginx:latest
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+    links:
+      - matomo
+    volumes_from:
+      - matomo
+    ports:
+     - "8080:80"
+    networks:
+      - matomo
+
+networks:
+  matomo:
+    driver: bridge
