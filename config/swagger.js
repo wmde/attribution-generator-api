@@ -1,7 +1,7 @@
 const pkg = require('../package.json');
 
 const config = {
-  host: 'localhost:8080',
+  host: process.env.API_DOCS_HOST,
 
   // Overall API description
   info: {
@@ -25,8 +25,8 @@ const config = {
   auth: false,
 };
 
-if (process.env.DOCS_BASE_PATH) {
-  config.basePath = process.env.DOCS_BASE_PATH;
+if (process.env.API_DOCS_BASE_PATH) {
+  config.basePath = process.env.API_DOCS_BASE_PATH;
 }
 
 module.exports = config;
