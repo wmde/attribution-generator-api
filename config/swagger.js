@@ -25,4 +25,8 @@ const config = {
   auth: false,
 };
 
+if (process.env.DOCS_BASE_PATH) {
+  config.basePath = process.env.DOCS_BASE_PATH;
+}
+
 module.exports = config;

@@ -39,16 +39,21 @@ async function init(environment) {
     ]);
   }
 
+  const swaggerUiOptions = {
+    title: 'Lizenzgenerator API',
+    path: '/docs',
+  };
+  if (swagger.basePath) {
+    swaggerUiOptions.basePath = swagger.basePath;
+  }
+
   // Register router & swagger plugins.
   await server.register([
     Inert,
     Vision,
     {
       plugin: HapiSwaggerUi,
-      options: {
-        title: 'Lizenzgenerator API',
-        path: '/docs',
-      },
+      options: swaggerUiOptions,
     },
     {
       plugin: HapiRouter,
