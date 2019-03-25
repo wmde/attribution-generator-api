@@ -49,7 +49,8 @@ class Files {
   }
 
   async getPageImages(url) {
-    const { title, wikiUrl } = parseWikiUrl(url);
+    const input = decodeURIComponent(url);
+    const { title, wikiUrl } = parseWikiUrl(input);
     const { client } = this;
     const titles = await getImageTitles({ client, title, wikiUrl });
     if (titles.length === 0) return [];
