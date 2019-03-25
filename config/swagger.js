@@ -18,7 +18,7 @@ const config = {
   schemes: ['http', 'https'],
 
   // Security definitions
-  securityDefinitions: [],
+  securityDefinitions: {},
 
   // Configuration keys specific to "hapi-swaggered"
   requiredTags: [],

@@ -363,6 +363,6 @@ paths:
 schemes:
   - http
   - https
-securityDefinitions: []
+securityDefinitions: {}
 swagger: '2.0'
 tags: []
