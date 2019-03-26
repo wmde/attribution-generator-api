@@ -31,3 +31,6 @@ node_modules/
 # System- and editor-specific files
 .DS_Store
 .vscode
+
+
+docker/matomo/config
