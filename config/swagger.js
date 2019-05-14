@@ -15,6 +15,7 @@ const config = {
   produces: ['application/json'],
 
   // URI schemes
+// TODO: configure
   schemes: ['http', 'https'],
 
   // Security definitions
